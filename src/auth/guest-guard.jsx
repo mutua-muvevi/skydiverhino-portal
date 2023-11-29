@@ -16,11 +16,12 @@ GuestGuard.propTypes = {
 export default function GuestGuard({ children }) {
 	const { isAuthenticated, isInitialized } = useAuthContext();
 
+
 	if (isAuthenticated) {
-		return <Navigate to={PATH_DASHBOARD.root} />;
+		return <Navigate to={PATH_DASHBOARD.general.home.main} />;
 	}
 
-	if (!isInitialized) {
+	if (!isInitialized ) {
 		return <LoadingScreen />;
 	}
 

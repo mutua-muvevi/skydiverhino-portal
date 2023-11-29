@@ -148,7 +148,7 @@ export function fetchMe(token) {
 		dispatch(slice.actions.startLoading());
 		
 		try {
-			const response = await axios.get("http://localhost:9700/api/user/fetch/me", {
+			const response = await axios.get("http://localhost:8100/api/user/fetch/me", {
 				headers: {
 					Authorization: token,
 				},
@@ -170,7 +170,7 @@ export function register(values){
 
 		try {
 			const response = await axios.post(
-				"http://localhost:9700/api/user/register",
+				"http://localhost:8100/api/user/register",
 				values,
 				{
 					headers: {
@@ -193,7 +193,7 @@ export function postOTPCode(userID, values, token){
 
 		try {
 			const response = axios.post(
-				`http://localhost:9700/api/user/${userID}/otp`,
+				`http://localhost:8100/api/user/${userID}/otp`,
 				values,
 				{
 					headers: {
@@ -221,7 +221,7 @@ export function resendOTPCode(userID, token){
 
 		try {
 			const response = await axios.get(
-				`http://localhost:9700/api/user/${userID}/otp/resend`,
+				`http://localhost:8100/api/user/${userID}/otp/resend`,
 				{
 					headers: {
 						"Content-Type": "application/json",
@@ -249,7 +249,7 @@ export function loginUser(values){
 
 		try {
 			const response = await axios.post(
-				"http://localhost:9700/api/user/login",
+				"http://localhost:8100/api/user/login",
 				values,
 				{
 					headers: {
@@ -276,7 +276,7 @@ export function resetPassword(values){
 
 		try {
 			const response = await axios.post(
-				"http://localhost:9700/api/user/reset/password",
+				"http://localhost:8100/api/user/reset/password",
 				values,
 				{
 					headers: {
@@ -303,7 +303,7 @@ export function newPassword(values, resetToken){
 
 		try {
 			const response = await axios.post(
-				`http://localhost:9700/api/user/new/password/${resetToken}`,
+				`http://localhost:8100/api/user/new/password/${resetToken}`,
 				values,
 				{
 					headers: {

@@ -11,6 +11,16 @@ export const presets = [
 		name: "default",
 		...themePalette.primary,
 	},
+	//Secondary
+	{
+		name: "secondary",
+		lighter: "#e58d80",
+		light: "#dc6756",
+		main: "#d3412c",
+		dark: "#a93423",
+		darker: "#a93423",
+		contrastText: "#fff",
+	},
 	// CYAN
 	{
 		name: "cyan",
@@ -64,11 +74,12 @@ export const presets = [
 ];
 
 export const defaultPreset = presets[0];
-export const cyanPreset = presets[1];
-export const purplePreset = presets[2];
-export const bluePreset = presets[3];
-export const orangePreset = presets[4];
-export const redPreset = presets[5];
+export const secondaryPreset = presets[1];
+export const cyanPreset = presets[2];
+export const purplePreset = presets[3];
+export const bluePreset = presets[4];
+export const orangePreset = presets[5];
+export const redPreset = presets[6];
 
 export const presetsOption = presets.map((color) => ({
 	name: color.name,
@@ -78,6 +89,7 @@ export const presetsOption = presets.map((color) => ({
 export function getPresets(key) {
 	return {
 		default: defaultPreset,
+		secondary: secondaryPreset,
 		cyan: cyanPreset,
 		purple: purplePreset,
 		blue: bluePreset,

@@ -14,7 +14,6 @@ import { isValidToken, setSession } from "./utils";
 import { useDispatch } from "../redux/store";
 import { fetchMe } from "../redux/slices/user";
 
-
 // ----------------------------------------------------------------------
 
 // NOTE:
@@ -80,9 +79,7 @@ export function AuthProvider({ children }) {
 
 	const initialize = useCallback(async () => {
 		try {
-			const token = storageAvailable
-				? localStorage.getItem("token")
-				: "";
+			const token = storageAvailable ? localStorage.getItem("token") : "";
 
 			if (token && isValidToken(token)) {
 				setSession(token);
@@ -93,12 +90,12 @@ export function AuthProvider({ children }) {
 					},
 				});
 
-				const me = await reduxDispatch(fetchMe(token))
+				const me = await reduxDispatch(fetchMe(token));
 
-				const user  = response.data.data;
+				const user = response.data.data;
 
-				console.log("The user we fetched is", user)
-				console.log("The user we fetched is a", me)
+				console.log("The user we fetched is", user);
+				console.log("The user we fetched is a", me);
 
 				dispatch({
 					type: "INITIAL",
@@ -140,49 +137,44 @@ export function AuthProvider({ children }) {
 				password,
 			});
 			const { token, user } = response.data;
-			
-	
+
 			setSession(token);
-	
+
 			dispatch({
 				type: "LOGIN",
 				payload: {
 					user,
 				},
 			});
-	
-			return response
+
+			return response;
 		} catch (error) {
 			console.error("Caught Error", error);
-			throw error
+			throw error;
 		}
-		
 	}, []);
 
 	// REGISTER
-	const register = useCallback(
-		async (email, password, fullname, country) => {
-			const response = await axios.post("/api/user/register", {
-				email,
-				password,
-				fullname,
-				country,
-			});
+	const register = useCallback(async (email, password, fullname, country) => {
+		const response = await axios.post("/api/user/register", {
+			email,
+			password,
+			fullname,
+			country,
+		});
 
-			const { token, user, message } = response.data;
+		const { token, user, message } = response.data;
 
-			localStorage.setItem("token", token);
+		localStorage.setItem("token", token);
 
-			dispatch({
-				type: "REGISTER",
-				payload: {
-					user,
-					message
-				},
-			});
-		},
-		[]
-	);
+		dispatch({
+			type: "REGISTER",
+			payload: {
+				user,
+				message,
+			},
+		});
+	}, []);
 
 	// LOGOUT
 	const logout = useCallback(() => {

@@ -40,7 +40,6 @@ export default memo(NavSectionHorizontal);
 Items.propTypes = {
 	items: PropTypes.array,
 };
-
 function Items({ items }) {
 	return (
 		<>

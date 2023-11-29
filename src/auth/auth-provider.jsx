@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 		// 	navigate("/admin/freelancer/home");
 		// } else
 		if (location.pathname.startsWith("/freelancer") && !isFreelancer) {
-			navigate("/freelancer/dashboard");
+			navigate("/freelancer/home/main");
 		} else if (location.pathname.startsWith("/client") && !isClient) {
 			navigate("/client/dashboard");
 		}

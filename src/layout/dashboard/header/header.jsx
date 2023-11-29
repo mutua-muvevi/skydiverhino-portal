@@ -49,12 +49,15 @@ export default function Header({ onOpenNav }) {
 					onClick={onOpenNav}
 					sx={{ mr: 1, color: "text.primary" }}
 				>
-					<Iconify icon="eva:menu-2-fill"  sx={{
-						color:
-						theme.palette.mode === "light"
-							? theme.palette.grey[900]
-							: theme.palette.text.secondary,
-					}} />
+					<Iconify
+						icon="eva:menu-2-fill"
+						sx={{
+							color:
+								theme.palette.mode === "light"
+									? theme.palette.grey[900]
+									: theme.palette.text.secondary,
+						}}
+					/>
 				</IconButton>
 			)}
 
@@ -88,9 +91,7 @@ export default function Header({ onOpenNav }) {
 					theme.palette.mode === "dark"
 						? theme.palette.background.neutral
 						: theme.palette.primary.lighter,
-				// ...bgBlur({
-				// 	color: theme.palette.primary.main,
-				// }),
+
 				transition: theme.transitions.create(["height"], {
 					duration: theme.transitions.duration.shorter,
 				}),
@@ -102,7 +103,10 @@ export default function Header({ onOpenNav }) {
 					}),
 					...(isNavHorizontal && {
 						width: 1,
-						bgcolor: "background.default",
+						bgcolor:
+							theme.palette.mode === "dark"
+								? theme.palette.background.neutral
+								: theme.palette.primary.main,
 						height: HEADER.H_DASHBOARD_DESKTOP_OFFSET,
 						borderBottom: `dashed 1px ${theme.palette.divider}`,
 					}),

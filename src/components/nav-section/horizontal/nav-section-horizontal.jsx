@@ -6,40 +6,46 @@ import { Stack } from "@mui/material";
 import { hideScrollbarY } from "../../../utils/css-styles";
 //
 import NavList from "./nav-list";
+import Scrollbar from "../../scrollbar";
 
 // ----------------------------------------------------------------------
 
-NavSectionHorizontal.propTypes = {
+NavSectionHorizontalComponent.propTypes = {
 	sx: PropTypes.object,
 	data: PropTypes.array,
 };
 
-function NavSectionHorizontal({ data, sx, ...other }) {
+function NavSectionHorizontalComponent({ data, sx, ...other }) {
 	return (
-		<Stack
-			direction="row"
-			spacing={1}
-			sx={{
-				mx: "auto",
-				...hideScrollbarY,
-				...sx,
-			}}
-			{...other}
-		>
-			{data.map((group) => (
-				<Items key={group.subheader} items={group.items} />
-			))}
-		</Stack>
+		<Scrollbar sx={{ pb: 0 }}>
+			<Stack
+				direction="row"
+				spacing={1}
+				sx={{
+					mx: "auto",
+					...hideScrollbarY,
+					...sx,
+				}}
+				{...other}
+			>
+				{data.map((group) => (
+					<Items key={group.subheader} items={group.items} />
+				))}
+			</Stack>
+		</Scrollbar>
 	);
 }
 
-export default memo(NavSectionHorizontal);
+const NavSectionHorizontal = memo(NavSectionHorizontalComponent);
+
+export default NavSectionHorizontal;
 
 // ----------------------------------------------------------------------
 
 Items.propTypes = {
 	items: PropTypes.array,
 };
+
 function Items({ items }) {
 	return (
 		<>

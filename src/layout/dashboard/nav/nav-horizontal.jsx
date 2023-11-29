@@ -5,8 +5,6 @@ import { useTheme } from "@mui/material/styles";
 import { AppBar, Box, Toolbar } from "@mui/material";
 // config
 import { HEADER } from "../../../config/global";
-// utils
-import { bgBlur } from "../../../utils/css-styles";
 // components
 import { NavSectionHorizontal } from "../../../components/nav-section";
 //
@@ -14,7 +12,7 @@ import navConfig from "./config-navigation";
 
 // ----------------------------------------------------------------------
 
-function NavHorizontal() {
+function NavHorizontalComponent() {
 	const theme = useTheme();
 
 	return (
@@ -28,9 +26,9 @@ function NavHorizontal() {
 		>
 			<Toolbar
 				sx={{
-					...bgBlur({
-						color: theme.palette.background.default,
-					}),
+					backgroundColor: theme.palette.mode === "dark"
+					? theme.palette.background.neutral
+					: theme.palette.primary.lighter,
 				}}
 			>
 				<NavSectionHorizontal data={navConfig} />
@@ -41,7 +39,9 @@ function NavHorizontal() {
 	);
 }
 
-export default memo(NavHorizontal);
+const NavHorizontal = memo(NavHorizontalComponent);
+
+export default NavHorizontal;
 
 // ----------------------------------------------------------------------
 

@@ -153,7 +153,7 @@ const palette = (themeMode) => {
 		background: {
 			paper: "#1E2125",
 			default: "#1f1f1f",
-			neutral: alpha(GREY[500], 0.16),
+			neutral: "#14161f",
 		},
 		action: {
 			...COMMON.action,

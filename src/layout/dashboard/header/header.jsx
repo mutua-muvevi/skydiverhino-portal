@@ -19,7 +19,6 @@ import AccountPopover from "./account-popover";
 import LanguagePopover from "./language-popover";
 import ContactsPopover from "./contacts-popover";
 import NotificationsPopover from "./notifications-popover";
-import navConfig from "../nav/config-navigation";
 
 // ----------------------------------------------------------------------
 
@@ -44,10 +43,7 @@ export default function Header({ onOpenNav }) {
 	const renderContent = (
 		<>
 			{isDesktop && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
-{console.log("NAVCONFIIR", navConfig.map((list) =>{
-	console.log("LIST>>LIST>>", list)
-	return list
-}))}
+
 			{!isDesktop && (
 				<IconButton
 					onClick={onOpenNav}

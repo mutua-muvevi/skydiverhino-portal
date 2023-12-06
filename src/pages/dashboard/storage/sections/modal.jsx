@@ -12,15 +12,14 @@ import {
 	Typography,
 	useTheme,
 } from "@mui/material";
-import Iconify from "../../../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 import { PropTypes } from "prop-types";
-import Iframe from "../../../../../components/iframe";
-import { IconButtonAnimate } from "../../../../../components/animate";
-import MenuPopover from "../../../../../components/menu-popover";
-import { getFilenameFromUrl } from "../../../../../utils/get-filename";
-import { useDispatch, useSelector } from "../../../../../redux/store";
-import { downloadFile } from "../../../../../redux/slices/storage";
-import LoadingScreen from "../../../../../components/loading-screen";
+import Iframe from "../../../../components/iframe";
+import { IconButtonAnimate } from "../../../../components/animate";
+import MenuPopover from "../../../../components/menu-popover";
+import { getFilenameFromUrl } from "../../../../utils/get-filename";
+import { useDispatch, useSelector } from "../../../../redux/store";
+import { downloadFile } from "../../../../redux/slices/storage";
 
 const OpenFolderModal = ({ open, onClose, file }) => {
 	const [openPopover, setOpenPopover] = useState(null);

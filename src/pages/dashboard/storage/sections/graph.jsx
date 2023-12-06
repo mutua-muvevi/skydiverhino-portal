@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, useTheme } from "@mui/material";
-import ChartArea from "../../../../../components/chart/types/chart-area"; 
+import ChartArea from "../../../../components/chart/types/chart-area"; 
 
 const StorageOverviewGraph = () => {
 	const theme = useTheme();

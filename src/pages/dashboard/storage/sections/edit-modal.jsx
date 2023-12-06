@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types";
 import { Dialog } from "@mui/material";
-import MenuPopover from "../../../../../components/menu-popover";
+import MenuPopover from "../../../../components/menu-popover";
 
 
 const ActionFolderModal = ({ open, onClose, file }) => {

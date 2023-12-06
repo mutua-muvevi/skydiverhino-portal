@@ -42,7 +42,7 @@ export default function Header({ onOpenNav }) {
 
 	const renderContent = (
 		<>
-			{isDesktop && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
+			{isDesktop && isNavHorizontal && <Logo sx={{ mr: 5 }} />}
 
 			{!isDesktop && (
 				<IconButton

@@ -8,7 +8,7 @@ export default function LoginPage() {
 	return (
 		<>
 			<Helmet>
-				<title> Login | Freelance Tool</title>
+				<title> Login | Skydive Rhino Portal</title>
 			</Helmet>
 
 			<Login />

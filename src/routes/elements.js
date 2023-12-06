@@ -66,7 +66,7 @@ export const ScrollPlaybround = Loadable(lazy(() => import("../pages/playground/
 // DASHBOARD
 //-----------------main-----------------
 //home
-export const DashboardMain = Loadable(lazy(() => import("../pages/dashboard/home/main/main")));
+export const DashboardMain = Loadable(lazy(() => import("../pages/dashboard/home/home")));
 
 //account
 export const AccountOverview = Loadable(lazy(() => import("../pages/dashboard/account/overview/overview")));
@@ -75,9 +75,6 @@ export const AccountProfile = Loadable(lazy(() => import("../pages/dashboard/acc
 
 //bookings
 export const Bookings = Loadable(lazy(() => import("../pages/dashboard/bookings/bookings")));
-
-//contacts
-export const Contacts = Loadable(lazy(() => import("../pages/dashboard/contacts/contacts")));
 
 //clients
 export const Clients = Loadable(lazy(() => import("../pages/dashboard/clients/clients")));
@@ -97,9 +94,6 @@ export const Tools = Loadable(lazy(() => import("../pages/dashboard/tools/tools"
 //social
 export const FaceBook = Loadable(lazy(() => import("../pages/dashboard/social/facebook/facebook")));
 export const Instagram = Loadable(lazy(() => import("../pages/dashboard/social/instagram/instagram")));
-export const LinkedIn = Loadable(lazy(() => import("../pages/dashboard/social/linkedin/linkedin")));
-export const Twitter = Loadable(lazy(() => import("../pages/dashboard/social/twitter/twitter")));
-export const Youtube = Loadable(lazy(() => import("../pages/dashboard/social/youtube/youtube")));
 export const TikTok = Loadable(lazy(() => import("../pages/dashboard/social/tiktok/tiktok")));
 
 //website
@@ -107,3 +101,7 @@ export const WebsiteOverview = Loadable(lazy(() => import("../pages/dashboard/we
 export const WebsiteHomepage = Loadable(lazy(() => import("../pages/dashboard/website/homepage/homepage")));
 export const WebsiteAbout = Loadable(lazy(() => import("../pages/dashboard/website/about/about")));
 export const WebsitePricing = Loadable(lazy(() => import("../pages/dashboard/website/pricing/pricing")));
+export const WebsiteServices = Loadable(lazy(() => import("../pages/dashboard/website/services/services")));
+
+//landing
+export const LandingOverview = Loadable(lazy(() => import("../pages/dashboard/landing/overview/overview")));

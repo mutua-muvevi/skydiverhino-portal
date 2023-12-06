@@ -27,6 +27,9 @@ const initialState = {
 
 	newPassword: null,
 	newPasswordError: null,
+
+	editUser: null,
+	editUserError: null,
 };
 
 // user slice
@@ -133,6 +136,19 @@ const slice = createSlice({
 		newPasswordHasError(state, action) {
 			state.isLoading = false;
 			state.newPasswordError = action.payload;
+		},
+
+		//edit
+		editUser(state, action) {
+			const user = action.payload;
+			state.isLoading = false;
+			state.editUser = user;
+		},
+
+		//edit has error
+		editUserHasError(state, action) {
+			state.isLoading = false;
+			state.editUserError = action.payload;
 		},
 	},
 });
@@ -318,6 +334,34 @@ export function newPassword(values, resetToken){
 
 		} catch (error) {
 			dispatch(slice.actions.newPasswordHasError(error.response));
+			throw error.response
+		}
+	}
+}
+
+//------------edit user
+export function editUser(values, token, userID){
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			const response = await axios.put(
+				`http://localhost:8100/api/user/edit/me/${userID}`,
+				values,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": token
+					},
+				}
+			);
+
+			console.log("user edit response", response)
+			dispatch(slice.actions.editUser(response.data));
+			return response;
+
+		} catch (error) {
+			dispatch(slice.actions.editUserHasError(error.response));
 			throw error.response
 		}
 	}

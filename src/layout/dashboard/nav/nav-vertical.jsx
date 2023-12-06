@@ -78,8 +78,6 @@ export default function NavVertical({ openNav, onCloseNav }) {
 								theme.palette.mode === "dark"
 									? theme.palette.background.neutral
 									: theme.palette.primary.lighter,
-							// bgcolor: "transparent",
-							// borderRightStyle: "dashed",
 						},
 					}}
 				>

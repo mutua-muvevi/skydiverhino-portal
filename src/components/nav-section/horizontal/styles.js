@@ -16,11 +16,14 @@ export const StyledItem = styled(ListItemButton, {
 	const subItem = depth !== 1;
 
 	const activeStyle = {
-		color: theme.palette.primary.main,
-		backgroundColor: alpha(
-			theme.palette.primary.main,
-			theme.palette.action.selectedOpacity
-		),
+		color:
+			theme.palette.mode === "light"
+				? theme.palette.grey[100]
+				: theme.palette.primary.main,
+		backgroundColor:
+			theme.palette.mode === "light"
+				? alpha(theme.palette.primary.main, 0.5)
+				: theme.palette.grey[800],
 		...(!isLight && {
 			color: theme.palette.primary.light,
 		}),
@@ -41,7 +44,10 @@ export const StyledItem = styled(ListItemButton, {
 		display: "inline-flex",
 		textTransform: "capitalize",
 		padding: theme.spacing(0, 0.75),
-		color: theme.palette.text.secondary,
+		color:
+			theme.palette.mode === "light"
+				? theme.palette.grey[900]
+				: theme.palette.text.secondary,
 		borderRadius: theme.shape.borderRadius,
 		height: NAV.H_DASHBOARD_ITEM_HORIZONTAL,
 		"&:hover": hoverStyle,

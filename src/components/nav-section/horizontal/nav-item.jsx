@@ -31,7 +31,11 @@ const NavItem = forwardRef(
 				disabled={disabled}
 				{...other}
 			>
-				{icon && <StyledIcon>{icon}</StyledIcon>}
+				{icon && (
+					<StyledIcon>
+						<Iconify icon={icon} />
+					</StyledIcon>
+				)}
 
 				<ListItemText
 					primary={`${translate(title)}`}

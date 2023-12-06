@@ -1,8 +1,25 @@
 import { Page } from "../../../../components/page";
+import { PATH_DASHBOARD } from "../../../../routes/path";
+
+import CustomBreadcrumbs from "../../../../components/custom-breadcrumbs";
 
 const Profile = () => {
 	return (
-		<Page title="Account Profile">
+		<Page title="My Profile">
+			<CustomBreadcrumbs
+				heading="My Profile"
+				links={[
+					{
+						name: "Dashboard",
+						href: PATH_DASHBOARD.general.home.root,
+					},
+					{
+						name: "Account",
+						href: PATH_DASHBOARD.general.account.root,
+					},
+					{ name: "Profile" },
+				]}
+			/>
 			<div>Profile</div>
 		</Page>
 	);

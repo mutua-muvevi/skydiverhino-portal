@@ -17,8 +17,8 @@ import { IconButtonAnimate } from "../../../components/animate";
 
 const OPTIONS = [
 	{
-		label: "Home",
-		linkTo: PATH_DASHBOARD.general.account.overview,
+		label: "Homepage",
+		linkTo: PATH_DASHBOARD.general.account.overview, //this will be the link to the homepage of main website
 	},
 	{
 		label: "Profile",
@@ -26,15 +26,7 @@ const OPTIONS = [
 	},
 	{
 		label: "Settings",
-		linkTo: PATH_DASHBOARD.general.account.account,
-	},
-	{
-		label: "Billing",
-		linkTo: PATH_DASHBOARD.general.account.billing,
-	},
-	{
-		label: "Integration",
-		linkTo: PATH_DASHBOARD.general.account.intergration,
+		linkTo: PATH_DASHBOARD.general.account.settings,
 	},
 ];
 

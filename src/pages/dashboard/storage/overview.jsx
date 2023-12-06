@@ -10,16 +10,16 @@ import StorageOverviewListCard from "./sections/list-cards";
 
 const StorageOverview = () => {
 	return (
-		<Page title="Overview">
+		<Page title="Storage">
 			<CustomBreadcrumbs
-				heading="Overview"
+				heading="Storage"
 				links={[
 					{
 						name: "Dashboard",
 						href: PATH_DASHBOARD.general.home.root,
 					},
 					{
-						name: "Overview",
+						name: "Storage",
 					},
 				]}
 			/>

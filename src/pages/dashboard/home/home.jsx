@@ -1,7 +1,11 @@
-const Dashboard = () => {
-  return (
-	<div>Dashboard</div>
-  )
-}
+import { Page } from "../../../components/page";
 
-export default Dashboard
+const Dashboard = () => {
+	return (
+		<Page title="Dashboard">
+			<div>Dashboard Home</div>
+		</Page>
+	);
+};
+
+export default Dashboard;

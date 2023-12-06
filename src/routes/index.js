@@ -44,11 +44,8 @@ import {
 	DashboardMain,
 
 	//-----------social----------------
-	Twitter,
 	FaceBook,
 	Instagram,
-	LinkedIn,
-	Youtube,
 	TikTok,
 
 	//-----------content----------------
@@ -59,12 +56,15 @@ import {
 	Leads,
 	Clients,
 	Services,
+	WebsiteServices,
+	LandingOverview,
 
 } from "./elements";
 
 import CompactLayout from "../layout/compact/compact-layout";
 import TimelinePlayground from "../pages/playground/timeline";
 import WebsiteOverview from "../pages/dashboard/website/overview/overview";
+import LandingPage from "../pages/dashboard/landing/page/landing";
 
 // ----------------------------------------------------------------------
 export default function Router() {
@@ -152,21 +152,8 @@ export default function Router() {
 
 				{ path: "leads", element: <Leads /> },
 
-				{
-					path: "websites",
-					children: [
-						{
-							element: (
-								<Navigate to="/admin/websites/overview" replace/>
-							),
-							index: true
-						},
-						{ path: "overview", element: <WebsiteOverview /> },
-						{ path: "homepage", element: <WebsiteHomepage /> },
-						{ path: "about", element: <WebsiteAbout /> },
-						{ path: "pricing", element: <WebsitePricing /> },
-					]
-				},
+				{ path: "tools", element: <Tools /> },
+
 				{
 					path: "social",
 					children: [
@@ -178,14 +165,41 @@ export default function Router() {
 						},
 						{ path: "facebook", element: <FaceBook /> },
 						{ path: "instagram", element: <Instagram /> },
-						{ path: "linkedin", element: <LinkedIn /> },
-						{ path: "youtube", element: <Youtube /> },
-						{ path: "twitter", element: <Twitter /> },
 						{ path: "tiktok", element: <TikTok /> },
 					]
 				},
 
-				{ path: "tools", element: <Tools /> },
+				{
+					path: "website",
+					children: [
+						{
+							element: (
+								<Navigate to="/admin/website/overview" replace/>
+							),
+							index: true
+						},
+						{ path: "overview", element: <WebsiteOverview /> },
+						{ path: "homepage", element: <WebsiteHomepage /> },
+						{ path: "about", element: <WebsiteAbout /> },
+						{ path: "pricing", element: <WebsitePricing /> },
+						{ path: "services", element: <WebsiteServices /> },
+					]
+				},
+
+				{
+					path: "landing",
+					children: [
+						{
+							element: (
+								<Navigate to="/admin/landing/overview" replace/>
+							),
+							index: true
+						},
+						{ path: "overview", element: <LandingOverview /> },
+						{ path: "landing", element: <LandingPage /> },
+					]
+				},
+
 			],
 		},
 

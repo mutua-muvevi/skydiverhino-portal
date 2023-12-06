@@ -84,6 +84,7 @@ export const PATH_DASHBOARD = {
 			homepage: path(ROOTS_DASHBOARD, "/website/homepage"),
 			about: path(ROOTS_DASHBOARD, "/website/about"),
 			pricing: path(ROOTS_DASHBOARD, "/website/pricing"),
+			services: path(ROOTS_DASHBOARD, "/website/services"),
 		},
 
 		//landing

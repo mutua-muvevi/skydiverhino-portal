@@ -3,22 +3,22 @@ import { Page } from "../../../../components/page";
 import CustomBreadcrumbs from "../../../../components/custom-breadcrumbs";
 import { PATH_DASHBOARD } from "../../../../routes/path";
 
-const About = () => {
+const LandingPage = () => {
 	return (
-		<Page title="Overview">
+		<Page title="Landing Page">
 			<CustomBreadcrumbs
-				heading="Web About"
+				heading="Landing Page"
 				links={[
 					{
 						name: "Dashboard",
 						href: PATH_DASHBOARD.general.home.root,
 					},
-					{ name: "About" },
+					{ name: "Landing Page" },
 				]}
 			/>
-			<div>About</div>
+			<div>Landing Page</div>
 		</Page>
 	);
 };
 
-export default About;
+export default LandingPage;

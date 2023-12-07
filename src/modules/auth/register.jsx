@@ -66,7 +66,6 @@ export default function Register() {
 						</Link>
 						.
 					</Typography>
-					<AuthWithSocial />
 				</Stack>
 			</Container>
 		</Stack>

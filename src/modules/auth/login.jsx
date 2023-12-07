@@ -56,8 +56,6 @@ export default function Login() {
 							</Link>
 						</span>
 					</Typography>
-
-					<AuthWithSocial />
 				</Stack>
 			</Container>
 		</Stack>

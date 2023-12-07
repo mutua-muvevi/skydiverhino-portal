@@ -7,7 +7,6 @@ import { Stack, Typography, Link, Container } from "@mui/material";
 import { PATH_AUTH } from "../../routes/path";
 //
 import AuthLoginForm from "./login-form";
-import AuthWithSocial from "./social-login";
 
 // ----------------------------------------------------------------------
 

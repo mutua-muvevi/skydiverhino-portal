@@ -12,6 +12,9 @@ const initialState = {
 
 	delete: null,
 	deleteError: null,
+
+	allFiles: null,
+	allFilesError: null,
 };
 
 //the slice
@@ -49,6 +52,17 @@ const slice = createSlice({
 		deleteFileError(state, action) {
 			state.isLoading = false;
 			state.deleteError = action.payload;
+		},
+
+		//FETCH ALL FILES
+		fetchFiles(state, action) {
+			state.isLoading = false;
+			state.allFiles = action.payload;
+		},
+
+		fetchFilesError(state, action) {
+			state.isLoading = false;
+			state.allFiles = action.payload;
 		}
 	},
 });
@@ -124,7 +138,7 @@ export function deleteFile(userID, filename, token) {
 			);
 
 			dispatch(slice.actions.deleteFile(response));
-			return response
+			return response;
 		} catch (error) {
 			dispatch(slice.actions.deleteFileError(error));
 			throw error.response;
@@ -132,5 +146,31 @@ export function deleteFile(userID, filename, token) {
 			dispatch(slice.actions.stopLoading());
 		}
 	};
+}
 
+//fetch all files
+export function fetchAllFiles(userID, token) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			const response = await axios.get(
+				`http://localhost:8100/api/storage/${userID}/fetch`,
+				{
+					headers: {
+						Authorization: token,
+					},
+				}
+			);
+			console.log("The ", response)
+
+			dispatch(slice.actions.fetchFiles(response.data.data));
+			return response.data.data;
+		} catch (error) {
+			dispatch(slice.actions.fetchFilesError(error));
+			throw error.response;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
 }

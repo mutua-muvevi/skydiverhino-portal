@@ -16,7 +16,7 @@ export default function Login() {
 			direction="column"
 			justifyContent="center"
 			sx={{ height: "100%" }}
-		>
+		> 
 			<Container maxWidth="md">
 				<Stack
 					direction="column"

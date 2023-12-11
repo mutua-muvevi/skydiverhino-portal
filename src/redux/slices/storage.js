@@ -15,6 +15,9 @@ const initialState = {
 
 	allFiles: null,
 	allFilesError: null,
+
+	uploadFile: null,
+	uploadFileError: null,
 };
 
 //the slice
@@ -63,6 +66,17 @@ const slice = createSlice({
 		fetchFilesError(state, action) {
 			state.isLoading = false;
 			state.allFiles = action.payload;
+		},
+
+		//UPLOAD FILE
+		uploadFile(state, action) {
+			state.isLoading = false;
+			state.uploadFile = action.payload;
+		},
+
+		uploadFileError(state, action) {
+			state.isLoading = false;
+			state.uploadFileError = action.payload;
 		}
 	},
 });
@@ -162,12 +176,38 @@ export function fetchAllFiles(userID, token) {
 					},
 				}
 			);
-			console.log("The ", response)
 
 			dispatch(slice.actions.fetchFiles(response.data.data));
 			return response.data.data;
 		} catch (error) {
 			dispatch(slice.actions.fetchFilesError(error));
+			throw error.response;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
+}
+
+//upload file
+export function uploadFile(userID, file, token) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			const response = await axios.post(
+				`http://localhost:9700/api/storage/${userID}/upload`,
+				file,
+				{
+					headers: {
+						Authorization: token,
+					},
+				}
+			);
+
+			dispatch(slice.actions.uploadFile(response));
+			return response;
+		} catch (error) {
+			dispatch(slice.actions.uploadFileError(error));
 			throw error.response;
 		} finally {
 			dispatch(slice.actions.stopLoading());

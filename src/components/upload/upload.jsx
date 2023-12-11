@@ -44,6 +44,8 @@ Upload.propTypes = {
 	thumbnail: PropTypes.bool,
 	helperText: PropTypes.node,
 	onRemoveAll: PropTypes.func,
+	name: PropTypes.string.isRequired,
+	setFieldValue: PropTypes.func.isRequired,
 };
 
 export default function Upload({
@@ -60,6 +62,7 @@ export default function Upload({
 	onUpload,
 	onRemove,
 	onRemoveAll,
+	setFieldValue,
 	sx,
 	...other
 }) {
@@ -70,6 +73,14 @@ export default function Upload({
 		isDragReject,
 		fileRejections,
 	} = useDropzone({
+		onDrop: (acceptedFiles) => {
+			// Handle the file drop event
+			const newFile = acceptedFiles[0];
+			if (newFile) {
+				const fileUrl = URL.createObjectURL(newFile);
+				setFieldValue(name, fileUrl); // Update Formik state with the file URL
+			}
+		},
 		multiple,
 		disabled,
 		...other,
@@ -83,6 +94,8 @@ export default function Upload({
 
 	return (
 		<Box sx={{ width: 1, position: "relative", ...sx }}>
+			{console.log("file", file)}
+			{console.log("name", name)}
 			<StyledDropZone
 				{...getRootProps()}
 				sx={{

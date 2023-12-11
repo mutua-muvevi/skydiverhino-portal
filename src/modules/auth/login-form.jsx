@@ -49,7 +49,6 @@ const LoginForm = () => {
 		} catch (error) {
 			setAlertMessage(error.error || "An error occurred.");
 			setAlertSeverity("error");
-
 		}
 	};
 	return (

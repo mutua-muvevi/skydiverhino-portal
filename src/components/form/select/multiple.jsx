@@ -38,7 +38,7 @@ const MultipleSelect = ({
 	const handleChange = (evt) => {
 		const { value } = evt.target;
 		setFieldValue(name, Array.isArray(value) ? value : [value]);
-		{console.log("Meta is", meta)}
+
 	};
 
 	const configSelect = {

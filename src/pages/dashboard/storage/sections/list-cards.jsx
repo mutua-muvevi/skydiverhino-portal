@@ -133,25 +133,25 @@ const StorageOverviewListCard = () => {
 																				"documents"
 																					? "mdi-file-document-outline"
 																					: folderName ===
-																					  "images"
+																						"images"
 																					? "mdi-file-image-outline"
 																					: folderName ===
-																					  "videos"
+																						"videos"
 																					? "mdi-file-video-outline"
 																					: folderName ===
-																					  "code"
+																						"code"
 																					? "mdi-file-code-outline"
 																					: folderName ===
-																					  "design"
+																						"design"
 																					? "mdi-file-document-edit-outline"
 																					: folderName ===
-																					  "presentations"
+																						"presentations"
 																					? "mdi-file-powerpoint-outline"
 																					: folderName ===
-																					  "spreadsheet"
+																						"spreadsheet"
 																					? "mdi-file-excel-outline"
 																					: folderName ===
-																					  "website"
+																						"website"
 																					? "mdi-file-web-outline"
 																					: "mdi-file-outline"
 																			}

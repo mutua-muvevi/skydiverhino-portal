@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "../../redux/store";
 import { uploadFile } from "../../redux/slices/storage";
 import { Navigate } from "react-big-calendar";
 import Iconify from "../../components/iconify";
-import { set } from "lodash";
+import PropTypes from "prop-types";
 
 const initialState = {
 	file: "",
@@ -144,6 +144,14 @@ const AddFileModal = ({ open, onClose }) => {
 			</Dialog>
 		</div>
 	);
+};
+
+// ----------------------------------------------------------------------
+
+// proptypes validation
+AddFileModal.propTypes = {
+	open: PropTypes.bool,
+	onClose: PropTypes.func,
 };
 
 export default AddFileModal;

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "../../redux/store";
 import { uploadFile } from "../../redux/slices/storage";
 import { Navigate } from "react-big-calendar";
 import Iconify from "../../components/iconify";
+import { set } from "lodash";
 
 const initialState = {
 	file: "",
@@ -37,7 +38,7 @@ const AddFileModal = ({ open, onClose }) => {
 	const [alertSeverity, setAlertSeverity] = useState("info");
 
 	//add file
-	const addFileHander = useCallback((acceptedFiles) => {
+	const addFileHander = useCallback((acceptedFiles, setFieldValue) => {
 		const newFile = acceptedFiles[0];
 		if (newFile) {
 			setFile(
@@ -45,6 +46,9 @@ const AddFileModal = ({ open, onClose }) => {
 					preview: URL.createObjectURL(newFile),
 				})
 			);
+
+			//SET FIELD VALUE FOR FORMIK
+			setFieldValue("file", newFile);
 		}
 	}, []);
 
@@ -54,21 +58,34 @@ const AddFileModal = ({ open, onClose }) => {
 
 	const submitFile = async (values) => {
 		try {
-			console.log("values", values);
-			console.log("values");
-			// const response = await dispatch(
-			// 	uploadFile(me._id, file, token)
-			// );
+			const response = await dispatch(
+				uploadFile(me._id, file, token)
+			);
 
-			// //extract success message
-			// const { success, message } = response.data;
+			//extract success message
+			const { success, message } = response.data;
 
-			// // Set the alert message from the response and determine severity
-			// setAlertMessage(message);
-			// setAlertSeverity(success ? "success" : "error");
+			// Set the alert message from the response and determine severity
+			setAlertMessage(message);
+			setAlertSeverity(success ? "success" : "error");
+
+			//close the modal
+			if (success) {
+				setFile(null);
+				setTimeout(() => {
+					onClose();
+				}, 2000);
+
+				//reset formik
+				values.file = "";
+
+				//reload the page
+				window.location.reload();
+			}
+
 		} catch (error) {
-			// setAlertMessage(error.error || "An error occurred.");
-			// setAlertSeverity("error");
+			setAlertMessage(error.error || "An error occurred.");
+			setAlertSeverity("error");
 		}
 	};
 
@@ -83,33 +100,44 @@ const AddFileModal = ({ open, onClose }) => {
 							validationSchema={fileSchema}
 							onSubmit={submitFile}
 						>
-							<Form>
-								<Stack direction="column" spacing={3}>
-									{alertMessage && (
-										<Alert
-											severity={alertSeverity}
-											sx={{ mb: 2 }}
-										>
-											{alertMessage}
-										</Alert>
-									)}
-									<Upload
-										file={file ? file : null}
-										onDrop={addFileHander}
-										onDelete={() => setFile(null)}
-									/>
+							{({ setFieldValue }) => (
+								<Form>
+									<Stack direction="column" spacing={3}>
+										{alertMessage && (
+											<Alert
+												severity={alertSeverity}
+												sx={{ mb: 2 }}
+											>
+												{alertMessage}
+											</Alert>
+										)}
+										<Upload
+											file={file ? file : undefined}
+											onDrop={(acceptedFiles) =>
+												addFileHander(
+													acceptedFiles,
+													setFieldValue
+												)
+											}
+											onDelete={() => {
+												setFile(null);
+												setFieldValue("file", null);
+											}}
+											name="file"
+										/>
 
-									<Button
-										variant="contained"
-										type="submit"
-										endIcon={
-											<Iconify icon="ep:upload-filled" />
-										}
-									>
-										Submit File
-									</Button>
-								</Stack>
-							</Form>
+										<Button
+											variant="contained"
+											type="submit"
+											endIcon={
+												<Iconify icon="ep:upload-filled" />
+											}
+										>
+											Submit File
+										</Button>
+									</Stack>
+								</Form>
+							)}
 						</Formik>
 					</CardContent>
 				</Card>

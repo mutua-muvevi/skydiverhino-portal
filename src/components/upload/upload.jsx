@@ -63,6 +63,7 @@ export default function Upload({
 	onRemove,
 	onRemoveAll,
 	setFieldValue,
+	name,
 	sx,
 	...other
 }) {
@@ -94,8 +95,6 @@ export default function Upload({
 
 	return (
 		<Box sx={{ width: 1, position: "relative", ...sx }}>
-			{console.log("file", file)}
-			{console.log("name", name)}
 			<StyledDropZone
 				{...getRootProps()}
 				sx={{

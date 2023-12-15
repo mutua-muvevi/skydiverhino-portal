@@ -103,7 +103,7 @@ export function downloadFile(userID, filename, token) {
 
 		try {
 			const response = await axios.get(
-				`http://localhost:9700/api/storage/${userID}/download/${filename}`,
+				`http://localhost:8100/api/storage/${userID}/download/${filename}`,
 				{
 					headers: {
 						Authorization: token,
@@ -143,7 +143,7 @@ export function deleteFile(userID, filename, token) {
 
 		try {
 			const response = await axios.delete(
-				`http://localhost:9700/api/storage/${userID}/delete/${filename}`,
+				`http://localhost:8100/api/storage/${userID}/delete/${filename}`,
 				{
 					headers: {
 						Authorization: token,
@@ -193,13 +193,20 @@ export function uploadFile(userID, file, token) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 
+		// Create a form data object to send the file
+		const formData = new FormData();
+
+		// Append the file to the form data object
+		formData.append("file", file);
+
 		try {
 			const response = await axios.post(
-				`http://localhost:9700/api/storage/${userID}/upload`,
-				file,
+				`http://localhost:8100/api/storage/${userID}/upload`,
+				formData,
 				{
 					headers: {
-						Authorization: token,
+						"Authorization": token,
+						"Content-Type": "multipart/form-data",
 					},
 				}
 			);

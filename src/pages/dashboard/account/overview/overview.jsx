@@ -21,6 +21,7 @@ import SelectField from "../../../../components/form/select/select";
 import { countries } from "../../../../constants/country";
 import { editUser } from "../../../../redux/slices/user";
 import { useState } from "react";
+import { sentenceCase } from "change-case";
 
 //validation schema
 const editUserSchema = Yup.object().shape({
@@ -191,6 +192,7 @@ const AccountOverview = () => {
 												</InputAdornment>
 											),
 										}}
+										defaultValue={me && me.country ? sentenceCase(me.country) : ""}
 									/>
 
 									<Textfield

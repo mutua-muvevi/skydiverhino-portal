@@ -8,7 +8,33 @@ import StorageOverviewGraph from "./sections/graph";
 import StorageOverviewSpeedometerGraph from "./sections/spedometer-graph";
 import StorageOverviewListCard from "./sections/list-cards";
 
+import { useDispatch , useSelector } from "../../../redux/store";
+import { useEffect } from "react";
+import { fetchAllFiles } from "../../../redux/slices/storage";
+
 const StorageOverview = () => {
+	const dispatch = useDispatch();
+	const { me } = useSelector((state) => state.user)
+
+	const token = localStorage.getItem("token");
+
+	if(!token) {
+		window.location.href = "/login";
+	}
+
+	const fetchStorage = async () => {
+		try {
+			const response = await dispatch(fetchAllFiles(me._id, token));
+			console.log("The response is", response)
+		} catch (error) {
+			console.log("Error", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchStorage(me._id, token);
+	}, [me._id, token]);
+
 	return (
 		<Page title="Storage">
 			<CustomBreadcrumbs

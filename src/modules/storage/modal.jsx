@@ -12,20 +12,21 @@ import {
 	Typography,
 	useTheme,
 } from "@mui/material";
-import Iconify from "../../../../components/iconify";
+import Iconify from "../../components/iconify";
 import { PropTypes } from "prop-types";
-import Iframe from "../../../../components/iframe";
-import { IconButtonAnimate } from "../../../../components/animate";
-import MenuPopover from "../../../../components/menu-popover";
-import { getFilenameFromUrl } from "../../../../utils/get-filename";
-import { useDispatch, useSelector } from "../../../../redux/store";
-import { downloadFile } from "../../../../redux/slices/storage";
+import Iframe from "../../components/iframe";
+import { IconButtonAnimate } from "../../components/animate";
+import MenuPopover from "../../components/menu-popover";
+import { getFilenameFromUrl } from "../../utils/get-filename";
+import { useDispatch, useSelector } from "../../redux/store";
+import { deleteFile, downloadFile } from "../../redux/slices/storage";
 
 const OpenFolderModal = ({ open, onClose, file }) => {
 	const [openPopover, setOpenPopover] = useState(null);
+	const [openDelete, setOpenDelete] = useState(null);
+	const [openDownloading, setOpenDownloading] = useState(null);
 
 	const { me } = useSelector((state) => state.user);
-	const { isLoading } = useSelector((state) => state.storage);
 
 	const token = localStorage.getItem("token");
 
@@ -47,11 +48,17 @@ const OpenFolderModal = ({ open, onClose, file }) => {
 			icon: "mdi:download",
 			color: theme.palette.primary.main,
 			onClick: async () => {
-				await dispatch(
-					downloadFile(me._id, file.file.split("/").pop(), token)
+				setOpenDownloading(true);
+				const filename = file.file.split("/").pop();
+
+				const response = await dispatch(
+					downloadFile(me._id, filename, token)
 				);
 
-				handleClosePopover();
+				if (response.status === 200) {
+					setOpenDownloading(false);
+					handleClosePopover();
+				}
 			},
 		},
 		{
@@ -59,24 +66,61 @@ const OpenFolderModal = ({ open, onClose, file }) => {
 			linkTo: "",
 			icon: "mdi:trash",
 			color: theme.palette.error.main,
-			onClick: () => {
-				handleClosePopover();
-				console.log("Clicked delete");
+			onClick: async () => {
+				setOpenDelete(true);
+				const filename = file.file.split("/").pop();
+
+				const response = await dispatch(
+					deleteFile(me._id, filename, token)
+				);
+
+				if (response.status === 200) {
+					setOpenDelete(false);
+
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}
 			},
 		},
 	];
 
 	return (
 		<div>
-			{isLoading && (
-				<Grow in={isLoading} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
-					<Snackbar open={isLoading} anchorOrigin={{vertical: "top", horizontal: "right"}}> 
-						<Alert severity="info">
-							<AlertTitle>
-								Download
-							</AlertTitle>
+			{openDownloading && (
+				<Grow
+					in={openDownloading}
+					style={{ transformOrigin: "0 0 0" }}
+					timeout={1500}
+				>
+					<Snackbar
+						open={openDownloading}
+						anchorOrigin={{ vertical: "top", horizontal: "right" }}
+					>
+						<Alert severity="info" variant="filled">
+							<AlertTitle>Download</AlertTitle>
 							<Typography variant="body2">
 								Preparing to download file ...
+							</Typography>
+						</Alert>
+					</Snackbar>
+				</Grow>
+			)}
+
+			{openDelete && (
+				<Grow
+					in={openDelete}
+					style={{ transformOrigin: "0 0 0" }}
+					timeout={1500}
+				>
+					<Snackbar
+						open={openDelete}
+						anchorOrigin={{ vertical: "top", horizontal: "right" }}
+					>
+						<Alert severity="error" variant="filled">
+							<AlertTitle>Delete</AlertTitle>
+							<Typography variant="body2">
+								Deleting the file ...
 							</Typography>
 						</Alert>
 					</Snackbar>

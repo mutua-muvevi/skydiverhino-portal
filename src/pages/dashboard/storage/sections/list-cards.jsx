@@ -16,18 +16,18 @@ import Iconify from "../../../../components/iconify";
 import { getFilenameFromUrl } from "../../../../utils/get-filename";
 import { fDate } from "../../../../utils/format-time";
 import { formatBytes } from "../../../../utils/format-bytes";
-import OpenFolderModal from "./modal";
+import OpenFolderModal from "../../../../modules/storage/modal";
+import AddFileModal from "../../../../modules/storage/add-file-modal";
 
 const StorageOverviewListCard = () => {
 	const [expandedSections, setExpandedSections] = useState({});
 	const [openFile, setOpenFile] = useState(false);
 	const [file, setFile] = useState({});
-
+	const [uploadFile, setUploadFile] = useState(false);
 
 	const {
 		me: { storage },
 	} = useSelector((state) => state.user);
-	console.log("Storage", storage)
 
 	// Function to toggle the expanded state of a section
 	const toggleExpandSection = (folderName) => {
@@ -48,6 +48,11 @@ const StorageOverviewListCard = () => {
 		setOpenFile(false);
 	};
 
+	//upload file handler
+	const uploadFileHandler = () => {
+		setUploadFile(true)
+	};
+
 	const theme = useTheme();
 
 	const themeColors = [
@@ -61,265 +66,252 @@ const StorageOverviewListCard = () => {
 
 	return (
 		<div>
-			{storage
-				? Object.entries(storage).map(
-						([folderName, folderDetails], index) => {
-							const iconColor =
-								themeColors[index % themeColors.length];
+			{Object.entries(storage).map(
+				([folderName, folderDetails], index) => {
+					const iconColor = themeColors[index % themeColors.length];
 
-							return (
-								<StyledFolder spacing={3} key={folderName}>
-									<Stack
-										direction="row"
-										justifyContent="space-between"
-									>
-										<Typography
-											variant="h5"
-											color={iconColor}
-										>{`${
-											folderName
-												? sentenceCase(folderName)
-												: null
-										}`}</Typography>
-										<Button
-											variant="outlined"
-											endIcon={
-												<Iconify icon="material-symbols-light:add-notes-sharp" />
-											}
-										>
-											<Typography variant="subtitle2">
-												Add File
-											</Typography>
-										</Button>
-									</Stack>
+					return (
+						<StyledFolder spacing={3} key={folderName}>
+							<Stack
+								direction="row"
+								justifyContent="space-between"
+							>
+								<Typography variant="h5" color={iconColor}>{`${
+									folderName ? sentenceCase(folderName) : null
+								}`}</Typography>
+								<Button
+									variant="outlined"
+									endIcon={
+										<Iconify icon="ep:upload-filled" />
+									}
+									onClick={uploadFileHandler}
+								>
+									<Typography variant="subtitle2">
+										Add File
+									</Typography>
+								</Button>
+							</Stack>
 
-									<Stack spacing={3}>
-										<div>
-											<Grid container spacing={3}>
-												{folderDetails.files
-													.slice(
-														0,
-														expandedSections[
-															folderName
-														]
-															? folderDetails
-																	.files
-																	.length
-															: 4
-													)
-													.map((file, index) => (
-														<React.Fragment
-															key={index}
-														>
-															<Grid
-																item
-																xs={12}
-																md={6}
-																lg={4}
-																xl={3}
+							<Stack spacing={3}>
+								<div>
+									<Grid container spacing={3}>
+										{folderDetails.files
+											.slice(
+												0,
+												expandedSections[folderName]
+													? folderDetails.files.length
+													: 4
+											)
+											.map((file, index) => (
+												<React.Fragment key={index}>
+													<Grid
+														item
+														xs={12}
+														md={6}
+														lg={4}
+														xl={3}
+													>
+														<Card>
+															<CardActionArea
+																onClick={() =>
+																	openFileHandler(
+																		file
+																	)
+																}
 															>
-																<Card>
-																	<CardActionArea
-																		onClick={() =>
-																			openFileHandler(
-																				file
-																			)
+																<CardContent>
+																	<Stack
+																		direction="row"
+																		spacing={
+																			1.5
 																		}
+																		alignItems="flex-start"
 																	>
-																		<CardContent>
+																		<Iconify
+																			icon={
+																				folderName ===
+																				"documents"
+																					? "mdi-file-document-outline"
+																					: folderName ===
+																						"images"
+																					? "mdi-file-image-outline"
+																					: folderName ===
+																						"videos"
+																					? "mdi-file-video-outline"
+																					: folderName ===
+																						"code"
+																					? "mdi-file-code-outline"
+																					: folderName ===
+																						"design"
+																					? "mdi-file-document-edit-outline"
+																					: folderName ===
+																						"presentations"
+																					? "mdi-file-powerpoint-outline"
+																					: folderName ===
+																						"spreadsheet"
+																					? "mdi-file-excel-outline"
+																					: folderName ===
+																						"website"
+																					? "mdi-file-web-outline"
+																					: "mdi-file-outline"
+																			}
+																			width={
+																				50
+																			}
+																			height={
+																				80
+																			}
+																			sx={{
+																				color: iconColor,
+																			}}
+																		/>
+																		<Stack direction="column">
 																			<Stack
 																				direction="row"
 																				spacing={
-																					1.5
+																					3
 																				}
-																				alignItems="flex-start"
+																				sx={{
+																					overflowX:
+																						"hidden",
+																				}}
 																			>
-																				<Iconify
-																					icon={
-																						folderName ===
-																						"documents"
-																							? "mdi-file-document-outline"
-																							: folderName ===
-																							  "images"
-																							? "mdi-file-image-outline"
-																							: folderName ===
-																							  "videos"
-																							? "mdi-file-video-outline"
-																							: folderName ===
-																							  "code"
-																							? "mdi-file-code-outline"
-																							: folderName ===
-																							  "design"
-																							? "mdi-file-document-edit-outline"
-																							: folderName ===
-																							  "presentations"
-																							? "mdi-file-powerpoint-outline"
-																							: folderName ===
-																							  "spreadsheet"
-																							? "mdi-file-excel-outline"
-																							: folderName ===
-																							  "website"
-																							? "mdi-file-web-outline"
-																							: "mdi-file-outline"
-																					}
-																					width={
-																						50
-																					}
-																					height={
-																						80
-																					}
+																				<Typography
+																					variant="body2"
 																					sx={{
-																						color: iconColor,
+																						fontWeight: 700,
 																					}}
-																				/>
-																				<Stack direction="column">
-																					<Stack
-																						direction="row"
-																						spacing={
-																							3
-																						}
-																						sx={{
-																							overflowX:
-																								"hidden",
-																						}}
-																					>
-																						<Typography
-																							variant="body2"
-																							sx={{
-																								fontWeight: 700,
-																							}}
-																						>
-																							Name:
-																						</Typography>
-																						<Typography
-																							variant="body2"
-																							sx={{
-																								whiteSpace:
-																									"nowrap",
-																								overflow:
-																									"hidden",
-																								textOverflow:
-																									"ellipsis",
-																							}}
-																						>
-																							{getFilenameFromUrl(
-																								file.file
-																							)}
-																						</Typography>
-																					</Stack>
-																					<Stack
-																						direction="row"
-																						spacing={
-																							3
-																						}
-																						sx={{
-																							overflowX:
-																								"hidden",
-																						}}
-																					>
-																						<Typography
-																							variant="body2"
-																							sx={{
-																								fontWeight: 700,
-																							}}
-																						>
-																							Size:
-																						</Typography>
-																						<Typography variant="body2">
-																							{formatBytes(
-																								file.size
-																							)}
-																						</Typography>
-																					</Stack>
-																					<Stack
-																						direction="row"
-																						spacing={
-																							3
-																						}
-																						sx={{
-																							overflowX:
-																								"hidden",
-																						}}
-																					>
-																						<Typography
-																							variant="body2"
-																							sx={{
-																								fontWeight: 700,
-																							}}
-																						>
-																							Uploaded:
-																						</Typography>
-																						<Typography variant="body2">
-																							{fDate(
-																								file.uploaded
-																							)}
-																						</Typography>
-																					</Stack>
-																				</Stack>
+																				>
+																					Name:
+																				</Typography>
+																				<Typography
+																					variant="body2"
+																					sx={{
+																						whiteSpace:
+																							"nowrap",
+																						overflow:
+																							"hidden",
+																						textOverflow:
+																							"ellipsis",
+																					}}
+																				>
+																					{getFilenameFromUrl(
+																						file.file
+																					)}
+																				</Typography>
 																			</Stack>
-																		</CardContent>
-																	</CardActionArea>
-																</Card>
-															</Grid>
-														</React.Fragment>
-													))}
-											</Grid>
-										</div>
-									</Stack>
+																			<Stack
+																				direction="row"
+																				spacing={
+																					3
+																				}
+																				sx={{
+																					overflowX:
+																						"hidden",
+																				}}
+																			>
+																				<Typography
+																					variant="body2"
+																					sx={{
+																						fontWeight: 700,
+																					}}
+																				>
+																					Size:
+																				</Typography>
+																				<Typography variant="body2">
+																					{formatBytes(
+																						file.size
+																					)}
+																				</Typography>
+																			</Stack>
+																			<Stack
+																				direction="row"
+																				spacing={
+																					3
+																				}
+																				sx={{
+																					overflowX:
+																						"hidden",
+																				}}
+																			>
+																				<Typography
+																					variant="body2"
+																					sx={{
+																						fontWeight: 700,
+																					}}
+																				>
+																					Uploaded:
+																				</Typography>
+																				<Typography variant="body2">
+																					{fDate(
+																						file.uploaded
+																					)}
+																				</Typography>
+																			</Stack>
+																		</Stack>
+																	</Stack>
+																</CardContent>
+															</CardActionArea>
+														</Card>
+													</Grid>
+												</React.Fragment>
+											))}
+									</Grid>
+								</div>
+							</Stack>
 
-									<Stack
-										direction="row"
-										justifyContent="space-between"
+							<Stack
+								direction="row"
+								justifyContent="space-between"
+							>
+								<Typography
+									variant="subtitle1"
+									color="text.primary"
+								>
+									<strong>Total Size:</strong>{" "}
+									<span style={{ color: iconColor }}>
+										<strong>
+											{formatBytes(folderDetails.size)}
+										</strong>
+									</span>
+								</Typography>
+
+								<Button
+									endIcon={
+										<Iconify
+											icon={
+												expandedSections[folderName]
+													? "ic:outline-expand-less"
+													: "ic:outline-expand-more"
+											}
+										/>
+									}
+									onClick={() =>
+										toggleExpandSection(folderName)
+									}
+								>
+									<Typography
+										variant="subtitle2"
+										color="text.primary"
 									>
-										<Typography
-											variant="subtitle1"
-											color="text.primary"
-										>
-											<strong>Total Size:</strong>{" "}
-											<span style={{ color: iconColor }}>
-												<strong>
-													{formatBytes(
-														folderDetails.size
-													)}
-												</strong>
-											</span>
-										</Typography>
-
-										<Button
-											endIcon={
-												<Iconify
-													icon={
-														expandedSections[
-															folderName
-														]
-															? "ic:outline-expand-less"
-															: "ic:outline-expand-more"
-													}
-												/>
-											}
-											onClick={() =>
-												toggleExpandSection(folderName)
-											}
-										>
-											<Typography
-												variant="subtitle2"
-												color="text.primary"
-											>
-												{expandedSections[folderName]
-													? "Collapse"
-													: "View All"}
-											</Typography>
-										</Button>
-									</Stack>
-								</StyledFolder>
-							);
-						}
-				  )
-				: "No Storage"}
+										{expandedSections[folderName]
+											? "Collapse"
+											: "View All"}
+									</Typography>
+								</Button>
+							</Stack>
+						</StyledFolder>
+					);
+				}
+			)}
 			<OpenFolderModal
 				open={openFile}
 				onClose={handleClose}
 				file={file}
+			/>
+			<AddFileModal
+				open={uploadFile}
+				onClose={() => setUploadFile(false)}
 			/>
 		</div>
 	);

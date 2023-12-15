@@ -4,7 +4,6 @@ import { Stack, Typography, Link, Container } from "@mui/material";
 // routes
 import { PATH_AUTH } from "../../routes/path";
 //
-import AuthWithSocial from "./social-login";
 import AuthRegisterForm from "./register-form";
 import { Helmet } from "react-helmet-async";
 
@@ -66,7 +65,6 @@ export default function Register() {
 						</Link>
 						.
 					</Typography>
-					<AuthWithSocial />
 				</Stack>
 			</Container>
 		</Stack>

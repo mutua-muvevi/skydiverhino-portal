@@ -12,6 +12,12 @@ const initialState = {
 
 	delete: null,
 	deleteError: null,
+
+	allFiles: null,
+	allFilesError: null,
+
+	uploadFile: null,
+	uploadFileError: null,
 };
 
 //the slice
@@ -49,6 +55,28 @@ const slice = createSlice({
 		deleteFileError(state, action) {
 			state.isLoading = false;
 			state.deleteError = action.payload;
+		},
+
+		//FETCH ALL FILES
+		fetchFiles(state, action) {
+			state.isLoading = false;
+			state.allFiles = action.payload;
+		},
+
+		fetchFilesError(state, action) {
+			state.isLoading = false;
+			state.allFiles = action.payload;
+		},
+
+		//UPLOAD FILE
+		uploadFile(state, action) {
+			state.isLoading = false;
+			state.uploadFile = action.payload;
+		},
+
+		uploadFileError(state, action) {
+			state.isLoading = false;
+			state.uploadFileError = action.payload;
 		}
 	},
 });
@@ -75,7 +103,7 @@ export function downloadFile(userID, filename, token) {
 
 		try {
 			const response = await axios.get(
-				`http://localhost:9700/api/storage/${userID}/download/${filename}`,
+				`http://localhost:8100/api/storage/${userID}/download/${filename}`,
 				{
 					headers: {
 						Authorization: token,
@@ -115,7 +143,7 @@ export function deleteFile(userID, filename, token) {
 
 		try {
 			const response = await axios.delete(
-				`http://localhost:9700/api/storage/${userID}/delete/${filename}`,
+				`http://localhost:8100/api/storage/${userID}/delete/${filename}`,
 				{
 					headers: {
 						Authorization: token,
@@ -124,7 +152,7 @@ export function deleteFile(userID, filename, token) {
 			);
 
 			dispatch(slice.actions.deleteFile(response));
-			return response
+			return response;
 		} catch (error) {
 			dispatch(slice.actions.deleteFileError(error));
 			throw error.response;
@@ -132,5 +160,64 @@ export function deleteFile(userID, filename, token) {
 			dispatch(slice.actions.stopLoading());
 		}
 	};
+}
 
+//fetch all files
+export function fetchAllFiles(userID, token) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			const response = await axios.get(
+				`http://localhost:8100/api/storage/${userID}/fetch`,
+				{
+					headers: {
+						Authorization: token,
+					},
+				}
+			);
+
+			dispatch(slice.actions.fetchFiles(response.data.data));
+			return response.data.data;
+		} catch (error) {
+			dispatch(slice.actions.fetchFilesError(error));
+			throw error.response;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
+}
+
+//upload file
+export function uploadFile(userID, file, token) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		// Create a form data object to send the file
+		const formData = new FormData();
+
+		// Append the file to the form data object
+		formData.append("file", file);
+
+		try {
+			const response = await axios.post(
+				`http://localhost:8100/api/storage/${userID}/upload`,
+				formData,
+				{
+					headers: {
+						"Authorization": token,
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+
+			dispatch(slice.actions.uploadFile(response));
+			return response;
+		} catch (error) {
+			dispatch(slice.actions.uploadFileError(error));
+			throw error.response;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
 }

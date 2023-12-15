@@ -78,7 +78,7 @@ const SelectField = ({
 						</MenuItem>
 					);
 				})}
-			</Select>
+			</Select>{console.log("Default value is", defaultValue)}
 			{meta.touched && meta.error ? (
 				<Typography variant="caption" color="error" sx={{mt:1}}>
 					{meta.error}

@@ -11,7 +11,7 @@ import Chart from "../../../../components/chart";
 import { useSelector } from "../../../../redux/store";
 import { formatBytes } from "../../../../utils/format-bytes";
 
-const totalAllocatedStorage = 1200000000;
+const totalAllocatedStorage = 4200000000;
 
 const StorageOverviewSpeedometerGraph = () => {
 	const {

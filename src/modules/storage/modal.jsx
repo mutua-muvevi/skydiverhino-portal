@@ -75,8 +75,11 @@ const OpenFolderModal = ({ open, onClose, file }) => {
 				);
 
 				if (response.status === 200) {
-					window.location.reload();
 					setOpenDelete(false);
+
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
 				}
 			},
 		},

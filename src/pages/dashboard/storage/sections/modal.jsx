@@ -61,7 +61,7 @@ const OpenFolderModal = ({ open, onClose, file }) => {
 			color: theme.palette.error.main,
 			onClick: () => {
 				handleClosePopover();
-				console.log("Clicked delete");
+				console.log("Clicked delete ++++++++++++++++");
 			},
 		},
 	];

@@ -50,6 +50,14 @@ export const PATH_DASHBOARD = {
 
 		//tools
 		tools: path(ROOTS_DASHBOARD, "/tools"),
+
+		//the tools
+		competition: path(ROOTS_DASHBOARD, "/competition"),
+		weather: path(ROOTS_DASHBOARD, "/weather"),
+		seo: path(ROOTS_DASHBOARD, "/seo"),
+		jumps: path(ROOTS_DASHBOARD, "/jumps"),
+		events: path(ROOTS_DASHBOARD, "/events"),
+		gears: path(ROOTS_DASHBOARD, "/gears"),
 		
 		//storage
 		storage: path(ROOTS_DASHBOARD, "/storage"),

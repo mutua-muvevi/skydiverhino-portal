@@ -58,6 +58,12 @@ import {
 	Services,
 	WebsiteServices,
 	LandingOverview,
+	Competition,
+	Weather,
+	SEO,
+	Jumps,
+	Events,
+	Gears,
 
 } from "./elements";
 
@@ -153,6 +159,15 @@ export default function Router() {
 				{ path: "leads", element: <Leads /> },
 
 				{ path: "tools", element: <Tools /> },
+
+				//the tools
+				{ path: "competition", element: <Competition/> },
+				{ path: "weather", element: <Weather/> },
+				{ path: "seo", element: <SEO/> },
+				{ path: "jumps", element: <Jumps/> },
+				{ path: "events", element: <Events/> },
+				{ path: "gears", element: <Gears/> },
+
 
 				{
 					path: "social",

@@ -91,6 +91,14 @@ export const Services = Loadable(lazy(() => import("../pages/dashboard/services/
 //tools
 export const Tools = Loadable(lazy(() => import("../pages/dashboard/tools/tools")));
 
+//the tools
+export const Competition = Loadable(lazy(() => import("../tools/competition/competition")));
+export const Events = Loadable(lazy(() => import("../tools/events/events")));
+export const Jumps = Loadable(lazy(() => import("../tools/jumps/jumps")));
+export const SEO = Loadable(lazy(() => import("../tools/seo/seo")));
+export const Weather = Loadable(lazy(() => import("../tools/weather/weather")));
+export const Gears = Loadable(lazy(() => import("../tools/gears/gears")));
+
 //social
 export const FaceBook = Loadable(lazy(() => import("../pages/dashboard/social/facebook/facebook")));
 export const Instagram = Loadable(lazy(() => import("../pages/dashboard/social/instagram/instagram")));
@@ -105,3 +113,4 @@ export const WebsiteServices = Loadable(lazy(() => import("../pages/dashboard/we
 
 //landing
 export const LandingOverview = Loadable(lazy(() => import("../pages/dashboard/landing/overview/overview")));
+

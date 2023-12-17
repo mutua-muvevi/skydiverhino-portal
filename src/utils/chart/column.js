@@ -1,12 +1,12 @@
 // utils/graph.js
-import { format, subMonths, startOfMonth, isWithinInterval } from "date-fns";
+import { format, subMonths } from "date-fns";
 
 /**
  * Processes reservation data to get the count of data per month for the last 12 months.
  * @param {Array} data Array of reservation objects.
  * @returns {Object} Object containing series and labels for the bar chart.
  */
-export const processAnualCollumnData = (data) => {
+export const processAnualCollumnData = (data, name) => {
 	const currentDate = new Date();
 	const months = {};
 
@@ -32,7 +32,7 @@ export const processAnualCollumnData = (data) => {
 	return {
 		series: [
 			{
-				name: "Reservations",
+				name: name,
 				data: series,
 			},
 		],

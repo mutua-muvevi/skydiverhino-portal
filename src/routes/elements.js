@@ -86,7 +86,7 @@ export const Leads = Loadable(lazy(() => import("../pages/dashboard/leads/leads"
 export const Storage = Loadable(lazy(() => import("../pages/dashboard/storage/overview")));
 
 //services
-export const Services = Loadable(lazy(() => import("../pages/dashboard/services/overview")));
+export const Services = Loadable(lazy(() => import("../pages/dashboard/services/services")));
 
 //tools
 export const Tools = Loadable(lazy(() => import("../pages/dashboard/tools/tools")));
@@ -114,3 +114,5 @@ export const WebsiteServices = Loadable(lazy(() => import("../pages/dashboard/we
 //landing
 export const LandingOverview = Loadable(lazy(() => import("../pages/dashboard/landing/overview/overview")));
 
+//Blogs
+export const Blogs = Loadable(lazy(() => import("../pages/dashboard/blogs/blogs")));

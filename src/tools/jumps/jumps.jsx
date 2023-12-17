@@ -10,7 +10,7 @@ const Jumps = () => {
 				links={[
 					{
 						name: "Dashboard",
-						href: PATH_DASHBOARD.general.home.root,
+						href: PATH_DASHBOARD.general.home,
 					},
 					{ name: "Tools", href: PATH_DASHBOARD.general.tools },
 					{ name: "Jumps" },

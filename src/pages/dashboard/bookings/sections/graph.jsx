@@ -5,6 +5,7 @@ import { useSelector } from "../../../../redux/store";
 import { processAnualCollumnData } from "../../../../utils/chart/column";
 
 const BookingGraph = () => {
+	const name = "Reservations";
 
 	//fetching reservations
 	const {
@@ -12,7 +13,7 @@ const BookingGraph = () => {
 	} = useSelector((state) => state.reservations);
 
 	// Process the reservations data for the graph
-	const { series, categories } = processAnualCollumnData(reservationsData);
+	const { series, categories } = processAnualCollumnData(reservationsData, name);
 
 	const chartColumnSingleData = {
 		type: "bar",

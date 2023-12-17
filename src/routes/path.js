@@ -101,6 +101,12 @@ export const PATH_DASHBOARD = {
 			overview: path(ROOTS_DASHBOARD, "/landing/overview"),
 			landing: path(ROOTS_DASHBOARD, "/landing/landing"),
 		},
+
+		//services
+		services: path(ROOTS_DASHBOARD, "/services"),
+
+		//blogs
+		blogs: path(ROOTS_DASHBOARD, "/blogs"),
 		
 
 		

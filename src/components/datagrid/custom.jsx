@@ -29,164 +29,7 @@ import {
 	renderNestedTable,
 } from "../../utils/datagrid/data";
 
-// ----------------------------------------------------------------------
-
-// const columns = [
-// 	// OPTIONS
-// 	// https://mui.com/x/api/data-grid/grid-col-def/#main-content
-// 	// - hide: false (default)
-// 	// - editable: false (default)
-// 	// - filterable: true (default)
-// 	// - sortable: true (default)
-// 	// - disableColumnMenu: false (default)
-
-// 	// FIELD TYPES
-// 	// --------------------
-// 	// 'string' (default)
-// 	// 'number'
-// 	// 'date'
-// 	// 'dateTime'
-// 	// 'boolean'
-// 	// 'singleSelect'
-
-// 	{
-// 		field: "id",
-// 		hide: true,
-// 	},
-// 	{
-// 		field: "avatar",
-// 		headerName: "Avatar",
-// 		align: "center",
-// 		headerAlign: "center",
-// 		width: 64,
-// 		sortable: false,
-// 		filterable: false,
-// 		disableColumnMenu: true,
-// 		renderCell: (params) => (
-// 			<CustomAvatar
-// 				name={params.row.name}
-// 				sx={{ width: 36, height: 36 }}
-// 			/>
-// 		),
-// 	},
-// 	{
-// 		field: "name",
-// 		headerName: "Name",
-// 		flex: 1,
-// 		editable: true,
-// 	},
-// 	{
-// 		field: "email",
-// 		headerName: "Email",
-// 		flex: 1,
-// 		editable: true,
-// 		renderCell: (params) => (
-// 			<Typography
-// 				variant="body2"
-// 				sx={{ textDecoration: "underline" }}
-// 				noWrap
-// 			>
-// 				{params.row.email}
-// 			</Typography>
-// 		),
-// 	},
-// 	{
-// 		field: "lastLogin",
-// 		type: "dateTime",
-// 		headerName: "Last login",
-// 		align: "right",
-// 		headerAlign: "right",
-// 		width: 200,
-// 	},
-// 	{
-// 		field: "rating",
-// 		type: "number",
-// 		headerName: "Rating",
-// 		width: 160,
-// 		disableColumnMenu: true,
-// 		renderCell: (params) => (
-// 			<Rating
-// 				size="small"
-// 				value={params.row.rating}
-// 				precision={0.5}
-// 				readOnly
-// 			/>
-// 		),
-// 	},
-// 	{
-// 		field: "status",
-// 		type: "singleSelect",
-// 		headerName: "Status",
-// 		valueOptions: ["online", "away", "busy"],
-// 		align: "center",
-// 		headerAlign: "center",
-// 		width: 120,
-// 		renderCell: (params) => RenderStatus(params.row.status),
-// 	},
-// 	{
-// 		field: "isAdmin",
-// 		type: "boolean",
-// 		align: "center",
-// 		headerAlign: "center",
-// 		width: 120,
-
-// 		renderCell: (params) =>
-// 			params.row.isAdmin ? (
-// 				<Iconify
-// 					icon="eva:checkmark-circle-2-fill"
-// 					sx={{ color: "primary.main" }}
-// 				/>
-// 			) : (
-// 				"-"
-// 			),
-// 	},
-// 	{
-// 		field: "performance",
-// 		type: "number",
-// 		headerName: "Performance",
-// 		align: "center",
-// 		headerAlign: "center",
-// 		width: 160,
-// 		renderCell: (params) => (
-// 			<Stack
-// 				spacing={1}
-// 				direction="row"
-// 				alignItems="center"
-// 				sx={{ px: 1, width: 1, height: 1 }}
-// 			>
-// 				<LinearProgress
-// 					value={params.row.performance}
-// 					variant="determinate"
-// 					color={
-// 						(params.row.performance < 30 && "error") ||
-// 						(params.row.performance > 30 &&
-// 							params.row.performance < 70 &&
-// 							"warning") ||
-// 						"primary"
-// 					}
-// 					sx={{ width: 1, height: 6 }}
-// 				/>
-// 				<Typography variant="caption" sx={{ width: 80 }}>
-// 					{fPercent(params.row.performance)}
-// 				</Typography>
-// 			</Stack>
-// 		),
-// 	},
-// 	{
-// 		field: "action",
-// 		headerName: " ",
-// 		align: "right",
-// 		width: 80,
-// 		sortable: false,
-// 		filterable: false,
-// 		disableColumnMenu: true,
-// 		renderCell: (params) => (
-// 			<IconButton onClick={() => console.log("ID", params.row._id)}>
-// 				<Iconify icon="eva:more-vertical-fill" />
-// 			</IconButton>
-// 		),
-// 	},
-// ];
+import ModalComponent from "./modal";
 
 // ----------------------------------------------------------------------
 
@@ -229,8 +72,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 }));
 
 export default function DataGridCustom({ data, checkboxSelection }) {
-	const [selectionModel, setSelectionModel] = useState([]);
-	const [expandedRows, setExpandedRows] = useState([]);
+	const [selectedRow, setSelectedRow] = useState(null);
 
 	const nestedDataRenderer = (key, value) => {
 		// Implement rendering logic for nested data
@@ -239,26 +81,9 @@ export default function DataGridCustom({ data, checkboxSelection }) {
 
 	const { rows, columns } = processDataForGrid(data, nestedDataRenderer);
 
+	// Function to handle row click
 	const handleRowClick = (params) => {
-		const rowId = params.id;
-		const currentExpandedRows = expandedRows.includes(rowId)
-			? expandedRows.filter((id) => id !== rowId)
-			: [...expandedRows, rowId];
-		setExpandedRows(currentExpandedRows);
-		console.log("expandedRows", expandedRows);
-	};
-
-	const renderCell = (params) => {
-		if (Array.isArray(params.value)) {
-			return expandedRows.includes(params.id) ? (
-				renderNestedTable(params.value)
-			) : (
-				<Typography sx={{ cursor: "pointer", color: "primary.main" }}>
-					Expand
-				</Typography>
-			);
-		}
-		return nestedDataRenderer(params.field, params.value);
+		setSelectedRow(params.row); // Set the selected row data
 	};
 
 	if (columns.length > 0) {
@@ -284,28 +109,33 @@ export default function DataGridCustom({ data, checkboxSelection }) {
 	// const selected = data.filter((row) => selectionModel.includes(row._id));
 
 	return (
-		<StyledDataGridContainer>
-			<StyledDataGridHeader title="Custom Datagrid" />
+		<>
+			<StyledDataGridContainer>
+				<StyledDataGridHeader title="Custom Datagrid" />
 
-			<Box style={{ height: "600px" }}>
-				<StyledDataGrid
-					checkboxSelection={checkboxSelection ? true : false}
-					disableSelectionOnClick
-					rows={rows}
-					columns={columns}
-					pagination
-					getRowId={(row) => row._id}
-					onSelectionModelChange={(newSelectionModel) => {
-						setSelectionModel(newSelectionModel);
-					}}
-					components={{
-						Toolbar: GridToolbar,
-					}}
-					onRowClick={handleRowClick}
-					renderCell={renderCell}
-				/>
-			</Box>
-		</StyledDataGridContainer>
+				<Box style={{ height: "600px" }}>
+					<StyledDataGrid
+						checkboxSelection={checkboxSelection ? true : false}
+						disableSelectionOnClick
+						rows={rows}
+						columns={columns}
+						pagination
+						getRowId={(row) => row._id}
+						components={{
+							Toolbar: GridToolbar,
+						}}
+						onRowClick={handleRowClick}
+						// renderCell={renderCell}
+					/>
+				</Box>
+			</StyledDataGridContainer>
+
+			<ModalComponent
+				selectedRow={selectedRow}
+				open={Boolean(selectedRow)}
+				onClose={() => setSelectedRow(null)}
+			/>
+		</>
 	);
 }
 

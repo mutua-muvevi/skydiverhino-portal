@@ -10,16 +10,16 @@ import BookingMain from "./sections/main";
 
 const Bookings = () => {
 	return (
-		<Page title="Booking">
+		<Page title="Reservations">
 			<CustomBreadcrumbs
-				heading="Booking"
+				heading="Reservations"
 				links={[
 					{
 						name: "Dashboard",
 						href: PATH_DASHBOARD.general.home.root,
 					},
 					{
-						name: "Booking",
+						name: "Reservations",
 					},
 				]}
 			/>

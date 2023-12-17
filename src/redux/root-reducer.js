@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage";
 import UserReducer from "./slices/user";
 import StorageReducer from "./slices/storage";
 import ReservationsReducer from "./slices/reservations";
+import ServicesReducer from "./slices/services";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -17,14 +18,16 @@ import kanbanReducer from "./slices/kanban";
 const config = {
 	key: "root",
 	storage,
-	whitelist: ["user"],
+	whitelist: ["user", "storage", "reservation"],
 	blacklist: [],
 };
 
 export const rootReducer = combineReducers({
 	user: UserReducer,
+	
 	storage: StorageReducer,
-	reservation: ReservationsReducer,
+	reservations: ReservationsReducer,
+	services: ServicesReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

@@ -446,14 +446,23 @@ export const { startLoading, stopLoading } = slice.actions;
 
 //----------------------------services--------------------------------------------
 //SERVICE
-export function getService(id) {
+export function fetchSingleService(serviceID) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
-		try {
-			const response = await axios.get(`/services/${id}`);
-			const data = await response.data;
 
+		try {
+			const response = await axios.get(
+				`http://localhost:8100/api/service/fetch/single/${serviceID}`,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const data = await response.data;
 			dispatch(slice.actions.getServiceSuccess(data));
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.getServiceError(error));
 			throw error;
@@ -464,14 +473,23 @@ export function getService(id) {
 }
 
 //SERVICES
-export function getServices() {
+export function fetchAllServices() {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
-		try {
-			const response = await axios.get(`/services`);
-			const data = await response.data;
 
+		try {
+			const response = await axios.get(
+				"http://localhost:8100/api/service/fetch/all",
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const data = await response.data;
 			dispatch(slice.actions.getServicesSuccess(data));
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.getServicesError(error));
 			throw error;
@@ -513,7 +531,7 @@ export function postService(userID, values, token) {
 export function editService(userID, values, token, serviceID) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
-		
+
 		try {
 			const response = await axios.put(
 				`http://localhost:8100/api/service/${userID}/edit/${serviceID}`,
@@ -521,7 +539,7 @@ export function editService(userID, values, token, serviceID) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 				}
 			);
@@ -529,7 +547,6 @@ export function editService(userID, values, token, serviceID) {
 			const data = await response.data;
 			dispatch(slice.actions.editServiceSuccess(data));
 			return data;
-
 		} catch (error) {
 			dispatch(slice.actions.editServiceError(error));
 			throw error;

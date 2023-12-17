@@ -21,14 +21,17 @@ export const StyledItem = styled(ListItemButton, {
 		backgroundColor:
 			theme.palette.mode === "light"
 				? alpha(theme.palette.primary.main, 0.5)
-				: theme.palette.grey[800],
+				: theme.palette.primary.main,
 		...(!isLight && {
 			color: theme.palette.primary.contrastText,
 		}),
 	};
 
 	const activeSubStyle = {
-		color: theme.palette.primary.contrastText,
+		color:
+			theme.palette.mode === "light"
+				? theme.palette.primary.contrastText
+				: theme.palette.primary.main,
 		backgroundColor: "transparent",
 	};
 
@@ -86,7 +89,6 @@ export const StyledIcon = styled(ListItemIcon)({
 	justifyContent: "center",
 	width: ICON.NAV_ITEM,
 	height: ICON.NAV_ITEM,
-
 });
 
 // ----------------------------------------------------------------------

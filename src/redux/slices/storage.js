@@ -87,8 +87,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { addRecipients, sendMessage, resetActiveConversation } =
-	slice.actions;
+export const { startLoading, stopLoading } = slice.actions;
 
 // ---
 

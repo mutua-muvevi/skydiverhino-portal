@@ -13,6 +13,7 @@ import localStorageAvailable from "../utils/localstorage-available";
 import { isValidToken, setSession } from "./utils";
 import { useDispatch } from "../redux/store";
 import { fetchMe } from "../redux/slices/user";
+import { fetchAllReservations } from "../redux/slices/reservations";
 
 // ----------------------------------------------------------------------
 
@@ -90,12 +91,12 @@ export function AuthProvider({ children }) {
 					},
 				});
 
-				const me = await reduxDispatch(fetchMe(token));
+				await reduxDispatch(fetchMe(token));
 
 				const user = response.data.data;
 
-				console.log("The user we fetched is", user);
-				console.log("The user we fetched is a", me);
+				//fetching all reservations
+				await reduxDispatch(fetchAllReservations(token, user._id));
 
 				dispatch({
 					type: "INITIAL",

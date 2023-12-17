@@ -24,8 +24,7 @@ const StorageOverview = () => {
 
 	const fetchStorage = async () => {
 		try {
-			const response = await dispatch(fetchAllFiles(me._id, token));
-			console.log("The response is", response)
+			await dispatch(fetchAllFiles(me._id, token));
 		} catch (error) {
 			console.log("Error", error);
 		}

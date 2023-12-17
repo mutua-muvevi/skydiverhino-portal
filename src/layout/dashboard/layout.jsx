@@ -13,6 +13,8 @@ import NavMini from "./nav/nav-mini";
 import NavVertical from "./nav/nav-vertical";
 import NavHorizontal from "./nav/nav-horizontal";
 
+//fetch booking
+
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {

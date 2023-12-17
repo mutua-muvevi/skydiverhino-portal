@@ -246,8 +246,7 @@ export function resendOTPCode(userID, token){
 				
 				}
 			);
-
-			console.log("response", response)
+			
 			dispatch(slice.actions.resendOTPCode(response.data));
 			return response;
 

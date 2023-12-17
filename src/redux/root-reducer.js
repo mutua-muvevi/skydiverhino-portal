@@ -4,8 +4,9 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 // slices
-import userReducer from "./slices/user";
-import StorageReducer from "./slices/storage"
+import UserReducer from "./slices/user";
+import StorageReducer from "./slices/storage";
+import ReservationsReducer from "./slices/reservations";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -21,8 +22,9 @@ const config = {
 };
 
 export const rootReducer = combineReducers({
-	user: userReducer,
+	user: UserReducer,
 	storage: StorageReducer,
+	reservation: ReservationsReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

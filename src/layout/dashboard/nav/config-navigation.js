@@ -60,7 +60,7 @@ const navConfig = [
 
 			//bookings
 			{
-				title: "bookings",
+				title: "reservations",
 				path: PATH_DASHBOARD.general.bookings,
 				icon: ICONS.bookings,
 			},

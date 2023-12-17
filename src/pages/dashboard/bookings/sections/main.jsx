@@ -10,7 +10,7 @@ const BookingMain = () => {
 
 	return (
 		<div>
-			<DataGridCustom data={reservationsData}/>
+			<DataGridCustom data={reservationsData} title="Reservations List" />
 		</div>
 	)
 }

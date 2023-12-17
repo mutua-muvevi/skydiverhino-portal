@@ -30,6 +30,7 @@ import {
 } from "../../utils/datagrid/data";
 
 import ModalComponent from "./modal";
+import { sentenceCase } from "change-case";
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +72,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 	},
 }));
 
-export default function DataGridCustom({ data, checkboxSelection }) {
+export default function DataGridCustom({ data, checkboxSelection, title }) {
 	const [selectedRow, setSelectedRow] = useState(null);
 
 	const nestedDataRenderer = (key, value) => {
@@ -111,7 +112,7 @@ export default function DataGridCustom({ data, checkboxSelection }) {
 	return (
 		<>
 			<StyledDataGridContainer>
-				<StyledDataGridHeader title="Custom Datagrid" />
+				<StyledDataGridHeader title={title ? sentenceCase(title): "Data table"} />
 
 				<Box style={{ height: "600px" }}>
 					<StyledDataGrid
@@ -134,6 +135,7 @@ export default function DataGridCustom({ data, checkboxSelection }) {
 				selectedRow={selectedRow}
 				open={Boolean(selectedRow)}
 				onClose={() => setSelectedRow(null)}
+				title="Reservations List"
 			/>
 		</>
 	);

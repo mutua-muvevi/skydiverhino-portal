@@ -1,24 +1,23 @@
+import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
 import { Page } from "../../../components/page";
 import { PATH_DASHBOARD } from "../../../routes/path";
 
-import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
-
-const Clients = () => {
+const Blogs = () => {
 	return (
-		<Page title="Clients">
+		<Page title="Blogs">
 			<CustomBreadcrumbs
-				heading="Clients"
+				heading="Blogs"
 				links={[
 					{
 						name: "Dashboard",
 						href: PATH_DASHBOARD.general.home,
 					},
-					{ name: "Clients" },
+					{ name: "Blogs" },
 				]}
 			/>
-			<div>Clients</div>
+			<div>Blogs</div>
 		</Page>
 	);
 };
 
-export default Clients;
+export default Blogs;

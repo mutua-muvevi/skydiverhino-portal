@@ -27,6 +27,9 @@ const ICONS = {
 	emails: "ic:baseline-email",
 	social: "icon-park-solid:connect",
 	content: "bxs:bot",
+
+	blogs: "fa-solid:quote-left",
+	services: "fluent-emoji-high-contrast:parachute",
 };
 
 const navConfig = [
@@ -131,6 +134,20 @@ const navConfig = [
 						path: PATH_DASHBOARD.general.landing.landing,
 					},
 				],
+			},
+
+			//blogs
+			{
+				title: "blogs",
+				path: PATH_DASHBOARD.general.blogs,
+				icon: ICONS.blogs,
+			},
+
+			//services
+			{
+				title: "services",
+				path: PATH_DASHBOARD.general.services,
+				icon: ICONS.services,
 			},
 		],
 	},

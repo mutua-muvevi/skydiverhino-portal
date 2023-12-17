@@ -64,6 +64,7 @@ import {
 	Jumps,
 	Events,
 	Gears,
+	Blogs,
 
 } from "./elements";
 
@@ -214,6 +215,9 @@ export default function Router() {
 						{ path: "landing", element: <LandingPage /> },
 					]
 				},
+
+				{ path: "blogs", element: <Blogs/> },
+				{ path: "services", element: <Services/> },
 
 			],
 		},

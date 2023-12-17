@@ -11,7 +11,7 @@ const Instagram = () => {
 				links={[
 					{
 						name: "Dashboard",
-						href: PATH_DASHBOARD.general.home.root,
+						href: PATH_DASHBOARD.general.home,
 					},
 					{ name: "Instagram" },
 				]}

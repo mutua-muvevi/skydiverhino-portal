@@ -16,19 +16,22 @@ export const StyledItem = styled(ListItemButton, {
 	const activeStyle = {
 		color:
 			theme.palette.mode === "light"
-				? theme.palette.grey[100]
+				? theme.palette.primary.contrastText
 				: theme.palette.primary.main,
 		backgroundColor:
 			theme.palette.mode === "light"
 				? alpha(theme.palette.primary.main, 0.5)
-				: theme.palette.grey[800],
+				: theme.palette.primary.main,
 		...(!isLight && {
-			color: theme.palette.primary.light,
+			color: theme.palette.primary.contrastText,
 		}),
 	};
 
 	const activeSubStyle = {
-		color: theme.palette.text.primary,
+		color:
+			theme.palette.mode === "light"
+				? theme.palette.primary.contrastText
+				: theme.palette.primary.main,
 		backgroundColor: "transparent",
 	};
 
@@ -86,7 +89,6 @@ export const StyledIcon = styled(ListItemIcon)({
 	justifyContent: "center",
 	width: ICON.NAV_ITEM,
 	height: ICON.NAV_ITEM,
-
 });
 
 // ----------------------------------------------------------------------
@@ -114,8 +116,4 @@ export const StyledSubheader = styled(ListSubheader)(({ theme }) => ({
 	fontSize: 11,
 	paddingTop: theme.spacing(3),
 	paddingBottom: theme.spacing(1),
-	color:
-		theme.palette.mode === "light"
-			? theme.palette.grey[300]
-			: theme.palette.text.secondary,
 }));

@@ -1,6 +1,7 @@
 import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
 import { Page } from "../../../components/page";
 import { PATH_DASHBOARD } from "../../../routes/path";
+import BlogsMain from "./sections/main";
 
 const Blogs = () => {
 	return (
@@ -15,7 +16,7 @@ const Blogs = () => {
 					{ name: "Blogs" },
 				]}
 			/>
-			<div>Blogs</div>
+			<BlogsMain/>
 		</Page>
 	);
 };

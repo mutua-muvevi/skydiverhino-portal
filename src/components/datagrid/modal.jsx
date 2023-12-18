@@ -8,8 +8,8 @@ import {
 	useTheme,
 	IconButton,
 	ButtonGroup,
+	Stack,
 } from "@mui/material";
-import { Stack } from "@mui/system";
 import PropTypes from "prop-types";
 import Iconify from "../iconify";
 import Scrollbar from "../scrollbar";

@@ -115,6 +115,17 @@ const slice = createSlice({
 			state.isLoading = false;
 		},
 
+		//SET SERVICE
+		setService(state, action) {
+			state.isLoading = false;
+			state.service = action.payload;
+		},
+
+		setServiceError(state, action) {
+			state.isLoading = false;
+			state.serviceError = action.payload;
+		},
+
 		//SERVICE
 		getServiceSuccess(state, action) {
 			state.isLoading = false;
@@ -445,6 +456,23 @@ export const { startLoading, stopLoading } = slice.actions;
 // ----------------------------------------------------------------------
 
 //----------------------------services--------------------------------------------
+//SET SERVICE FROM ALL SERVICES
+export function setService(service) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			dispatch(slice.actions.setService(service));
+		} catch (error) {
+			dispatch(slice.actions.getServiceError(error));
+			throw error;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
+}
+
+
 //SERVICE
 export function fetchSingleService(serviceID) {
 	return async (dispatch) => {

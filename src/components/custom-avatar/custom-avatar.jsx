@@ -42,8 +42,8 @@ const CustomAvatar = forwardRef(
 				<Avatar
 					ref={ref}
 					sx={{
-						color: theme.palette[colr]?.contrastText,
-						backgroundColor: theme.palette[colr]?.main,
+						color: theme.palette.primary.contrastText,
+						backgroundColor: theme.palette.primary.main,
 						fontWeight: theme.typography.fontWeightMedium,
 						...sx,
 					}}

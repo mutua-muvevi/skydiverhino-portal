@@ -22,11 +22,17 @@ const ModalComponent = ({
 	children,
 	height,
 	actions,
+	maxWidth,
 }) => {
 	const theme = useTheme();
 
 	return (
-		<Dialog open={open} onClose={onClose} maxWidth="xl" fullWidth>
+		<Dialog
+			open={open}
+			onClose={onClose}
+			maxWidth={maxWidth ? maxWidth : "xl"}
+			fullWidth
+		>
 			<DialogTitle
 				sx={{
 					backgroundColor: theme.palette.primary.main,
@@ -95,6 +101,7 @@ ModalComponent.propTypes = {
 	children: PropTypes.node,
 	height: PropTypes.number,
 	actions: PropTypes.array,
+	maxWidth: PropTypes.string,
 };
 
 export default ModalComponent;

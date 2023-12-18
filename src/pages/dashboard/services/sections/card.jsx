@@ -4,6 +4,7 @@ import {
 	CardActionArea,
 	CardContent,
 	CardMedia,
+	Grid,
 	Stack,
 	Typography,
 } from "@mui/material";
@@ -105,35 +106,53 @@ const ServiceCards = ({ service }) => {
 										>
 											Prices
 										</Typography>
-										<Stack direction="row" spacing={3}>
-											{service.prices.map((price) => (
-												<Stack
-													direction="column"
-													key={price._id}
-													spacing={1.5}
-												>
-													<Typography
-														variant="subtitle2"
-														color="primary"
+										<div>
+											<Grid container spacing={3}>
+												{service.prices.map((price) => (
+													<Grid
+														item
+														xs={12}
+														md={6}
+														lg={4}
+														key={price._id}
 													>
-														{price.title}
-													</Typography>
-													<Stack
-														direction="row"
-														spacing={3}
-													>
-														<Iconify icon="icomoon-free:price-tags" />
-														<Typography variant="body2">
-															{price.price.amount}{" "}
-															{
-																price.price
-																	.currency
-															}
-														</Typography>
-													</Stack>
-												</Stack>
-											))}
-										</Stack>
+														<Stack
+															direction="column"
+															spacing={1.5}
+														>
+															<Typography
+																variant="subtitle2"
+																color="primary"
+															>
+																{price.title}
+															</Typography>
+															<Stack
+																direction="row"
+																spacing={3}
+															>
+																<Iconify icon="icomoon-free:price-tags" />
+																<Typography variant="body2">
+																	{
+																		price
+																			.price
+																			.amount
+																	}{" "}
+																	{
+																		price
+																			.price
+																			.currency
+																	}
+																</Typography>
+															</Stack>
+														</Stack>
+													</Grid>
+												))}
+											</Grid>
+										</div>
+										<Stack
+											direction="row"
+											spacing={3}
+										></Stack>
 									</Stack>
 
 									{/* Leads */}

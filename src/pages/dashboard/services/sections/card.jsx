@@ -14,16 +14,24 @@ import Iconify from "../../../../components/iconify";
 import { truncateStr } from "../../../../utils/format-string";
 import Scrollbar from "../../../../components/scrollbar";
 import { useMediaQuery } from "@mui/material";
+import { useDispatch } from "../../../../redux/store";
+import { setService } from "../../../../redux/slices/services";
 
 const image = "";
 
 const ServiceCards = ({ service }) => {
+	const dispatch = useDispatch();
+
 	const isLargeScreen = useMediaQuery("(min-width: 1280px)");
 	const isMediumScreen = useMediaQuery("(min-width: 960px)");
 
+	const handleSetService = () => {
+		dispatch(setService(service));
+	};
+
 	return (
 		<Card>
-			<CardActionArea>
+			<CardActionArea onClick={handleSetService}>
 				<Stack direction={{ xs: "column", md: "row" }} spacing={1}>
 					{image ? (
 						<CardMedia

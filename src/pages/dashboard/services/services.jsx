@@ -10,6 +10,7 @@ const Services = () => {
 	const {
 		services: { data: allServices },
 	} = useSelector((state) => state.services);
+	
 	return (
 		<Page title="Services">
 			<CustomBreadcrumbs

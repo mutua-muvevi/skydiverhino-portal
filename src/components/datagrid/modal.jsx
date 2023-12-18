@@ -43,7 +43,7 @@ const ModalComponent = ({ selectedRow, open, onClose, title }) => {
 						variant="sibtitle1"
 						sx={{ color: theme.palette.primary.contrastText }}
 					>
-						Row Details
+						{title ? title : "Row Details"}
 					</Typography>
 					<IconButton onClick={onClose}>
 						<Iconify
@@ -59,11 +59,16 @@ const ModalComponent = ({ selectedRow, open, onClose, title }) => {
 					<Stack direction="column" spacing={3}>
 						{selectedRow &&
 							Object.entries(selectedRow).map(([key, value]) => (
-								<Stack key={key} direction="row" spacing={3}>
+								<Stack
+									key={key}
+									direction={{ xs: "column", lg: "row" }}
+									spacing={3}
+								>
 									<Typography
 										variant="subtitle2"
 										sx={{
 											color: theme.palette.primary.main,
+											marginBottom: { xs: 1, lg: 0 },
 										}}
 									>
 										{key ? sentenceCase(key) : "No data"}
@@ -88,7 +93,7 @@ const ModalComponent = ({ selectedRow, open, onClose, title }) => {
 					</Stack>
 				</Scrollbar>
 			</DialogContent>
-			
+
 			<DialogActions>
 				<ButtonGroup>
 					<Button
@@ -113,6 +118,7 @@ ModalComponent.propTypes = {
 	open: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
 	selectedRow: PropTypes.object,
+	title: PropTypes.string,
 };
 
 export default ModalComponent;

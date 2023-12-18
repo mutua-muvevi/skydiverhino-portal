@@ -37,6 +37,7 @@ import { sentenceCase } from "change-case";
 DataGridCustom.propTypes = {
 	data: PropTypes.array,
 	checkboxSelection: PropTypes.bool,
+	title: PropTypes.string,
 };
 
 const StyledDataGridContainer = styled(Card)(({ theme }) => ({

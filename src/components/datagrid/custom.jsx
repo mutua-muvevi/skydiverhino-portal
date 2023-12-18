@@ -45,7 +45,7 @@ const StyledDataGridContainer = styled(Card)(({ theme }) => ({
 
 const StyledDataGridHeader = styled(CardHeader)(({ theme }) => ({
 	backgroundColor: theme.palette.primary.main,
-	color: "#fff",
+	color: theme.palette.primary.contrastText,
 	fontFamily: "'Rubik', sans-serif",
 	padding: 15,
 }));
@@ -72,7 +72,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 	},
 }));
 
-export default function DataGridCustom({ data, checkboxSelection, title }) {
+export default function DataGridCustom({ data, checkboxSelection, title, height }) {
 	const [selectedRow, setSelectedRow] = useState(null);
 
 	const nestedDataRenderer = (key, value) => {
@@ -114,7 +114,7 @@ export default function DataGridCustom({ data, checkboxSelection, title }) {
 			<StyledDataGridContainer>
 				<StyledDataGridHeader title={title ? sentenceCase(title): "Data table"} />
 
-				<Box style={{ height: "600px" }}>
+				<Box style={{ height: height ? height : "600px" }}>
 					<StyledDataGrid
 						checkboxSelection={checkboxSelection ? true : false}
 						disableSelectionOnClick

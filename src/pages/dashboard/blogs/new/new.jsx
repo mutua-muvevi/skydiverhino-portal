@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Stack, Step, StepLabel, Stepper } from "@mui/material";
@@ -6,7 +6,7 @@ import { Box, Button, Stack, Step, StepLabel, Stepper } from "@mui/material";
 import Textfield from "../../../../components/form/textfield/textfield";
 import MultipleSelect from "../../../../components/form/select/multiple";
 import { Upload } from "../../../../components/upload";
-import BlogPreview from "./preview"; // Adjust the path as per your folder structure
+import BlogPreview from "./preview";
 import Iconify from "../../../../components/iconify";
 
 const initialValues = {
@@ -94,7 +94,7 @@ const NewBlog = () => {
 				validationSchema={BlogSchema}
 				onSubmit={handleSubmit}
 			>
-				{({ values, setFieldValue, isSubmitting }) => (
+				{({ values, setFieldValue, isSubmitting, isValid, dirty }) => (
 					<Form>
 						{activeStep === 0 && (
 							<Stack direction="column" spacing={3}>
@@ -235,6 +235,7 @@ const NewBlog = () => {
 									type="button"
 									onClick={handleNext}
 									endIcon={<Iconify icon="mdi:arrow-right" />}
+									disabled={!isValid || !dirty}
 								>
 									Next
 								</Button>

@@ -1,63 +1,93 @@
-import React from "react";
-import { Box, Typography, Stack, CardMedia } from "@mui/material";
+import { Box, Typography, Stack, CardMedia, Paper } from "@mui/material";
+
+import PropTypes from "prop-types";
 
 const BlogPreview = ({ formData }) => {
 	return (
-		<Box>
-			<Typography variant="h5" gutterBottom>
-				Title
-			</Typography>
-			<Typography paragraph>{formData.title}</Typography>
+		<Stack direction="column" spacing={3}>
+			<Stack direction="column" spacing={1}>
+				<Typography variant="h6" color="primary">
+					Title
+				</Typography>
+				<Typography variant="body1" textAlign="justify">
+					{formData.title}
+				</Typography>
+			</Stack>
 
-			<Typography variant="h5" gutterBottom>
-				Tags
-			</Typography>
-			<Typography paragraph>{formData.tags.join(", ")}</Typography>
+			<Stack direction="column" spacing={1}>
+				<Typography variant="h6" color="primary">
+					Intro Description
+				</Typography>
+				<Typography variant="body1" textAlign="justify">
+					{formData.introDescription}
+				</Typography>
+			</Stack>
 
-			<Typography variant="h5" gutterBottom>
-				Intro Description
-			</Typography>
-			<Typography paragraph>{formData.introDescription}</Typography>
+			<Stack direction="column" spacing={1}>
+				{formData.thumbnail && (
+					<Box>
+						<Typography variant="h6" color="primary">
+							Thumbnail Preview
+						</Typography>
+						<CardMedia
+							component="img"
+							image={URL.createObjectURL(formData.thumbnail)}
+							alt="Thumbnail"
+						/>
+					</Box>
+				)}
+			</Stack>
 
-			{formData.thumbnail && (
-				<Box>
-					<Typography variant="h5" gutterBottom>
-						Thumbnail Preview
-					</Typography>
-					<CardMedia
-						component="img"
-						image={URL.createObjectURL(formData.thumbnail)}
-						alt="Thumbnail"
-					/>
-				</Box>
-			)}
-
-			<Typography variant="h5" gutterBottom>
+			<Typography variant="h5" color="primary">
 				Content Blocks
 			</Typography>
 			{formData.contentBlocks.map((block, index) => (
-				<Stack key={index} spacing={2}>
-					<Typography variant="subtitle1">{`Block ${
-						index + 1
-					} Title`}</Typography>
-					<Typography paragraph>{block.title}</Typography>
+				<Paper
+					key={index}
+					sx={{ backgroundColor: "rgba(0,0,0,0.1)", p: 3 }}
+				>
+					<Stack spacing={3}>
+						<Typography
+							variant="subtitle1"
+							color="primary"
+						>{`Block ${index + 1} Title`}</Typography>
+						<Typography variant="body1" textAlign="justify">
+							{block.title}
+						</Typography>
 
-					<Typography variant="subtitle1">{`Block ${
-						index + 1
-					} Details`}</Typography>
-					<Typography paragraph>{block.details}</Typography>
+						<Typography
+							variant="subtitle1"
+							color="primary"
+						>{`Block ${index + 1} Details`}</Typography>
+						<Typography variant="body1" textAlign="justify">
+							{block.details}
+						</Typography>
 
-					{block.image && (
-						<CardMedia
-							component="img"
-							image={URL.createObjectURL(block.image)}
-							alt={`Content Block ${index + 1}`}
-						/>
-					)}
-				</Stack>
+						{block.image && (
+							<CardMedia
+								component="img"
+								image={URL.createObjectURL(block.image)}
+								alt={`Content Block ${index + 1}`}
+							/>
+						)}
+					</Stack>
+				</Paper>
 			))}
-		</Box>
+
+			<Stack direction="column">
+				<Typography variant="h5" color="primary">
+					Tags
+				</Typography>
+				<Typography variant="body1" textAlign="justify">
+					{formData.tags.join(", ")}
+				</Typography>
+			</Stack>
+		</Stack>
 	);
+};
+
+BlogPreview.propTypes = {
+	formData: PropTypes.object,
 };
 
 export default BlogPreview;

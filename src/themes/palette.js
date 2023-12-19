@@ -79,7 +79,7 @@ export const ERROR = {
 	main: "#f5222d",
 	dark: "#a8071a",
 	darker: "#5c0011",
-	contrastText: "#fff",
+	contrastText: "#000000",
 };
 
 const GRADIENTS = {

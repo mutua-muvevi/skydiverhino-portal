@@ -139,21 +139,55 @@ export function addBlog(userID, token, blog) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 		try {
+			const formData = new FormData();
+
+			// Append non-file fields to FormData
+			formData.append("title", blog.title);
+			formData.append("introDescription", blog.introDescription);
+			formData.append("tags", JSON.stringify(blog.tags)); // Assuming tags is an array
+
+			// Append thumbnail file to FormData
+			if (blog.thumbnail) {
+				formData.append(
+					"thumbnail",
+					blog.thumbnail,
+					blog.thumbnail.name
+				);
+			}
+
+			// Append content block files and details to FormData
+			if (Array.isArray(blog.contentBlocks)) {
+				blog.contentBlocks.forEach((block, index) => {
+					formData.append(
+						`contentBlocks[${index}][title]`,
+						block.title
+					);
+					formData.append(
+						`contentBlocks[${index}][details]`,
+						block.details
+					);
+
+					// Append each image with the field name 'image'
+					if (block.image) {
+						formData.append(`image`, block.image, block.image.name);
+					}
+				});
+			}
+
 			const response = await axios.post(
 				`http://localhost:8100/api/blog/${userID}/post`,
-				blog,
+				formData,
 				{
 					headers: {
-						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
+						// Content-Type will be set automatically by Axios for FormData
 					},
 				}
 			);
 
 			const data = await response.data;
 			dispatch(slice.actions.addBlog(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.addBlogError(error));
 			throw error.response;
@@ -175,15 +209,14 @@ export function editBlog(userID, token, blogID, blog) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 				}
 			);
 
 			const data = await response.data;
 			dispatch(slice.actions.editBlog(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.editBlogError(error));
 			throw error.response;
@@ -193,16 +226,13 @@ export function editBlog(userID, token, blogID, blog) {
 	};
 }
 
-
-
 // ----------------------------------set a blog------------------------------------
 export function setBlog(blog) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 		try {
 			dispatch(slice.actions.setBlog(blog));
-			return blog
-
+			return blog;
 		} catch (error) {
 			dispatch(slice.actions.setBlogError(error));
 			throw error.response;
@@ -222,15 +252,14 @@ export function fetchAllBlogs(userID, token) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 				}
 			);
 
 			const data = await response.data;
 			dispatch(slice.actions.fetchAllBlogs(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.fetchAllBlogsError(error));
 			throw error.response;
@@ -250,15 +279,14 @@ export function fetchSingleBlog(userID, token, id) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 				}
 			);
 
 			const data = await response.data;
 			dispatch(slice.actions.fetchSingleBlog(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.fetchSingleBlogError(error));
 			throw error.response;
@@ -278,15 +306,14 @@ export function deleteBlog(userID, token, blogID) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 				}
 			);
 
 			const data = await response.data;
 			dispatch(slice.actions.deleteBlog(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.deleteBlogError(error));
 			throw error.response;
@@ -306,7 +333,7 @@ export function deleteManyBlogs(userID, token, blogIDs) {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token,
+						Authorization: token,
 					},
 					data: {
 						blogIDs: blogIDs,
@@ -316,8 +343,7 @@ export function deleteManyBlogs(userID, token, blogIDs) {
 
 			const data = await response.data;
 			dispatch(slice.actions.deleteManyBlogs(data));
-			return data
-
+			return data;
 		} catch (error) {
 			dispatch(slice.actions.deleteManyBlogsError(error));
 			throw error.response;

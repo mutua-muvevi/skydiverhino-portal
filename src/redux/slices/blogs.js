@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 // utils
 import axios from "../../utils/axios";
+import { getFilenameFromUrl } from "../../utils/get-filename";
 
 // ----------------------------------------------------------------------
 
@@ -144,7 +145,7 @@ export function addBlog(userID, token, blog) {
 			// Append non-file fields to FormData
 			formData.append("title", blog.title);
 			formData.append("introDescription", blog.introDescription);
-			formData.append("tags", JSON.stringify(blog.tags)); // Assuming tags is an array
+			formData.append("tags", JSON.stringify(blog.tags));
 
 			// Append thumbnail file to FormData
 			if (blog.thumbnail) {
@@ -203,13 +204,43 @@ export function editBlog(userID, token, blogID, blog) {
 		dispatch(slice.actions.startLoading());
 
 		try {
+			const formData = new FormData();
+
+			// Append non-file fields
+			formData.append("title", blog.title);
+			formData.append("introDescription", blog.introDescription);
+			formData.append("tags", JSON.stringify(blog.tags));
+
+			// Handle new thumbnail file
+			if (blog.thumbnail && blog.thumbnail instanceof File) {
+				formData.append(
+					"thumbnail",
+					blog.thumbnail,
+					blog.thumbnail.name
+				);
+			}
+
+			// Handle new content block images
+			blog.contentBlocks.forEach((block, index) => {
+				formData.append(`contentBlocks[${index}][title]`, block.title);
+				formData.append(
+					`contentBlocks[${index}][details]`,
+					block.details
+				);
+
+				if (block.image && block.image instanceof File) {
+					formData.append("image", block.image, block.image.name);
+				}
+			});
+
+			// Axios PUT request
 			const response = await axios.put(
-				`http://localhost:8100/api/blog/${userID}/${blogID}/edit`,
-				blog,
+				`http://localhost:8100/api/blog/${userID}/edit/${blogID}`,
+				formData,
 				{
 					headers: {
-						"Content-Type": "application/json",
 						Authorization: token,
+						"Content-Type": "multipart/form-data",
 					},
 				}
 			);

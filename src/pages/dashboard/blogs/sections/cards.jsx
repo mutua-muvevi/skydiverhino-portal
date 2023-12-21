@@ -16,9 +16,14 @@ import Iconify from "../../../../components/iconify";
 import { useState } from "react";
 import ModalComponent from "../../../../components/modal/modal";
 import Blog from "../blog/blog";
+import EditBlog from "../edit/edit";
+import DeleteBlog from "../delete/delete";
 
 const BlogsCard = ({ blog }) => {
-	const [ openBlog, setOpenBlog ] = useState(false);
+	const [openBlog, setOpenBlog] = useState(false);
+	const [openEdit, setOpenEdit] = useState(false);
+	const [openDelete, setOpenDelete] = useState(false);
+
 	const theme = useTheme();
 
 	const {
@@ -30,19 +35,19 @@ const BlogsCard = ({ blog }) => {
 
 	const handleOpenBlog = () => {
 		setOpenBlog(true);
-	}
+	};
 
 	//edit blog
 	const handleEditBlog = () => {
-
-	}
+		setOpenEdit(true);
+	};
 
 	//delete blog
 	const handleDeleteBlog = () => {
-		
-	}
+		setOpenDelete(true);
+	};
 
-	//modal Actions 
+	//modal Actions
 	const modalActions = [
 		{
 			label: "Edit",
@@ -97,7 +102,10 @@ const BlogsCard = ({ blog }) => {
 					<CardContent>
 						<Stack direction="column" spacing={3}>
 							<Typography variant="body2">
-								{truncateStr(sentenceCase(introDescription), 200)}
+								{truncateStr(
+									sentenceCase(introDescription),
+									200
+								)}
 							</Typography>
 
 							<Stack direction="column">
@@ -116,6 +124,7 @@ const BlogsCard = ({ blog }) => {
 				</CardActionArea>
 			</Card>
 
+			{/* Blog Modal */}
 			<ModalComponent
 				title={title}
 				open={openBlog}
@@ -124,6 +133,28 @@ const BlogsCard = ({ blog }) => {
 				actions={modalActions}
 			>
 				<Blog blog={blog} />
+			</ModalComponent>
+
+			{/* Edit Modal */}
+			<ModalComponent
+				title={`Edit : ${title}`}
+				open={openEdit}
+				onClose={() => setOpenEdit(false)}
+				height={700}
+				maxWidth="lg"
+			>
+				<EditBlog blog={blog} />
+			</ModalComponent>
+
+			{/* Delete Modal */}
+			<ModalComponent
+				title={`Delete ${title}?`}
+				open={openDelete}
+				onClose={() => setOpenDelete(false)}
+				height={200}
+				maxWidth="sm"
+			>
+				<DeleteBlog blog={blog} />
 			</ModalComponent>
 		</>
 	);

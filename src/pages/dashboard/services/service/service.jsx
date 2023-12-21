@@ -1,17 +1,15 @@
-import { Box, Typography } from "@mui/material";
-import { Stack, useTheme } from "@mui/system";
+import { Typography } from "@mui/material";
+import { Stack } from "@mui/system";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
 import Iconify from "../../../../components/iconify";
 
 const Service = ({ service }) => {
-	const { leads, shortDescription, details, prices, requirements, clients } = service;
-
-	const theme = useTheme();
+	const { leads, shortDescription, details, prices, requirements, clients } =
+		service;
 
 	return (
 		<Stack direction="column" spacing={3}>
-
 			<Stack direction="column">
 				<Typography variant="subtitle1" color="primary">
 					Description
@@ -120,40 +118,35 @@ const Service = ({ service }) => {
 			</Stack>
 
 			{/* leads */}
-			{
-				leads.length > 0 ? (
-					<Stack direction="column" spacing={1.5}>
-						<Typography variant="subtitle1" color="primary">
-							Leads
+			{leads.length > 0 ? (
+				<Stack direction="column" spacing={1.5}>
+					<Typography variant="subtitle1" color="primary">
+						Leads
+					</Typography>
+					<Stack direction="row" spacing={3}>
+						<Iconify icon="fluent:people-community-20-filled" />
+						<Typography variant="body2">
+							{leads.length} {leads.length > 1 ? "leads" : "lead"}
 						</Typography>
-						<Stack direction="row" spacing={3}>
-							<Iconify icon="fluent:people-community-20-filled" />
-							<Typography variant="body2">
-								{leads.length}{" "}
-								{leads.length > 1 ? "leads" : "lead"}
-							</Typography>
-						</Stack>
 					</Stack>
-				) : null
-			}
+				</Stack>
+			) : null}
 
 			{/* Clients */}
-			{
-				clients.length > 0 ? (
-					<Stack direction="column" spacing={1.5}>
-						<Typography variant="subtitle1" color="primary">
-							Clients
+			{clients.length > 0 ? (
+				<Stack direction="column" spacing={1.5}>
+					<Typography variant="subtitle1" color="primary">
+						Clients
+					</Typography>
+					<Stack direction="row" spacing={3}>
+						<Iconify icon="fluent:people-community-20-filled" />
+						<Typography variant="body2">
+							{clients.length}{" "}
+							{clients.length > 1 ? "clients" : "client"}
 						</Typography>
-						<Stack direction="row" spacing={3}>
-							<Iconify icon="fluent:people-community-20-filled" />
-							<Typography variant="body2">
-								{clients.length}{" "}
-								{clients.length > 1 ? "clients" : "client"}
-							</Typography>
-						</Stack>
 					</Stack>
-				) : null
-			}
+				</Stack>
+			) : null}
 		</Stack>
 	);
 };

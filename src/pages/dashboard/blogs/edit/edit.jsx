@@ -67,7 +67,7 @@ const EditBlog = ({ blog }) => {
 			? blog.contentBlocks.map((block) => ({
 					file: block.image,
 					preview: block.image,
-			}))
+			  }))
 			: []
 	);
 
@@ -109,8 +109,9 @@ const EditBlog = ({ blog }) => {
 	};
 
 	const handleSubmit = async (values, actions) => {
+		console.log("Values are", values)
 		try {
-			const response = await dispatch(editBlog(me._id, token, values));
+			const response = await dispatch(editBlog(me._id, token, blog._id, values));
 			//extract success message
 			const { success, message } = response.data;
 
@@ -321,7 +322,15 @@ const EditBlog = ({ blog }) => {
 				</Formik>
 			</Stack>
 			{alertMessage && (
-				<Alert severity={alertSeverity} sx={{ mb: 2 }}>
+				<Alert
+					severity={alertSeverity}
+					sx={{
+						mb: 2,
+						position: "absolute",
+						left: "50%",
+						top: "50%",
+					}}
+				>
 					{alertMessage}
 				</Alert>
 			)}

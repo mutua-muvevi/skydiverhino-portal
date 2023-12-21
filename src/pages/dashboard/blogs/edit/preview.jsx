@@ -1,6 +1,7 @@
 import { Box, Typography, Stack, CardMedia, Paper } from "@mui/material";
 
 import PropTypes from "prop-types";
+import { isFile } from "../../../../utils/is-file";
 
 const BlogPreview = ({ formData }) => {
 	return (
@@ -31,7 +32,11 @@ const BlogPreview = ({ formData }) => {
 						</Typography>
 						<CardMedia
 							component="img"
-							image={URL.createObjectURL(formData.thumbnail)}
+							image={
+								isFile(formData.thumbnail)
+									? URL.createObjectURL(formData.thumbnail)
+									: formData.thumbnail
+							}
 							alt="Thumbnail"
 						/>
 					</Box>
@@ -66,7 +71,11 @@ const BlogPreview = ({ formData }) => {
 						{block.image && (
 							<CardMedia
 								component="img"
-								image={URL.createObjectURL(block.image)}
+								image={
+									isFile(block.image)
+										? URL.createObjectURL(block.image)
+										: block.image
+								}
 								alt={`Content Block ${index + 1}`}
 							/>
 						)}

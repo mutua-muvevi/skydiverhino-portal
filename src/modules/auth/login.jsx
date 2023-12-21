@@ -7,6 +7,7 @@ import { Stack, Typography, Link, Container } from "@mui/material";
 import { PATH_AUTH } from "../../routes/path";
 //
 import AuthLoginForm from "./login-form";
+import Logo from "../../components/logo";
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ export default function Login() {
 			direction="column"
 			justifyContent="center"
 			sx={{ height: "100%" }}
-		> 
+		>
 			<Container maxWidth="md">
 				<Stack
 					direction="column"
@@ -24,6 +25,10 @@ export default function Login() {
 					spacing={2}
 					sx={{ width: "100%" }}
 				>
+					<Stack direction="row" justifyContent="left" sx={{width: "100%"}}>
+						<Logo width={180} height={120} />
+					</Stack>
+
 					<Stack direction="column" sx={{ width: "100%" }}>
 						<Typography variant="h3">Login</Typography>
 						<Stack direction="row" spacing={0.5}>

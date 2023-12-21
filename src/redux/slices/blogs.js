@@ -248,7 +248,7 @@ export function fetchAllBlogs(userID, token) {
 		dispatch(slice.actions.startLoading());
 		try {
 			const response = await axios.get(
-				`http://localhost:8100/api/blog/${userID}/fetch/all`,
+				`http://localhost:8100/api/blog/fetch/all`,
 				{
 					headers: {
 						"Content-Type": "application/json",

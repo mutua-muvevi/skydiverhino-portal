@@ -93,7 +93,6 @@ const NewBlog = () => {
 	};
 
 	const handleSubmit = async (values, actions) => {
-		console.log(values);
 		try {
 			const response = await dispatch(addBlog(me._id, token, values));
 			//extract success message

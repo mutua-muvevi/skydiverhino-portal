@@ -17,6 +17,7 @@ import { useDispatch } from "../redux/store";
 import { fetchMe } from "../redux/slices/user";
 import { fetchAllReservations } from "../redux/slices/reservations";
 import { fetchAllServices } from "../redux/slices/services";
+import { fetchAllBlogs } from "../redux/slices/blogs";
 
 // ----------------------------------------------------------------------
 
@@ -103,6 +104,9 @@ export function AuthProvider({ children }) {
 
 				//fetching all services
 				await reduxDispatch(fetchAllServices());
+
+				// fetch all blogs
+				await reduxDispatch(fetchAllBlogs());
 
 				dispatch({
 					type: "INITIAL",

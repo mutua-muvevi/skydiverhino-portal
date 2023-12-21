@@ -3,9 +3,11 @@ import BlogsCard from "./cards";
 import ModalComponent from "../../../../components/modal/modal";
 import { useState } from "react";
 import NewBlog from "../new/new";
+import { useSelector } from "../../../../redux/store";
 
 const BlogsMain = () => {
 	const [openModal, setOpenModal] = useState(false);
+	const { blogs: { data: allBlogs } } = useSelector((state) => state.blog);
 
 	const handleOpenModal = () => {
 		setOpenModal(true);
@@ -24,11 +26,11 @@ const BlogsMain = () => {
 
 				<div>
 					<Grid container spacing={3}>
-						{[...Array(12)].map((_, index) => (
+						{allBlogs ? allBlogs.map((blog, index) => (
 							<Grid item xs={12} sm={6} md={4} xl={3} key={index}>
-								<BlogsCard />
+								<BlogsCard blog={blog}/>
 							</Grid>
-						))}
+						)): null}
 					</Grid>
 				</div>
 			</Stack>

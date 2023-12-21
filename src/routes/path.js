@@ -107,6 +107,9 @@ export const PATH_DASHBOARD = {
 
 		//blogs
 		blogs: path(ROOTS_DASHBOARD, "/blogs"),
+
+		//announcements
+		announcements: path(ROOTS_DASHBOARD, "/announcements"),
 		
 
 		
@@ -118,6 +121,8 @@ export const PATH_DASHBOARD = {
 		booking: path(ROOTS_DASHBOARD, "/booking"),
 		file: path(ROOTS_DASHBOARD, "/file"),
 	},
+
+
 
 	mail: {
 		root: path(ROOTS_DASHBOARD, "/mail"),

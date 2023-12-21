@@ -30,6 +30,8 @@ const ICONS = {
 
 	blogs: "fa-solid:quote-left",
 	services: "fluent-emoji-high-contrast:parachute",
+
+	announcements: "mdi:announcement"
 };
 
 const navConfig = [
@@ -66,6 +68,13 @@ const navConfig = [
 				title: "reservations",
 				path: PATH_DASHBOARD.general.bookings,
 				icon: ICONS.bookings,
+			},
+
+			//announcements
+			{
+				title: "announcements",
+				path: PATH_DASHBOARD.general.announcements,
+				icon: ICONS.announcements,
 			},
 		],
 	},

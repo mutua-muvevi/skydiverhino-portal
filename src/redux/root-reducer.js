@@ -9,6 +9,7 @@ import StorageReducer from "./slices/storage";
 import ReservationsReducer from "./slices/reservations";
 import ServicesReducer from "./slices/services";
 import BlogReducer from "./slices/blogs";
+import AnnouncementReducer from "./slices/announcements";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -19,7 +20,7 @@ import kanbanReducer from "./slices/kanban";
 const config = {
 	key: "root",
 	storage,
-	whitelist: ["user", "storage", "reservation", "blogs"],
+	whitelist: ["user", "storage", "reservation", "blogs", "announcements"],
 	blacklist: [],
 };
 
@@ -30,6 +31,7 @@ export const rootReducer = combineReducers({
 	reservations: ReservationsReducer,
 	services: ServicesReducer,
 	blog: BlogReducer,
+	announcements: AnnouncementReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

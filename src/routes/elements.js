@@ -116,3 +116,6 @@ export const LandingOverview = Loadable(lazy(() => import("../pages/dashboard/la
 
 //Blogs
 export const Blogs = Loadable(lazy(() => import("../pages/dashboard/blogs/blogs")));
+
+//Announcements
+export const Announcements = Loadable(lazy(() => import("../pages/dashboard/announcements/announcements")));

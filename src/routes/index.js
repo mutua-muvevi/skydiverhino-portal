@@ -34,6 +34,7 @@ import {
 
 	Storage,
 	Tools,
+	Announcements,
 
 	//-----------account----------------
 	AccountOverview,
@@ -168,6 +169,8 @@ export default function Router() {
 				{ path: "jumps", element: <Jumps/> },
 				{ path: "events", element: <Events/> },
 				{ path: "gears", element: <Gears/> },
+
+				{ path: "announcements", element: <Announcements/> },
 
 
 				{

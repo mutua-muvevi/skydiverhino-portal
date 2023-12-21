@@ -7,15 +7,15 @@ import { Box, Link } from "@mui/material";
 const logoUrl = "https://res.cloudinary.com/dqweh6zte/image/upload/v1679650180/skydive%20rhino/images/skydive_rhino_kenya_logo_trnkqy.png"
 // ----------------------------------------------------------------------
 
-const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
+const Logo = forwardRef(({ disabledLink = false, width, height, sx, ...other }, ref) => {
 
 	const logo = (
 		<Box
 			ref={ref}
 			component="div"
 			sx={{
-				width: 40,
-				height: 40,
+				width: width ? width : 40,
+				height:  height ? height : 40,
 				display: "inline-flex",
 				...sx,
 			}}
@@ -42,6 +42,8 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
 Logo.propTypes = {
 	sx: PropTypes.object,
 	disabledLink: PropTypes.bool,
+	width: PropTypes.number,
+	height: PropTypes.number,
 };
 
 Logo.displayName = "Logo"

@@ -6,6 +6,7 @@ import { PATH_AUTH } from "../../routes/path";
 //
 import AuthRegisterForm from "./register-form";
 import { Helmet } from "react-helmet-async";
+import Logo from "../../components/logo";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,10 @@ export default function Register() {
 					spacing={2}
 					sx={{ width: "100%" }}
 				>
+					<Stack direction="row" justifyContent="left" sx={{width: "100%"}}>
+						<Logo width={180} height={120} />
+					</Stack>
+
 					<Stack direction="column" sx={{ width: "100%" }}>
 						<Typography variant="h3">Register</Typography>
 						<Stack direction="row" spacing={0.5}>

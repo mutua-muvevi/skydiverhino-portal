@@ -7,7 +7,6 @@ import {
 	Grid,
 	Stack,
 	Typography,
-	useTheme,
 } from "@mui/material";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
@@ -30,7 +29,6 @@ const ServiceCards = ({ service }) => {
 	const isLargeScreen = useMediaQuery("(min-width: 1280px)");
 	const isMediumScreen = useMediaQuery("(min-width: 960px)");
 
-	const theme = useTheme()
 
 	const handleSetService = () => {
 		dispatch(setService(service));

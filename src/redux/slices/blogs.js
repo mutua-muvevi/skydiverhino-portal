@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // utils
 import axios from "../../utils/axios";
-import { getFilenameFromUrl } from "../../utils/get-filename";
 
 // ----------------------------------------------------------------------
 
@@ -333,7 +332,7 @@ export function deleteBlog(userID, token, blogID) {
 		dispatch(slice.actions.startLoading());
 		try {
 			const response = await axios.delete(
-				`http://localhost:8100/api/blog/${userID}/${blogID}/delete/single`,
+				`http://localhost:8100/api/blog/${userID}/delete/single/${blogID}`,
 				{
 					headers: {
 						"Content-Type": "application/json",

@@ -21,6 +21,21 @@ import { useDispatch, useSelector } from "../../../../redux/store";
 import { editBlog } from "../../../../redux/slices/blogs";
 
 const EditBlog = ({ blog }) => {
+	const [alertMessage, setAlertMessage] = useState("");
+	const [alertSeverity, setAlertSeverity] = useState("info");
+	const [activeStep, setActiveStep] = useState(0);
+	const [thumbnail, setThumbnail] = useState(
+		blog.thumbnail ? blog.thumbnail : null
+	);
+	
+	const [contentBlockImages, setContentBlockImages] = useState(
+		blog.contentBlocks
+			? blog.contentBlocks.map((block) => ({
+					file: block.image,
+					preview: block.image,
+			  }))
+			: []
+	);
 	const initialValues = {
 		title: blog ? blog.title : "",
 		tags: blog ? blog.tags : [],
@@ -58,22 +73,6 @@ const EditBlog = ({ blog }) => {
 		),
 	});
 
-	const [activeStep, setActiveStep] = useState(0);
-	const [thumbnail, setThumbnail] = useState(
-		blog.thumbnail ? blog.thumbnail : null
-	);
-	const [contentBlockImages, setContentBlockImages] = useState(
-		blog.contentBlocks
-			? blog.contentBlocks.map((block) => ({
-					file: block.image,
-					preview: block.image,
-			  }))
-			: []
-	);
-
-	const [alertMessage, setAlertMessage] = useState("");
-	const [alertSeverity, setAlertSeverity] = useState("info");
-
 	const dispatch = useDispatch();
 	const token = localStorage.getItem("token");
 	const { me } = useSelector((state) => state.user);
@@ -109,9 +108,10 @@ const EditBlog = ({ blog }) => {
 	};
 
 	const handleSubmit = async (values, actions) => {
-		console.log("Values are", values)
 		try {
-			const response = await dispatch(editBlog(me._id, token, blog._id, values));
+			const response = await dispatch(
+				editBlog(me._id, token, blog._id, values)
+			);
 			//extract success message
 			const { success, message } = response.data;
 
@@ -128,9 +128,10 @@ const EditBlog = ({ blog }) => {
 		} catch (error) {
 			setAlertMessage(error.error || "An error occurred.");
 			setAlertSeverity("error");
+		} finally {
+			actions.setSubmitting(false);
 		}
 
-		actions.setSubmitting(false);
 	};
 
 	return (

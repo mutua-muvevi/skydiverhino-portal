@@ -95,6 +95,17 @@ const slice = createSlice({
 			state.isLoading = false;
 			state.deleteManyReservationsError = action.payload;
 		},
+
+		//SET RESERVATION
+		setReservation(state, action) {
+			state.isLoading = false;
+			state.reservation = action.payload;
+		},
+
+		setReservationError(state, action) {
+			state.isLoading = false;
+			state.reservationError = action.payload;
+		},
 	},
 });
 
@@ -244,3 +255,19 @@ export const deleteManyReservations = (userID, token, reservationIDs) => async (
 		dispatch(slice.actions.stopLoading());
 	}
 };
+
+// ----------------------------------set a reservation------------------------------------
+export function setReservation(blog) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+		try {
+			dispatch(slice.actions.setReservation(blog));
+			return blog;
+		} catch (error) {
+			dispatch(slice.actions.setReservationError(error));
+			throw error.response;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
+}

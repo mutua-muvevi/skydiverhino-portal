@@ -38,6 +38,9 @@ DataGridCustom.propTypes = {
 	data: PropTypes.array,
 	checkboxSelection: PropTypes.bool,
 	title: PropTypes.string,
+	height: PropTypes.string,
+	modalActions: PropTypes.array,
+	modalTitle: PropTypes.string,
 };
 
 const StyledDataGridContainer = styled(Card)(({ theme }) => ({
@@ -73,7 +76,14 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 	},
 }));
 
-export default function DataGridCustom({ data, checkboxSelection, title, height }) {
+export default function DataGridCustom({
+	data,
+	checkboxSelection,
+	title,
+	height,
+	modalActions,
+	modalTitle,
+}) {
 	const [selectedRow, setSelectedRow] = useState(null);
 
 	const nestedDataRenderer = (key, value) => {
@@ -113,7 +123,9 @@ export default function DataGridCustom({ data, checkboxSelection, title, height 
 	return (
 		<>
 			<StyledDataGridContainer>
-				<StyledDataGridHeader title={title ? sentenceCase(title): "Data table"} />
+				<StyledDataGridHeader
+					title={title ? sentenceCase(title) : "Data table"}
+				/>
 
 				<Box style={{ height: height ? height : "600px" }}>
 					<StyledDataGrid
@@ -136,7 +148,8 @@ export default function DataGridCustom({ data, checkboxSelection, title, height 
 				selectedRow={selectedRow}
 				open={Boolean(selectedRow)}
 				onClose={() => setSelectedRow(null)}
-				title="Reservations List"
+				actions={modalActions}
+				title={modalTitle}
 			/>
 		</>
 	);

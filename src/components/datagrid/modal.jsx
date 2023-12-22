@@ -16,7 +16,7 @@ import Scrollbar from "../scrollbar";
 import { sentenceCase } from "change-case";
 import TableComponent from "../table/table";
 
-const ModalComponent = ({ selectedRow, open, onClose, title }) => {
+const ModalComponent = ({ selectedRow, open, onClose, title, actions }) => {
 	const theme = useTheme();
 
 	// Function to render table for array values
@@ -95,19 +95,24 @@ const ModalComponent = ({ selectedRow, open, onClose, title }) => {
 			</DialogContent>
 
 			<DialogActions>
-				<ButtonGroup>
+				<ButtonGroup variant="contained">
 					<Button
 						onClick={onClose}
 						endIcon={<Iconify icon="mdi:close" />}
 					>
 						Close
 					</Button>
-					<Button
-						color="error"
-						endIcon={<Iconify icon="mdi:delete" />}
-					>
-						Delete
-					</Button>
+					{
+						actions && actions.map((action, index) => (
+							<Button
+								key={index}
+								onClick={() => action.onClick(selectedRow)}
+								endIcon={<Iconify icon={action.icon} />}
+							>
+								{action.label}
+							</Button>
+						))
+					}
 				</ButtonGroup>
 			</DialogActions>
 		</Dialog>
@@ -119,6 +124,7 @@ ModalComponent.propTypes = {
 	onClose: PropTypes.func.isRequired,
 	selectedRow: PropTypes.object,
 	title: PropTypes.string,
+	actions: PropTypes.array,
 };
 
 export default ModalComponent;

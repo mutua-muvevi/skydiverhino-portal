@@ -98,6 +98,17 @@ const slice = createSlice({
 			state.isLoading = false;
 			state.deleteManyAnnouncementsError = action.payload;
 		},
+
+		//SET ANNOUNCEMENT
+		setAnnouncement(state, action) {
+			state.isLoading = false;
+			state.announcement = action.payload;
+		},
+
+		setAnnouncementError(state, action) {
+			state.isLoading = false;
+			state.announcementError = action.payload;
+		},
 	},
 });
 

@@ -6,14 +6,20 @@ import ModalComponent from "../../../../components/modal/modal";
 import { useState } from "react";
 import DeleteAnnouncement from "../delete/delete";
 import { setAnnouncement } from "../../../../redux/slices/announcements";
+import NewAnnouncement from "../new/new";
 
 const AnnouncementMain = () => {
-	const [open, setOpen] = useState(false);
+	const [openNew, setOpenNew] = useState(false);
+	const [openDelete, setOpenDelete] = useState(false);
 	const dispatch = useDispatch();
 
 	const {
 		announcements: { data: allAnnounceMents },
 	} = useSelector((state) => state.announcements);
+
+	const handleOpenNewAnnouncement = () => {
+		setOpenNew(true);
+	}
 
 	const modalActions = [
 		{
@@ -21,7 +27,7 @@ const AnnouncementMain = () => {
 			action: "delete",
 			icon: "ic:baseline-delete",
 			onClick: (rowData) => {
-				setOpen(true);
+				setOpenDelete(true);
 				dispatch(setAnnouncement(rowData))
 			}
 		},
@@ -33,6 +39,7 @@ const AnnouncementMain = () => {
 				variant="contained"
 				sx={{ p: 2 }}
 				endIcon={<Iconify icon="ic:baseline-add" />}
+				onClick={handleOpenNewAnnouncement}
 			>
 				Make an Announcement
 			</Button>
@@ -44,9 +51,21 @@ const AnnouncementMain = () => {
 				modalTitle="Announcement"
 			/>
 
+			{/* new announcement */}
 			<ModalComponent
-				open={open}
-				onClose={() => setOpen(false)}
+				open={openNew}
+				onClose={() => setOpenNew(false)}
+				title="New Announcement"
+				height={350}
+				maxWidth="md"
+			>
+				<NewAnnouncement/>
+			</ModalComponent>
+
+			{/* delete announcement */}
+			<ModalComponent
+				open={openDelete}
+				onClose={() => setOpenDelete(false)}
 				title="Delete Announcement"
 				height={230}
 				maxWidth="sm"

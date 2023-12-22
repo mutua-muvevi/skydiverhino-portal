@@ -19,6 +19,7 @@ import { fetchAllReservations } from "../redux/slices/reservations";
 import { fetchAllServices } from "../redux/slices/services";
 import { fetchAllBlogs } from "../redux/slices/blogs";
 import { fetchAllAnnouncements } from "../redux/slices/announcements";
+import { fetchAllLeads } from "../redux/slices/leads";
 
 // ----------------------------------------------------------------------
 
@@ -111,6 +112,9 @@ export function AuthProvider({ children }) {
 
 				//fetch all announcements
 				await reduxDispatch(fetchAllAnnouncements())
+
+				//await fetch all leads
+				await reduxDispatch(fetchAllLeads(token, user._id));
 
 				dispatch({
 					type: "INITIAL",

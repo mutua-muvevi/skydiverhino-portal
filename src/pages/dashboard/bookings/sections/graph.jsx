@@ -11,6 +11,7 @@ const BookingGraph = () => {
 	const {
 		reservations: { data: reservationsData },
 	} = useSelector((state) => state.reservations);
+	console.log(reservationsData)
 
 	// Process the reservations data for the graph
 	const { series, categories } = processAnualCollumnData(reservationsData, name);

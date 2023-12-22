@@ -1,40 +1,33 @@
+// StorageOverviewGraph.js
 import { Card, CardContent, CardHeader, useTheme } from "@mui/material";
-import ChartArea from "../../../../components/chart/types/chart-area"; 
+import { useSelector } from "react-redux";
+import { processStorageDataForLineGraph  } from "../../../../utils/chart/storage";
+import { ChartBar } from "../../../../components/chart/types";
 
 const StorageOverviewGraph = () => {
 	const theme = useTheme();
 
-	const chartAreaData = {
-		type: "area",
+	// Fetching storage data from Redux
+	const {
+		me: { storage: storageData },
+	} = useSelector((state) => state.user);
+
+	// Process the storage data for the graph using the utility function
+	const { series, categories } = processStorageDataForLineGraph (storageData);
+
+	const chartColumnSingleData = {
+		type: "bar",
 		height: 450,
-		series: [
-			{ name: "code", data: [31, 40, 28, 51, 42, 109, 100] },
-			{ name: "website", data: [11, 32, 45, 32, 34, 52, 41] },
-			{ name: "spreadsheet", data: [12, 37, 70, 44, 64, 42, 30] },
-			{ name: "design", data: [25, 48, 35, 60, 45, 70, 55] },
-			{ name: "videos", data: [30, 55, 45, 35, 60, 75, 65] },
-			{ name: "presentations", data: [20, 40, 50, 45, 55, 65, 60] },
-			{ name: "documents", data: [15, 35, 40, 50, 45, 55, 50] },
-			{ name: "images", data: [22, 47, 55, 40, 65, 60, 70] },
-		],
+		series,
 		options: {
 			xaxis: {
-				type: "datetime",
-				categories: [
-					"2018-09-19",
-					"2018-09-20",
-					"2018-09-21",
-					"2018-09-22",
-					"2018-09-23",
-					"2018-09-24",
-					"2018-09-25",
-				],
+				categories,
 			},
 			colors: [
 				theme.palette.primary.main,
+				theme.palette.chart.blue[1],
 				theme.palette.warning.main,
 				theme.palette.error.main,
-				theme.palette.chart.blue[1],
 				theme.palette.chart.green[1],
 				theme.palette.secondary.main,
 				theme.palette.success.main,
@@ -51,7 +44,7 @@ const StorageOverviewGraph = () => {
 		<Card>
 			<CardHeader title="My Storage Overview" />
 			<CardContent>
-				<ChartArea data={chartAreaData} />
+				<ChartBar  data={chartColumnSingleData} />
 			</CardContent>
 		</Card>
 	);

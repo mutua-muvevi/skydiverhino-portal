@@ -139,8 +139,8 @@ const NewBlog = () => {
 						values,
 						setFieldValue,
 						isSubmitting,
-						isValid,
-						dirty,
+						// isValid,
+						// dirty,
 					}) => (
 						<Form>
 							{activeStep === 0 && (

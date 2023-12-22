@@ -68,6 +68,7 @@ export const processDataForGrid = (data, nestedDataRenderer) => {
 			id: index,
 		};
 
+		// Iterate through each key in the item to define columns and process nested objects/arrays.
 		Object.keys(item).forEach((key) => {
 			if (key !== "_id" && key !== "__v") {
 				// Add column if not already present
@@ -106,8 +107,13 @@ export const processDataForGrid = (data, nestedDataRenderer) => {
 					typeof item[key] === "object" &&
 					item[key] !== null
 				) {
+					// For objects, extract the desired property based on availability
+					const objectValue = item[key];
 					processedItem[key] =
-						item[key].name || JSON.stringify(item[key]);
+						objectValue.fullname ||
+						objectValue.email ||
+						objectValue.title ||
+						Object.values(objectValue)[0];
 				}
 			}
 		});

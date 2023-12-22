@@ -1,0 +1,60 @@
+import { Button, Stack } from "@mui/material";
+import { useDispatch, useSelector } from "../../../../redux/store";
+import DataGridCustom from "../../../../components/datagrid/custom";
+import Iconify from "../../../../components/iconify";
+import ModalComponent from "../../../../components/modal/modal";
+import { useState } from "react";
+import DeleteAnnouncement from "../delete/delete";
+import { setAnnouncement } from "../../../../redux/slices/announcements";
+
+const AnnouncementMain = () => {
+	const [open, setOpen] = useState(false);
+	const dispatch = useDispatch();
+
+	const {
+		announcements: { data: allAnnounceMents },
+	} = useSelector((state) => state.announcements);
+
+	const modalActions = [
+		{
+			label: "Delete",
+			action: "delete",
+			icon: "ic:baseline-delete",
+			onClick: (rowData) => {
+				setOpen(true);
+				dispatch(setAnnouncement(rowData))
+			}
+		},
+	];
+
+	return (
+		<Stack direction="column" spacing={6}>
+			<Button
+				variant="contained"
+				sx={{ p: 2 }}
+				endIcon={<Iconify icon="ic:baseline-add" />}
+			>
+				Make an Announcement
+			</Button>
+
+			<DataGridCustom
+				data={allAnnounceMents}
+				title="Announcement List"
+				modalActions={modalActions}
+				modalTitle="Announcement"
+			/>
+
+			<ModalComponent
+				open={open}
+				onClose={() => setOpen(false)}
+				title="Delete Announcement"
+				height={230}
+				maxWidth="sm"
+			>
+				<DeleteAnnouncement/>
+			</ModalComponent>
+		</Stack>
+	);
+};
+
+export default AnnouncementMain;

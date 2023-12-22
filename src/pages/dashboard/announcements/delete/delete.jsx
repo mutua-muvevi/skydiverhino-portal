@@ -7,22 +7,22 @@ import {
 	useTheme,
 	Alert,
 } from "@mui/material";
-import PropTypes from "prop-types";
 import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { deleteBlog } from "../../../../redux/slices/blogs";
+import { deleteAnnouncement } from "../../../../redux/slices/announcements";
 
-const DeleteBlog = ({ blog }) => {
+const DeleteAnnouncement = () => {
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
 	const [inputTitle, setInputTitle] = useState("");
 
+	const { announcement } = useSelector((state) => state.announcements);
 	const {
 		me: { _id: userID },
 	} = useSelector((state) => state.user);
-	const token = localStorage.getItem("token");
 
-	const { title } = blog;
+	const { title } = announcement;
+	const token = localStorage.getItem("token");
 
 	const theme = useTheme();
 	const dispatch = useDispatch();
@@ -34,11 +34,11 @@ const DeleteBlog = ({ blog }) => {
 	const handleDelete = async () => {
 		try {
 			const response = await dispatch(
-				deleteBlog(userID, token, blog._id)
+				deleteAnnouncement(userID, token, announcement._id)
 			);
 
 			//extract success message
-			const { success, message } = response.data;
+			const { success, message } = response;
 
 			// Set the alert message from the response and determine severity
 			setAlertMessage(message);
@@ -59,16 +59,10 @@ const DeleteBlog = ({ blog }) => {
 	const isTitleMatch = inputTitle === title;
 
 	return (
-		<Stack direction="column" spacing={3}>
+		<Stack direction="column" spacing={3} >
 			{alertMessage && (
 				<Alert
 					severity={alertSeverity}
-					sx={{
-						mb: 2,
-						position: "absolute",
-						left: "50%",
-						top: "50%",
-					}}
 				>
 					{alertMessage}
 				</Alert>
@@ -95,14 +89,10 @@ const DeleteBlog = ({ blog }) => {
 				onClick={handleDelete}
 				disabled={!isTitleMatch}
 			>
-				Delete this blog
+				Delete this Announcement
 			</Button>
 		</Stack>
 	);
 };
 
-DeleteBlog.propTypes = {
-	blog: PropTypes.object.isRequired,
-};
-
-export default DeleteBlog;
+export default DeleteAnnouncement;

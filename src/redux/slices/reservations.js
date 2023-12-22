@@ -122,6 +122,7 @@ export const { startLoading, stopLoading, } = slice.actions;
 //FETCH ALL RESERVATIONS
 export const fetchAllReservations = (token, userID) => async (dispatch) => {
 	dispatch(slice.actions.startLoading());
+
 	try {
 		const response = await axios.get(
 			`http://localhost:8100/api/reservation/${userID}/fetch/all`,
@@ -265,7 +266,7 @@ export function setReservation(blog) {
 			return blog;
 		} catch (error) {
 			dispatch(slice.actions.setReservationError(error));
-			throw error.response;
+			throw error;
 		} finally {
 			dispatch(slice.actions.stopLoading());
 		}

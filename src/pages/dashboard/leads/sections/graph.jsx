@@ -4,17 +4,16 @@ import { ChartColumnSingle } from "../../../../components/chart/types";
 import { useSelector } from "../../../../redux/store";
 import { processAnualCollumnData } from "../../../../utils/chart/column";
 
-const BookingGraph = () => {
-	const name = "Reservations";
+const LeadGraph = () => {
+	const name = "Leads";
 
-	//fetching reservations
+	//fetching leads
 	const {
-		reservations: { data: reservationsData },
-	} = useSelector((state) => state.reservations);
+		leads : { data: leadsData },
+	} = useSelector((state) => state.leads);
 
-
-	// Process the reservations data for the graph
-	const { series, categories } = processAnualCollumnData(reservationsData, name);
+	// Process the leads data for the graph
+	const { series, categories } = processAnualCollumnData(leadsData, name);
 
 	const chartColumnSingleData = {
 		type: "bar",
@@ -30,11 +29,11 @@ const BookingGraph = () => {
 				show: false,
 			},
 			xaxis: {
-				categories
+				categories,
 			},
 			tooltip: {
 				y: {
-					formatter: (value) => `${value} reservations`,
+					formatter: (value) => `${value} leads`,
 				},
 			},
 		},
@@ -42,7 +41,7 @@ const BookingGraph = () => {
 
 	return (
 		<Card>
-			<CardHeader title="Reservations for the last 12 months" />
+			<CardHeader title="Our Leads for the past 12 Months" />
 			<CardContent>
 				<ChartColumnSingle data={chartColumnSingleData} />
 			</CardContent>
@@ -50,4 +49,4 @@ const BookingGraph = () => {
 	);
 };
 
-export default BookingGraph;
+export default LeadGraph;

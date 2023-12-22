@@ -2,6 +2,7 @@ import { Page } from "../../../components/page";
 import { PATH_DASHBOARD } from "../../../routes/path";
 
 import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
+import LeadMain from "./sections/main";
 
 const Leads = () => {
 	return (
@@ -16,7 +17,7 @@ const Leads = () => {
 					{ name: "Leads" },
 				]}
 			/>
-			<div>Leads</div>
+			<LeadMain/>
 		</Page>
 	);
 }

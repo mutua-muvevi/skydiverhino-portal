@@ -238,7 +238,7 @@ export function deleteManyLeads(userID, token, leadIDs) {
 //---------------------------fetch all leads--------------------------------
 export function fetchAllLeads(token, userID) {
 	return async (dispatch) => {
-		dispatch(slice.actions.startLoading()); console.log("DCSD", userID, token)
+		dispatch(slice.actions.startLoading());
 
 		try {
 			const response = await axios.get(
@@ -345,7 +345,6 @@ export function convertLeadToClient(userID, token, leadID) {
 		dispatch(slice.actions.startLoading());
 		
 		try {
-			console.log("DSDCSDCs", userID, token, leadID)
 			const response = await axios.get(
 				`http://localhost:8100/api/client/${userID}/convert/lead/${leadID}`,
 				{

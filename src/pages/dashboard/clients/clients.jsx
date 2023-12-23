@@ -2,6 +2,7 @@ import { Page } from "../../../components/page";
 import { PATH_DASHBOARD } from "../../../routes/path";
 
 import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
+import ClientMain from "./sections/main";
 
 const Clients = () => {
 	return (
@@ -16,7 +17,7 @@ const Clients = () => {
 					{ name: "Clients" },
 				]}
 			/>
-			<div>Clients</div>
+			<ClientMain/>
 		</Page>
 	);
 };

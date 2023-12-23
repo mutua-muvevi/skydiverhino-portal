@@ -4,15 +4,15 @@ import { ChartPie } from "../../../../components/chart/types";
 import { useSelector } from "../../../../redux/store";
 import { processPieChartData } from "../../../../utils/chart/pie";
 
-const LeadPie = () => {
+const ClientPie = () => {
 
 	//fetching reservations
 	const {
-		leads: { data: allLeads },
-	} = useSelector((state) => state.leads);
+		clients: { data: allClients },
+	} = useSelector((state) => state.clients);
 
 	// Process the reservations data for the pie chart
-	const { labels, series } = processPieChartData(allLeads);
+	const { labels, series } = processPieChartData(allClients);
 
 	const chartPieData = {
 		type: "pie",
@@ -50,4 +50,4 @@ const LeadPie = () => {
 	);
 };
 
-export default LeadPie;
+export default ClientPie;

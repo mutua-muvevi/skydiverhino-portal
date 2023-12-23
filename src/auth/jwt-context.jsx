@@ -20,6 +20,7 @@ import { fetchAllServices } from "../redux/slices/services";
 import { fetchAllBlogs } from "../redux/slices/blogs";
 import { fetchAllAnnouncements } from "../redux/slices/announcements";
 import { fetchAllLeads } from "../redux/slices/leads";
+import { fetchAllClients } from "../redux/slices/clients";
 
 // ----------------------------------------------------------------------
 
@@ -115,6 +116,9 @@ export function AuthProvider({ children }) {
 
 				//await fetch all leads
 				await reduxDispatch(fetchAllLeads(token, user._id));
+
+				//fetch all clients
+				await reduxDispatch(fetchAllClients(token, user._id));
 
 				dispatch({
 					type: "INITIAL",

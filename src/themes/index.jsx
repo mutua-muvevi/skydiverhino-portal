@@ -31,9 +31,8 @@ export default function ThemeProvider({ children }) {
 			palette: palette(themeMode),
 			typography,
 			shape: { 
-				borderRadius: 5,
-				inputBorderRadius: 5,
-				cardBorderRadius: 5,
+				borderRadius: 3,
+				inputBorderRadius: 3,
 			},
 			direction: themeDirection,
 			shadows: shadows(themeMode),

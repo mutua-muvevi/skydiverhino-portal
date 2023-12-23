@@ -160,7 +160,6 @@ const LeadCard = ({ lead }) => {
 				title={`Edit : ${lead.fullname}`}
 				fullWidth
 				maxWidth="lg"
-				backgroundIcon="uiw:edit"
 				height={650}
 			>
 				<EditLead  onClose={() => setOpenEditLead(false)} />
@@ -172,7 +171,6 @@ const LeadCard = ({ lead }) => {
 				onClose={() => setOpenDeleteLead(false)}
 				title={`Delete : ${lead.fullname}?`}
 				maxWidth="sm"
-				backgroundIcon="ic:baseline-delete"
 				height={200}
 			>
 				<DeleteLead onClose={() => setOpenDeleteLead(false)}/>

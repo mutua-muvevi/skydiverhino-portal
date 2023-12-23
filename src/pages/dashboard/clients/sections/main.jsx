@@ -1,39 +1,39 @@
 import { Button, Grid, Typography } from "@mui/material";
-import LeadGraph from "./graph";
-import LeadPie from "./pie";
-import LeadCards from "./card";
+import ClientGraph from "./graph";
+import ClientPie from "./pie";
+import ClientCards from "./card";
 import { useSelector } from "../../../../redux/store";
 import Iconify from "../../../../components/iconify";
 import { useState } from "react";
 import ModalComponent from "../../../../components/modal/modal";
-import NewLead from "../new/new";
+import NewClient from "../new/new";
 
-const LeadMain = () => {
+const ClientMain = () => {
 	const {
-		leads: { data: allLeads },
-	} = useSelector((state) => state.leads);
-	const [openAddLead, setOpenAddLead] = useState(false);
+		clients: { data: allClients },
+	} = useSelector((state) => state.clients);
+	const [openAddClient, setOpenAddClient] = useState(false);
 
 	return (
 		<>
 			<Grid container spacing={3}>
 				<Grid item xs={12} md={6} lg={8} xl={9}>
-					<LeadGraph />
+					<ClientGraph />
 				</Grid>
 				<Grid item xs={12} md={6} lg={4} xl={3}>
-					<LeadPie />
+					<ClientPie />
 				</Grid>
 				<Grid item xs={12}>
 					<Button
 						variant="contained"
 						endIcon={<Iconify icon="mdi:plus" />}
-						onClick={() => setOpenAddLead(true)}
+						onClick={() => setOpenAddClient(true)}
 					>
-						<Typography variant="subtitle2">Add a lead</Typography>
+						<Typography variant="subtitle2">Add a client</Typography>
 					</Button>
 				</Grid>
-				{allLeads
-					? allLeads.map((lead) => {
+				{allClients
+					? allClients.map((client) => {
 							return (
 								<Grid
 									item
@@ -41,31 +41,30 @@ const LeadMain = () => {
 									md={6}
 									lg={4}
 									xl={3}
-									key={lead._id}
+									key={client._id}
 								>
-									<LeadCards lead={lead} />
+									<ClientCards client={client} />
 								</Grid>
 							);
 					  })
 					: null}
 			</Grid>
 
-			{/* Add New Lead */}
+			{/* Add New Client */}
 			<ModalComponent
-				open={openAddLead}
-				onClose={() => setOpenAddLead(false)}
-				title="Add New Lead"
+				open={openAddClient}
+				onClose={() => setOpenAddClient(false)}
+				title="Add New Client"
 				size="md"
 				fullWidth
 				maxWidth="lg"
-				backgroundIcon="fa:plus"
 				height={650}
 			>
-				<NewLead onClose={() => setOpenAddLead(false)}/>
+				<NewClient onClose={() => setOpenAddClient(false)}/>
 			</ModalComponent>
 
 		</>
 	);
 };
 
-export default LeadMain;
+export default ClientMain;

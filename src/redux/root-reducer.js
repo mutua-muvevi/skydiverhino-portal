@@ -11,6 +11,7 @@ import ServicesReducer from "./slices/services";
 import BlogReducer from "./slices/blogs";
 import AnnouncementReducer from "./slices/announcements";
 import LeadsReducer from "./slices/leads";
+import ClientsReducer from "./slices/clients";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -21,19 +22,28 @@ import kanbanReducer from "./slices/kanban";
 const config = {
 	key: "root",
 	storage,
-	whitelist: ["user", "storage", "reservation", "blogs", "announcements", "leads"],
+	whitelist: [
+		"user",
+		"storage",
+		"reservation",
+		"blogs",
+		"announcements",
+		"leads",
+		"clients",
+	],
 	blacklist: [],
 };
 
 export const rootReducer = combineReducers({
 	user: UserReducer,
-	
+
 	storage: StorageReducer,
 	reservations: ReservationsReducer,
 	services: ServicesReducer,
 	blog: BlogReducer,
 	announcements: AnnouncementReducer,
 	leads: LeadsReducer,
+	clients: ClientsReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

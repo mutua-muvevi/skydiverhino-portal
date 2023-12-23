@@ -16,7 +16,7 @@ import ModalComponent from "../../../../components/modal/modal";
 import Lead from "../lead/lead";
 import EditLead from "../edit/edit";
 import DeleteLead from "../delete/delete";
-import Convert from "../convert/convert";
+import ConvertLead from "../convert/convert";
 
 const LeadCard = ({ lead }) => {
 	const theme = useTheme();
@@ -180,12 +180,12 @@ const LeadCard = ({ lead }) => {
 			<ModalComponent
 				open={openConvertLeadToClient}
 				onClose={() => setOpenConvertLeadToClient(false)}
-				title="Convert to Client"
+				title="Convert a Lead to Client"
 				fullWidth
-				maxWidth="lg"
-				backgroundIcon="mdi:user-convert"
+				maxWidth="sm"
+				height={200}
 			>
-				<Convert onClose={() => setOpenConvertLeadToClient(false)}/>
+				<ConvertLead onClose={() => setOpenConvertLeadToClient(false)}/>
 			</ModalComponent>
 		</>
 	);

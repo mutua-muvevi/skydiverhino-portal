@@ -51,6 +51,7 @@ const DeleteLead = ({ onClose }) => {
 			//close the modal
 			if (success) {
 				setTimeout(() => {
+					onClose();
 					window.location.reload();
 				}, 2000);
 			}

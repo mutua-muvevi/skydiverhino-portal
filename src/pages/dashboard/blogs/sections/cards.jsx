@@ -153,6 +153,7 @@ const BlogsCard = ({ blog }) => {
 				onClose={() => setOpenDelete(false)}
 				height={200}
 				maxWidth="sm"
+				backgroundIcon="ic:baseline-delete"
 			>
 				<DeleteBlog blog={blog} />
 			</ModalComponent>

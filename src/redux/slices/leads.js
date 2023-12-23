@@ -24,6 +24,9 @@ const initialState = {
 
 	fetchSingleLead: null,
 	fetchSingleLeadError: null,
+
+	editLead: null,
+	editLeadError: null,
 };
 
 //the slice
@@ -105,6 +108,17 @@ const slice = createSlice({
 		setLeadError(state, action) {
 			state.isLoading = false;
 			state.setLeadError = action.payload;
+		},
+
+		// EDIT LEAD
+		editLead(state, action) {
+			state.isLoading = false;
+			state.editLead = action.payload;
+		},
+
+		editLeadError(state, action) {
+			state.isLoading = false;
+			state.editLeadError = action.payload;
 		},
 	},
 });
@@ -279,4 +293,34 @@ export function setLead(lead) {
 			dispatch(slice.actions.stopLoading());
 		}
 	}
+}
+
+//---------------------------edit lead--------------------------------
+export function editLead(userID, token, leadID, values) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+
+		try {
+			const response = await axios.put(
+				`http://localhost:8100/api/lead/${userID}/edit/${leadID}`,
+				values,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": token,
+					},
+				}
+			);
+			const data = await response.data;
+			dispatch(slice.actions.editLead(data));
+			return data;
+
+		} catch (error) {
+			dispatch(slice.actions.editLeadError(error));
+			throw error.response;
+
+		} finally {
+			dispatch(stopLoading());
+		}
+	};
 }

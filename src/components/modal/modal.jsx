@@ -9,6 +9,7 @@ import {
 	DialogActions,
 	Button,
 	ButtonGroup,
+	Box,
 } from "@mui/material";
 
 import PropTypes from "prop-types";
@@ -23,6 +24,7 @@ const ModalComponent = ({
 	height,
 	actions,
 	maxWidth,
+	backgroundIcon,
 }) => {
 	const theme = useTheme();
 
@@ -66,7 +68,25 @@ const ModalComponent = ({
 					height: height ? height : 500,
 				}}
 			>
-				<Scrollbar sx={{ height: 1 }}>{children}</Scrollbar>
+				<Scrollbar sx={{ height: 1 }}>
+					{children}
+					{backgroundIcon ? (
+						<Box
+							sx={{
+								position: "absolute",
+								right: 0,
+								top: 0,
+								opacity: 0.2,
+							}}
+						>
+							<Iconify
+								icon={backgroundIcon}
+								width={500}
+								sx={{ color: theme.palette.primary.main }}
+							/>
+						</Box>
+					) : null}
+				</Scrollbar>
 			</DialogContent>
 
 			{actions ? (
@@ -102,6 +122,7 @@ ModalComponent.propTypes = {
 	height: PropTypes.number,
 	actions: PropTypes.array,
 	maxWidth: PropTypes.string,
+	backgroundIcon: PropTypes.string,
 };
 
 export default ModalComponent;

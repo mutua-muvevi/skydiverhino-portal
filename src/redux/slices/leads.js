@@ -27,6 +27,9 @@ const initialState = {
 
 	editLead: null,
 	editLeadError: null,
+
+	convertLeadToClient: null,
+	convertLeadToClientError: null,
 };
 
 //the slice
@@ -119,6 +122,17 @@ const slice = createSlice({
 		editLeadError(state, action) {
 			state.isLoading = false;
 			state.editLeadError = action.payload;
+		},
+
+		//CONVERT LEAD TO CLIENT
+		convertLeadToClient(state, action) {
+			state.isLoading = false;
+			state.convertLeadToClient = action.payload;
+		},
+
+		convertLeadToClientError(state, action) {
+			state.isLoading = false;
+			state.convertLeadToClientError = action.payload;
 		},
 	},
 });
@@ -317,6 +331,35 @@ export function editLead(userID, token, leadID, values) {
 
 		} catch (error) {
 			dispatch(slice.actions.editLeadError(error));
+			throw error.response;
+
+		} finally {
+			dispatch(stopLoading());
+		}
+	};
+}
+
+//---------------------------convert lead to client--------------------------------
+export function convertLeadToClient(userID, token, leadID) {
+	return async (dispatch) => {
+		dispatch(slice.actions.startLoading());
+		
+		try {
+			console.log("DSDCSDCs", userID, token, leadID)
+			const response = await axios.get(
+				`http://localhost:8100/api/client/${userID}/convert/lead/${leadID}`,
+				{
+					headers: {
+						"Authorization": token,
+					},
+				}
+			);
+			const data = await response.data;
+			dispatch(slice.actions.convertLeadToClient(data));
+			return data;
+
+		} catch (error) {
+			dispatch(slice.actions.convertLeadToClientError(error));
 			throw error.response;
 
 		} finally {

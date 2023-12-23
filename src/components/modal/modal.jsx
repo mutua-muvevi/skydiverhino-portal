@@ -77,6 +77,7 @@ const ModalComponent = ({
 								right: 0,
 								top: 0,
 								opacity: 0.2,
+								zIndex:0
 							}}
 						>
 							<Iconify

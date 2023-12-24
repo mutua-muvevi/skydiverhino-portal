@@ -12,6 +12,7 @@ import BlogReducer from "./slices/blogs";
 import AnnouncementReducer from "./slices/announcements";
 import LeadsReducer from "./slices/leads";
 import ClientsReducer from "./slices/clients";
+import TermReducer from "./slices/terms";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -44,6 +45,7 @@ export const rootReducer = combineReducers({
 	announcements: AnnouncementReducer,
 	leads: LeadsReducer,
 	clients: ClientsReducer,
+	terms: TermReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

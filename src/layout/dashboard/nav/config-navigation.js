@@ -31,7 +31,8 @@ const ICONS = {
 	blogs: "fa-solid:quote-left",
 	services: "fluent-emoji-high-contrast:parachute",
 
-	announcements: "mdi:announcement"
+	announcements: "mdi:announcement",
+	terms: "clarity:contract-solid"
 };
 
 const navConfig = [
@@ -75,6 +76,13 @@ const navConfig = [
 				title: "announcements",
 				path: PATH_DASHBOARD.general.announcements,
 				icon: ICONS.announcements,
+			},
+
+			//terms
+			{
+				title: "terms and policies",
+				path: PATH_DASHBOARD.general.terms,
+				icon: ICONS.terms,
 			},
 		],
 	},

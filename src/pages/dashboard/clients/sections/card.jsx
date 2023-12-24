@@ -72,6 +72,7 @@ const ClientCard = ({ client }) => {
 									right: 0,
 									top: 0,
 									opacity: 0.2,
+									zIndex: -1,
 								}}
 							>
 								<Iconify

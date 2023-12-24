@@ -180,7 +180,6 @@ export function addBlog(userID, token, blog) {
 				{
 					headers: {
 						Authorization: token,
-						// Content-Type will be set automatically by Axios for FormData
 					},
 				}
 			);

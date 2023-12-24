@@ -98,7 +98,6 @@ export const { startLoading, stopLoading } = slice.actions;
 export function downloadFile(userID, filename, token) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
-		console.log("Download", userID, filename, token);
 
 		try {
 			const response = await axios.get(

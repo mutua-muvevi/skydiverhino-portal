@@ -66,6 +66,7 @@ import {
 	Events,
 	Gears,
 	Blogs,
+	Terms,
 
 } from "./elements";
 
@@ -161,6 +162,8 @@ export default function Router() {
 				{ path: "leads", element: <Leads /> },
 
 				{ path: "tools", element: <Tools /> },
+
+				{ path: "terms", element: <Terms /> },
 
 				//the tools
 				{ path: "competition", element: <Competition/> },

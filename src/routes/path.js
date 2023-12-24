@@ -110,6 +110,9 @@ export const PATH_DASHBOARD = {
 
 		//announcements
 		announcements: path(ROOTS_DASHBOARD, "/announcements"),
+
+		//terms
+		terms: path(ROOTS_DASHBOARD, "/terms"),
 		
 
 		

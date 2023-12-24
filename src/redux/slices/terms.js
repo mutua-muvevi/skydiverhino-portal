@@ -211,7 +211,7 @@ export function editTerm(userID, token, termID, values) {
 
 		} catch (error) {
 			dispatch(slice.actions.editTermError(error));
-			throw error.response;
+			throw error;
 
 		} finally {
 			dispatch(stopLoading());
@@ -227,7 +227,7 @@ export function deleteTerm(userID, token, termID) {
 
 		try {
 			const response = await axios.delete(
-				`http://localhost:8100/api/term/${userID}/delete/single/${termID}`,
+				`http://localhost:8100/api/term/${userID}/delete/${termID}`,
 				{
 					headers: {
 						"Content-Type": "application/json",
@@ -241,7 +241,7 @@ export function deleteTerm(userID, token, termID) {
 
 		} catch (error) {
 			dispatch(slice.actions.deleteTermError(error));
-			throw error.response;
+			throw error;
 
 		} finally {
 			dispatch(stopLoading());
@@ -273,7 +273,7 @@ export function deleteManyTerms(userID, token, termIDs) {
 
 		} catch (error) {
 			dispatch(slice.actions.deleteManyTermsError(error));
-			throw error.response;
+			throw error;
 
 		} finally {
 			dispatch(stopLoading());
@@ -302,7 +302,7 @@ export function fetchAllTerms() {
 
 		} catch (error) {
 			dispatch(slice.actions.fetchAllTermsError(error));
-			throw error.response;
+			throw error;
 
 		} finally {
 			dispatch(stopLoading());
@@ -331,7 +331,7 @@ export function fetchSingleTerm( termID) {
 
 		} catch (error) {
 			dispatch(slice.actions.fetchSingleTermError(error));
-			throw error.response;
+			throw error;
 
 		} finally {
 			dispatch(stopLoading());
@@ -348,7 +348,7 @@ export function setTerm(announcement) {
 			return announcement;
 		} catch (error) {
 			dispatch(slice.actions.setTermError(error));
-			throw error.response;
+			throw error;
 		} finally {
 			dispatch(slice.actions.stopLoading());
 		}

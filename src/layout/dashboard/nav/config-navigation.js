@@ -32,7 +32,8 @@ const ICONS = {
 	services: "fluent-emoji-high-contrast:parachute",
 
 	announcements: "mdi:announcement",
-	terms: "clarity:contract-solid"
+	terms: "clarity:contract-solid",
+	manuals: "iconoir:book-solid"
 };
 
 const navConfig = [
@@ -83,6 +84,13 @@ const navConfig = [
 				title: "terms and policies",
 				path: PATH_DASHBOARD.general.terms,
 				icon: ICONS.terms,
+			},
+
+			//terms
+			{
+				title: "manuals",
+				path: PATH_DASHBOARD.general.manuals,
+				icon: ICONS.manuals,
 			},
 		],
 	},

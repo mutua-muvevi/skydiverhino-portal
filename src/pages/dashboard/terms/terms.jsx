@@ -5,9 +5,9 @@ import TermsMain from "./sections/main";
 
 const Terms = () => {
 	return (
-		<Page title="Storage">
+		<Page title="Terms, Policies, Waivers">
 			<CustomBreadcrumbs
-				heading="Storage"
+				heading="Terms, Policies and Waivers"
 				links={[
 					{
 						name: "Dashboard",

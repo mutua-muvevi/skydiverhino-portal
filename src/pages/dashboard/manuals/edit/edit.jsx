@@ -7,7 +7,7 @@ import Textfield from "../../../../components/form/textfield/textfield";
 import Iconify from "../../../../components/iconify";
 
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { editTerm } from "../../../../redux/slices/terms";
+import { editManual } from "../../../../redux/slices/manuals";
 
 import { Alert, Stack } from "@mui/material";
 import SelectField from "../../../../components/form/select/select";
@@ -16,56 +16,40 @@ import { Upload } from "../../../../components/upload";
 
 const selectOptions = [
 	{
-		name: "term",
-		label: "Term",
+		name: "safety",
+		label: "Safety Handbook",
 	},
 	{
-		name: "privacy policy",
-		label: "Privacy Policy",
+		name: "manual",
+		label: "Manual",
 	},
 	{
-		name: "refund policy",
-		label: "Refund Policy",
-	},
-	{
-		name: "sales policy",
-		label: "Sales Policy",
-	},
-	{
-		name: "cookie policy",
-		label: "Cookie Policy",
-	},
-	{
-		name: "waiver",
-		label: "Waiver",
-	},
-	{
-		name: "agreement",
-		label: "Agreement",
+		name: "others",
+		label: "Others",
 	},
 ];
 
-//------------------------ || EDIT TERM || -------------------------//
+//------------------------ || EDIT MANUAL || -------------------------//
 
-const EditTerm = ({ onClose }) => {
-	const { setTerm: term } = useSelector((state) => state.terms);
+const EditManual = ({ onClose }) => {
+	const { setManual: manual } = useSelector((state) => state.manuals);
 	const { me } = useSelector((state) => state.user);
 
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
-	const [file, setFile] = useState(term ? term.file : null);
+	const [file, setFile] = useState(manual && manual.file ? manual.file : null);
 
 	const token = localStorage.getItem("token");
 
 	const dispatch = useDispatch();
 
 	const initialValues = {
-		name: term ? term.name : "",
-		description: term ? term.description : "",
-		type: term ? term.type : "",
+		name: manual ? manual.name : "",
+		description: manual ? manual.description : "",
+		type: manual ? manual.type : "",
 	};
 
-	const TermSchema = Yup.object().shape({
+	const ManualSchema = Yup.object().shape({
 		name: Yup.string()
 			.min(5, "Minimum characters required is 5")
 			.required("Title is required"),
@@ -90,12 +74,12 @@ const EditTerm = ({ onClose }) => {
 	const handleSubmit = async (values, actions) => {
 		try {
 			const response = await dispatch(
-				editTerm(me._id, token, term._id, values)
+				editManual(me._id, token, values,  manual._id)
 			);
 			//extract success message
 			const { success, message } = response;
 
-			// Set the alert message from the response and determine severity
+			// Set the alert message from the response and demanualine severity
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
@@ -118,7 +102,7 @@ const EditTerm = ({ onClose }) => {
 	return (
 		<Formik
 			initialValues={initialValues}
-			validationSchema={TermSchema}
+			validationSchema={ManualSchema}
 			onSubmit={handleSubmit}
 		>
 			{({ setFieldValue, isSubmitting }) => (
@@ -172,8 +156,8 @@ const EditTerm = ({ onClose }) => {
 	);
 };
 
-EditTerm.propTypes = {
+EditManual.propTypes = {
 	onClose: PropTypes.func,
 };
 
-export default EditTerm;
+export default EditManual;

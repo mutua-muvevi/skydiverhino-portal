@@ -80,7 +80,7 @@ const ManualsCards = ({ manual }) => {
 								}}
 							>
 								<Iconify
-									icon="clarity:contract-solid"
+									icon="iconoir:book-solid"
 									width={100}
 									sx={{ color: theme.palette.primary.main }}
 								/>

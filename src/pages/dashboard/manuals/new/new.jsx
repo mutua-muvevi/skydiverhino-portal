@@ -6,7 +6,7 @@ import Textfield from "../../../../components/form/textfield/textfield";
 import SelectField from "../../../../components/form/select/select";
 
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { addTerm } from "../../../../redux/slices/terms";
+import { addManual } from "../../../../redux/slices/manuals";
 import { Alert, Stack } from "@mui/material";
 import { Upload } from "../../../../components/upload";
 import Iconify from "../../../../components/iconify";
@@ -18,7 +18,7 @@ const initialValues = {
 	type: "",
 };
 
-const TermSchema = Yup.object().shape({
+const ManualSchema = Yup.object().shape({
 	name: Yup.string()
 		.min(5, "Minimum characters required is 5")
 		.required("Title is required"),
@@ -30,36 +30,20 @@ const TermSchema = Yup.object().shape({
 
 const selectOptions = [
 	{
-		name: "term",
-		label: "Term",
+		name: "safety",
+		label: "Safety Handbook",
 	},
 	{
-		name: "privacy policy",
-		label: "Privacy Policy",
+		name: "manual",
+		label: "Manual",
 	},
 	{
-		name: "refund policy",
-		label: "Refund Policy",
-	},
-	{
-		name: "sales policy",
-		label: "Sales Policy",
-	},
-	{
-		name: "cookie policy",
-		label: "Cookie Policy",
-	},
-	{
-		name: "waiver",
-		label: "Waiver",
-	},
-	{
-		name: "agreement",
-		label: "Agreement",
+		name: "others",
+		label: "Others",
 	},
 ];
 
-const NewTerm = () => {
+const NewManual = () => {
 	const [file, setFile] = useState(null);
 
 	const [alertMessage, setAlertMessage] = useState("");
@@ -83,11 +67,11 @@ const NewTerm = () => {
 
 	const handleSubmit = async (values, actions) => {
 		try {
-			const response = await dispatch(addTerm(me._id, token, values));
+			const response = await dispatch(addManual(me._id, token, values));
 			//extract success message
 			const { success, message } = response;
 
-			// Set the alert message from the response and determine severity
+			// Set the alert message from the response and demanualine severity
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
@@ -108,7 +92,7 @@ const NewTerm = () => {
 	return (
 		<Formik
 			initialValues={initialValues}
-			validationSchema={TermSchema}
+			validationSchema={ManualSchema}
 			onSubmit={handleSubmit}
 		>
 			{({ setFieldValue, isSubmitting }) => {
@@ -168,4 +152,4 @@ const NewTerm = () => {
 	);
 };
 
-export default NewTerm;
+export default NewManual;

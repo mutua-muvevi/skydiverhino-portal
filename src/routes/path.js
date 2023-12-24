@@ -114,6 +114,8 @@ export const PATH_DASHBOARD = {
 		//terms
 		terms: path(ROOTS_DASHBOARD, "/terms"),
 		
+		//manuals
+		manuals: path(ROOTS_DASHBOARD, "/manuals"),
 
 		
 

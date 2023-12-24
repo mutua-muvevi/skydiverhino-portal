@@ -10,24 +10,24 @@ import {
 } from "@mui/material";
 import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { deleteTerm } from "../../../../redux/slices/terms";
+import { deleteManual } from "../../../../redux/slices/manuals";
 
-//------------------------ || DELETE TERM || -------------------------//
+//------------------------ || DELETE MANUAL || -------------------------//
 
-const DeleteTerm = ({ onClose }) => {
+const DeleteManual = ({ onClose }) => {
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
-	const [inputTermName, setInputFullname] = useState("");
+	const [inputManualName, setInputFullname] = useState("");
 
 	const {
 		me: { _id: userID },
 	} = useSelector((state) => state.user);
 
-	const { setTerm: term } = useSelector((state) => state.terms);
+	const { setManual: manual } = useSelector((state) => state.manuals);
 
 	const token = localStorage.getItem("token");
 
-	const { name } = term;
+	const { name } = manual;
 
 	const theme = useTheme();
 	const dispatch = useDispatch();
@@ -39,13 +39,13 @@ const DeleteTerm = ({ onClose }) => {
 	const handleDelete = async () => {
 		try {
 			const response = await dispatch(
-				deleteTerm(userID, token, term._id)
+				deleteManual(userID, token, manual._id)
 			);
 
 			//extract success message
 			const { success, message } = response;
 
-			// Set the alert message from the response and determine severity
+			// Set the alert message from the response and demanualine severity
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
@@ -62,7 +62,8 @@ const DeleteTerm = ({ onClose }) => {
 		}
 	};
 
-	const isInputTermName = inputTermName === name;
+	const isInputManualName = inputManualName === name;
+
 	return (
 		<Stack direction="column" spacing={3}>
 			{alertMessage && <Alert severity={alertSeverity} >{alertMessage}</Alert>}
@@ -70,14 +71,14 @@ const DeleteTerm = ({ onClose }) => {
 				Please type the title of the manual to confirm deletion:
 				<br />
 				<span style={{ color: theme.palette.text.primary }}>
-					{term.name}
+					{manual.name}
 				</span>
 			</Typography>
 			<TextField
 				fullWidth
 				variant="outlined"
 				placeholder="Type manual title here"
-				value={inputTermName}
+				value={inputManualName}
 				onChange={handleInputChange}
 				size="small"
 			/>
@@ -86,17 +87,17 @@ const DeleteTerm = ({ onClose }) => {
 				color="error"
 				endIcon={<Iconify icon="mdi:delete" />}
 				onClick={handleDelete}
-				disabled={!isInputTermName}
+				disabled={!isInputManualName}
 				type="submit"
 			>
-				Delete this term
+				Delete this manual
 			</Button>
 		</Stack>
 	);
 };
 
-DeleteTerm.propTypes = {
+DeleteManual.propTypes = {
 	onClose: PropTypes.func,
 };
 
-export default DeleteTerm;
+export default DeleteManual;

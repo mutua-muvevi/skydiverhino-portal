@@ -227,7 +227,7 @@ export function deleteTerm(userID, token, termID) {
 
 		try {
 			const response = await axios.delete(
-				`http://localhost:8100/api/term/${userID}/delete/single/${termID}`,
+				`http://localhost:8100/api/term/${userID}/delete/${termID}`,
 				{
 					headers: {
 						"Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { CardMedia, Stack, Typography } from "@mui/material";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
+import Iframe from "../../../../components/iframe";
 
 const Curriculum = ({ curriculum }) => {
 
@@ -50,12 +51,19 @@ const Curriculum = ({ curriculum }) => {
 						key={detail._id}
 						color="primary"
 					>
-						<CardMedia
-							component="img"
-							height={250}
-							image={detail.image}
-							alt={detail.title}
-						/>
+						{
+							detail.file && (
+								<Iframe
+									src={detail.file}
+									title={detail.title}
+									style={{
+										width: "100%",
+										height: "500px",
+									}}
+								/>
+							)
+
+						}
 						<Typography variant="subtitle2" color="primary">
 							{sentenceCase(detail.title)}
 						</Typography>

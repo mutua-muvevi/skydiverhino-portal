@@ -201,18 +201,19 @@ export function addCurriculum(userID, token, curriculum) {
 }
 
 //-----------------------------edit a curriculum---------------------------------
-export function editCurriculum(userID, token, curriculum) {
+export function editCurriculum(userID, token, curriculum, curriculumID) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 		try {
 			const formData = new FormData();
+			// return console.log(curriculum);
 
 			// Append non-file fields to FormData
 			formData.append("title", curriculum.title);
 			formData.append("introDescription", curriculum.introDescription);
 
 			// Append thumbnail file to FormData
-			if (curriculum.thumbnail) {
+			if (curriculum.thumbnail instanceof File) {
 				formData.append(
 					"thumbnail",
 					curriculum.thumbnail,
@@ -221,26 +222,26 @@ export function editCurriculum(userID, token, curriculum) {
 			}
 
 			// Append content block files and details to FormData
-			if (Array.isArray(curriculum.contentBlocks)) {
-				curriculum.contentBlocks.forEach((block, index) => {
-					formData.append(
-						`contentBlocks[${index}][title]`,
-						block.title
-					);
-					formData.append(
-						`contentBlocks[${index}][details]`,
-						block.details
-					);
 
-					// Append each file with the field name 'file'
-					if (block.file) {
-						formData.append(`file`, block.file, block.file.name);
-					}
-				});
-			}
+			curriculum.contentBlocks.forEach((block, index) => {
+				formData.append(`contentBlocks[${index}][title]`, block.title);
+				formData.append(
+					`contentBlocks[${index}][details]`,
+					block.details
+				);
+
+				// Check if 'block.file' is an instance of File and not a string (URL)
+				if (block.file instanceof File) {
+					formData.append(
+						`contentBlocks[${index}][file]`,
+						block.file,
+						block.file.name
+					);
+				}
+			});
 
 			const response = await axios.put(
-				`http://localhost:8100/api/curriculum/${userID}/edit/${curriculum._id}`,
+				`http://localhost:8100/api/curriculum/${userID}/edit/${curriculumID}`,
 				formData,
 				{
 					headers: {

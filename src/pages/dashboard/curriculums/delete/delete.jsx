@@ -12,7 +12,7 @@ import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
 import { deleteCurriculum } from "../../../../redux/slices/curriculums";
 
-const DeleteCurriculum = ({ curriculum }) => {
+const DeleteCurriculum = ({ curriculum, onClose }) => {
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
 	const [inputTitle, setInputTitle] = useState("");
@@ -44,11 +44,13 @@ const DeleteCurriculum = ({ curriculum }) => {
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
+			onClose();
+
 			//close the modal
 			if (success) {
 				setTimeout(() => {
 					window.location.reload();
-				}, 2000);
+				}, 1000);
 			}
 		} catch (error) {
 			setAlertMessage(error.error || "An error occurred.");
@@ -97,6 +99,7 @@ const DeleteCurriculum = ({ curriculum }) => {
 
 DeleteCurriculum.propTypes = {
 	curriculum: PropTypes.object.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default DeleteCurriculum;

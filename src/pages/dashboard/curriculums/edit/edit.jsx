@@ -19,14 +19,14 @@ import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
 import { editCurriculum } from "../../../../redux/slices/curriculums";
 
-const EditCurriculum = ({ curriculum }) => {
+const EditCurriculum = ({ curriculum, onClose }) => {
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
 	const [activeStep, setActiveStep] = useState(0);
 	const [thumbnail, setThumbnail] = useState(
 		curriculum.thumbnail ? curriculum.thumbnail : null
 	);
-	
+
 	const [contentBlockImages, setContentBlockImages] = useState(
 		curriculum.contentBlocks
 			? curriculum.contentBlocks.map((block) => ({
@@ -100,7 +100,7 @@ const EditCurriculum = ({ curriculum }) => {
 	const handleSubmit = async (values, actions) => {
 		try {
 			const response = await dispatch(
-				editCurriculum(me._id, token, values)
+				editCurriculum(me._id, token, values, curriculum._id)
 			);
 			//extract success message
 			const { success, message } = response.data;
@@ -111,7 +111,11 @@ const EditCurriculum = ({ curriculum }) => {
 
 			//close the modal
 			if (success) {
+				onClose();
+
 				setTimeout(() => {
+					onClose();
+
 					window.location.reload();
 				}, 2000);
 			}
@@ -121,7 +125,6 @@ const EditCurriculum = ({ curriculum }) => {
 		} finally {
 			actions.setSubmitting(false);
 		}
-
 	};
 
 	return (
@@ -151,6 +154,19 @@ const EditCurriculum = ({ curriculum }) => {
 						// dirty,
 					}) => (
 						<Form>
+							{alertMessage && (
+								<Alert
+									severity={alertSeverity}
+									sx={{
+										mb: 2,
+										position: "absolute",
+										left: "50%",
+										top: "50%",
+									}}
+								>
+									{alertMessage}
+								</Alert>
+							)}
 							{activeStep === 0 && (
 								<Stack direction="column" spacing={3}>
 									<Upload
@@ -307,25 +323,13 @@ const EditCurriculum = ({ curriculum }) => {
 					)}
 				</Formik>
 			</Stack>
-			{alertMessage && (
-				<Alert
-					severity={alertSeverity}
-					sx={{
-						mb: 2,
-						position: "absolute",
-						left: "50%",
-						top: "50%",
-					}}
-				>
-					{alertMessage}
-				</Alert>
-			)}
 		</>
 	);
 };
 
 EditCurriculum.propTypes = {
 	curriculum: PropTypes.object.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default EditCurriculum;

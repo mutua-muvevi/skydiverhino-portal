@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useCallback } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -43,7 +44,7 @@ const CurriculumSchema = Yup.object().shape({
 const steps = ["Curriculum Details", "Content Blocks", "Preview"];
 
 
-const NewCurriculum = () => {
+const NewCurriculum = ({ onClose }) => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [thumbnail, setThumbnail] = useState(null);
 	const [contentBlockFiles, setContentBlockFiles] = useState([]);
@@ -94,6 +95,8 @@ const NewCurriculum = () => {
 			// Set the alert message from the response and determine severity
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
+
+			onClose()
 
 			//close the modal
 			if (success) {
@@ -299,6 +302,10 @@ const NewCurriculum = () => {
 			)}
 		</>
 	);
+};
+
+NewCurriculum.propTypes = {
+	onClose: PropTypes.func.isRequired,
 };
 
 export default NewCurriculum;

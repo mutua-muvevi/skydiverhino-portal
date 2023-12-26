@@ -14,6 +14,7 @@ export default function SingleFilePreview({ file }) {
 	}
 
 	const imgUrl = typeof file === "string" ? file : file.preview;
+	
 
 	return (
 		<Image

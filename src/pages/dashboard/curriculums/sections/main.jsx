@@ -1,9 +1,10 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import CurriculumsCard from "./cards";
 import ModalComponent from "../../../../components/modal/modal";
 import { useState } from "react";
 import NewCurriculum from "../new/new";
 import { useSelector } from "../../../../redux/store";
+import Iconify from "../../../../components/iconify";
 
 const CurriculumsMain = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -18,13 +19,17 @@ const CurriculumsMain = () => {
 	return (
 		<>
 			<Stack direction="column" spacing={3}>
-				<Button
-					variant="contained"
-					color="primary"
-					onClick={handleOpenModal}
-				>
-					<Typography variant="h6">Add a new Curriculum</Typography>
-				</Button>
+
+				<Box>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={handleOpenModal}
+						endIcon={<Iconify icon="mdi:plus" />}
+					>
+						<Typography variant="subtitle1">Add a new Curriculum</Typography>
+					</Button>
+				</Box>
 
 				<div>
 					<Grid container spacing={3}>

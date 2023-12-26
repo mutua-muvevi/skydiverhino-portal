@@ -94,7 +94,10 @@ const CurriculumsCard = ({ curriculum }) => {
 					<CardHeader
 						title={
 							curriculum.title
-								? truncateStr(sentenceCase(curriculum.title), 30)
+								? truncateStr(
+										sentenceCase(curriculum.title),
+										30
+								  )
 								: "Curriculum title"
 						}
 						sx={{ color: theme.palette.primary.main }}
@@ -126,13 +129,16 @@ const CurriculumsCard = ({ curriculum }) => {
 
 			{/* Curriculum Modal */}
 			<ModalComponent
-				title={title}
+				title={`Curriculum : ${title}`}
 				open={openCurriculum}
 				onClose={() => setOpenCurriculum(false)}
 				height={700}
 				actions={modalActions}
 			>
-				<Curriculum curriculum={curriculum} />
+				<Curriculum
+					curriculum={curriculum}
+					onClose={() => setOpenCurriculum(false)}
+				/>
 			</ModalComponent>
 
 			{/* Edit Modal */}
@@ -143,7 +149,10 @@ const CurriculumsCard = ({ curriculum }) => {
 				height={700}
 				maxWidth="lg"
 			>
-				<EditCurriculum curriculum={curriculum} />
+				<EditCurriculum
+					curriculum={curriculum}
+					onClose={() => setOpenEdit(false)}
+				/>
 			</ModalComponent>
 
 			{/* Delete Modal */}
@@ -154,7 +163,10 @@ const CurriculumsCard = ({ curriculum }) => {
 				height={200}
 				maxWidth="sm"
 			>
-				<DeleteCurriculum curriculum={curriculum} />
+				<DeleteCurriculum
+					curriculum={curriculum}
+					onClose={() => setOpenDelete(false)}
+				/>
 			</ModalComponent>
 		</>
 	);

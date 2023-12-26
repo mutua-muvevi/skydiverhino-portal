@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "../../../../redux/store";
 import DataGridCustom from "../../../../components/datagrid/custom";
 import Iconify from "../../../../components/iconify";
@@ -35,14 +35,17 @@ const AnnouncementMain = () => {
 
 	return (
 		<Stack direction="column" spacing={6}>
-			<Button
-				variant="contained"
-				sx={{ p: 2 }}
-				endIcon={<Iconify icon="ic:baseline-add" />}
-				onClick={handleOpenNewAnnouncement}
-			>
-				Make an Announcement
-			</Button>
+			<Box>
+				<Button
+					variant="contained"
+					endIcon={<Iconify icon="ic:baseline-add" />}
+					onClick={handleOpenNewAnnouncement}
+				>
+					<Typography variant="subtitle1">
+						Make an Announcement
+					</Typography>
+				</Button>
+			</Box>
 
 			<DataGridCustom
 				data={allAnnounceMents}

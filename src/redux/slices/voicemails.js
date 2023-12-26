@@ -16,6 +16,9 @@ const initialState = {
 	addVoicemail: null,
 	addVoicemailError: null,
 
+	editVoicemail: null,
+	editVoicemailError: null,
+
 	deleteVoicemail: null,
 	deleteVoicemailError: null,
 
@@ -78,6 +81,17 @@ const slice = createSlice({
 		addVoicemailError(state, action) {
 			state.isLoading = false;
 			state.addVoicemailError = action.payload;
+		},
+
+		//EDIT VOICEMAIL
+		editVoicemail(state, action) {
+			state.isLoading = false;
+			state.editVoicemail = action.payload;
+		},
+
+		editVoicemailError(state, action) {
+			state.isLoading = false;
+			state.editVoicemailError = action.payload;
 		},
 
 		//DELETE VOICEMAIL
@@ -144,6 +158,34 @@ export function addVoicemail(userID, token, values) {
 			return data;
 		} catch (error) {
 			dispatch(slice.actions.addVoicemailError(error));
+			throw error;
+		} finally {
+			dispatch(slice.actions.stopLoading());
+		}
+	};
+}
+
+//----------------------------edit voicemail--------------------------------
+export function editVoicemail(userID, token, values, id,) {
+	return async (dispatch) => {
+		dispatch(startLoading());
+		try {
+			const response = await axios.put(
+				`http://localhost:8100/api/voicemail/${userID}/edit/${id}`,
+				values,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: token,
+					},
+				}
+			);
+
+			const data = await response.data;
+			dispatch(slice.actions.editVoicemail(data));
+			return data;
+		} catch (error) {
+			dispatch(slice.actions.editVoicemailError(error));
 			throw error;
 		} finally {
 			dispatch(slice.actions.stopLoading());

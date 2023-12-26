@@ -125,3 +125,6 @@ export const Announcements = Loadable(lazy(() => import("../pages/dashboard/anno
 
 // Terms
 export const Terms = Loadable(lazy(() => import("../pages/dashboard/terms/terms")));
+
+//Curriculums
+export const Curriculums = Loadable(lazy(() => import("../pages/dashboard/curriculums/curriculums")));

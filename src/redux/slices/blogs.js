@@ -180,6 +180,7 @@ export function addBlog(userID, token, blog) {
 				{
 					headers: {
 						Authorization: token,
+						"Content-Type": "multipart/form-data",
 					},
 				}
 			);

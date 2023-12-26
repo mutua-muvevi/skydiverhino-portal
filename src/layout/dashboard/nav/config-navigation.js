@@ -33,7 +33,8 @@ const ICONS = {
 
 	announcements: "mdi:announcement",
 	terms: "clarity:contract-solid",
-	manuals: "iconoir:book-solid"
+	manuals: "iconoir:book-solid",
+	curriculums: "material-symbols:school",
 };
 
 const navConfig = [
@@ -86,11 +87,18 @@ const navConfig = [
 				icon: ICONS.terms,
 			},
 
-			//terms
+			//manuals
 			{
 				title: "manuals",
 				path: PATH_DASHBOARD.general.manuals,
 				icon: ICONS.manuals,
+			},
+
+			//curriculums
+			{
+				title: "curriculums",
+				path: PATH_DASHBOARD.general.curriculums,
+				icon: ICONS.curriculums,
 			},
 		],
 	},

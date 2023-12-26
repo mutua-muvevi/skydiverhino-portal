@@ -128,3 +128,6 @@ export const Terms = Loadable(lazy(() => import("../pages/dashboard/terms/terms"
 
 //Curriculums
 export const Curriculums = Loadable(lazy(() => import("../pages/dashboard/curriculums/curriculums")));
+
+//Voicemails
+export const Voicemails = Loadable(lazy(() => import("../pages/dashboard/voicemails/voicemails")));

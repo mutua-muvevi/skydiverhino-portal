@@ -35,6 +35,7 @@ const ICONS = {
 	terms: "clarity:contract-solid",
 	manuals: "iconoir:book-solid",
 	curriculums: "material-symbols:school",
+	voicemails: "fluent:voicemail-48-filled",
 };
 
 const navConfig = [
@@ -99,6 +100,13 @@ const navConfig = [
 				title: "curriculums",
 				path: PATH_DASHBOARD.general.curriculums,
 				icon: ICONS.curriculums,
+			},
+
+			//curriculums
+			{
+				title: "voicemails",
+				path: PATH_DASHBOARD.general.voicemails,
+				icon: ICONS.voicemails,
 			},
 		],
 	},

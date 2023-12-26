@@ -4,31 +4,42 @@ import DataGridCustom from "../../../../components/datagrid/custom";
 import Iconify from "../../../../components/iconify";
 import ModalComponent from "../../../../components/modal/modal";
 import { useState } from "react";
-import DeleteAnnouncement from "../delete/delete";
-import { setAnnouncement } from "../../../../redux/slices/announcements";
-import NewAnnouncement from "../new/new";
+import DeleteVoicemail from "../delete/delete";
+import { setVoicemail } from "../../../../redux/slices/voicemails";
+import NewVoicemail from "../new/new";
+import EditVoicemail from "../edit/edit";
 
-const AnnouncementMain = () => {
+const VoicemailsMain = () => {
 	const [openNew, setOpenNew] = useState(false);
 	const [openDelete, setOpenDelete] = useState(false);
+	const [openEdit, setOpenEdit] = useState(false);
 	const dispatch = useDispatch();
 
 	const {
-		announcements: { data: allAnnounceMents },
-	} = useSelector((state) => state.announcements);
+		voicemails: { data: allVoicemailss },
+	} = useSelector((state) => state.voicemails);
 
-	const handleOpenNewAnnouncement = () => {
+	const handleOpenNewVoicemail = () => {
 		setOpenNew(true);
 	}
 
 	const modalActions = [
+		{
+			label: "Edit",
+			action: "edit",
+			icon: "uiw:edit",
+			onClick: (rowData) => {
+				setOpenEdit(true);
+				dispatch(setVoicemail(rowData))
+			}
+		},
 		{
 			label: "Delete",
 			action: "delete",
 			icon: "ic:baseline-delete",
 			onClick: (rowData) => {
 				setOpenDelete(true);
-				dispatch(setAnnouncement(rowData))
+				dispatch(setVoicemail(rowData))
 			}
 		},
 	];
@@ -39,44 +50,55 @@ const AnnouncementMain = () => {
 				<Button
 					variant="contained"
 					endIcon={<Iconify icon="ic:baseline-add" />}
-					onClick={handleOpenNewAnnouncement}
+					onClick={handleOpenNewVoicemail}
 				>
 					<Typography variant="subtitle1">
-						Make an Announcement
+						Make an Voicemail
 					</Typography>
 				</Button>
 			</Box>
 
 			<DataGridCustom
-				data={allAnnounceMents}
-				title="Announcement List"
+				data={allVoicemailss}
+				title="Voicemail List"
 				modalActions={modalActions}
-				modalTitle="Announcement"
+				modalTitle="Voicemail"
 			/>
 
-			{/* new announcement */}
+			{/* new voicemail */}
 			<ModalComponent
 				open={openNew}
 				onClose={() => setOpenNew(false)}
-				title="New Announcement"
-				height={350}
+				title="New Voicemail"
+				height={450}
 				maxWidth="md"
 			>
-				<NewAnnouncement/>
+				<NewVoicemail onClose={() => setOpenDelete(false)}/>
 			</ModalComponent>
 
-			{/* delete announcement */}
+			{/* edit voicemail */}
+			<ModalComponent
+				open={openEdit}
+				onClose={() => setOpenEdit(false)}
+				title="Edit Voicemail"
+				height={450}
+				maxWidth="lg"
+			>
+				<EditVoicemail onClose={() => setOpenEdit(false)}/>
+			</ModalComponent>
+
+			{/* delete voicemail */}
 			<ModalComponent
 				open={openDelete}
 				onClose={() => setOpenDelete(false)}
-				title="Delete Announcement"
+				title="Delete Voicemail"
 				height={230}
 				maxWidth="sm"
 			>
-				<DeleteAnnouncement/>
+				<DeleteVoicemail onClose={() => setOpenDelete(false)}/>
 			</ModalComponent>
 		</Stack>
 	);
 };
 
-export default AnnouncementMain;
+export default VoicemailsMain;

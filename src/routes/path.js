@@ -120,7 +120,8 @@ export const PATH_DASHBOARD = {
 		//curriculums
 		curriculums: path(ROOTS_DASHBOARD, "/curriculums"),
 
-		
+		//voicemails
+		voicemails: path(ROOTS_DASHBOARD, "/voicemails"),
 
 		app: path(ROOTS_DASHBOARD, "/app"),
 		ecommerce: path(ROOTS_DASHBOARD, "/ecommerce"),

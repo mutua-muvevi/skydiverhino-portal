@@ -15,6 +15,7 @@ import ClientsReducer from "./slices/clients";
 import TermReducer from "./slices/terms";
 import ManualReducer from "./slices/manuals";
 import CurriculumReducer from "./slices/curriculums";
+import VoicemailReducer from "./slices/voicemails";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -35,6 +36,8 @@ const config = {
 		"clients",
 		"terms",
 		"manuals",
+		"curriculums",
+		"voicemails"
 	],
 	blacklist: [],
 };
@@ -52,6 +55,7 @@ export const rootReducer = combineReducers({
 	terms: TermReducer,
 	manuals: ManualReducer,
 	curriculum: CurriculumReducer,
+	voicemails: VoicemailReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

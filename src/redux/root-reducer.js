@@ -14,6 +14,7 @@ import LeadsReducer from "./slices/leads";
 import ClientsReducer from "./slices/clients";
 import TermReducer from "./slices/terms";
 import ManualReducer from "./slices/manuals";
+import CurriculumReducer from "./slices/curriculums";
 
 import calendarReducer from "./slices/calendar";
 import chatReducer from "./slices/chat";
@@ -50,6 +51,7 @@ export const rootReducer = combineReducers({
 	clients: ClientsReducer,
 	terms: TermReducer,
 	manuals: ManualReducer,
+	curriculum: CurriculumReducer,
 
 	calendar: calendarReducer,
 	chat: chatReducer,

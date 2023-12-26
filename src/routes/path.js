@@ -117,6 +117,9 @@ export const PATH_DASHBOARD = {
 		//manuals
 		manuals: path(ROOTS_DASHBOARD, "/manuals"),
 
+		//curriculums
+		curriculums: path(ROOTS_DASHBOARD, "/curriculums"),
+
 		
 
 		app: path(ROOTS_DASHBOARD, "/app"),

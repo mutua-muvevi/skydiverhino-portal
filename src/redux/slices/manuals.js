@@ -194,8 +194,6 @@ export function editManual(userID, token, values, manualID) {
 				formData.append("file", values.file, values.file.name);
 			}
 
-			console.log("The values are: ", values)
-
 			const response = await axios.put(
 				`http://localhost:8100/api/manual/${userID}/edit/${manualID}`,
 				formData,

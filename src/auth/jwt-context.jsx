@@ -23,6 +23,7 @@ import { fetchAllLeads } from "../redux/slices/leads";
 import { fetchAllClients } from "../redux/slices/clients";
 import { fetchAllTerms } from "../redux/slices/terms";
 import { fetchAllManuals } from "../redux/slices/manuals";
+import { fetchAllCurriculums } from "../redux/slices/curriculums";
 
 // ----------------------------------------------------------------------
 
@@ -127,6 +128,9 @@ export function AuthProvider({ children }) {
 
 				//fetch all manuals
 				await reduxDispatch(fetchAllManuals(user._id, token));
+
+				//fetch all curriculums
+				await reduxDispatch(fetchAllCurriculums(user._id, token));
 
 				dispatch({
 					type: "INITIAL",

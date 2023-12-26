@@ -13,51 +13,41 @@ import {
 } from "@mui/material";
 
 import Textfield from "../../../../components/form/textfield/textfield";
-import MultipleSelect from "../../../../components/form/select/multiple";
 import { Upload } from "../../../../components/upload";
-import BlogPreview from "./preview";
+import CurriculumPreview from "./preview";
 import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { editBlog } from "../../../../redux/slices/blogs";
+import { editCurriculum } from "../../../../redux/slices/curriculums";
 
-const EditBlog = ({ blog }) => {
+const EditCurriculum = ({ curriculum }) => {
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
 	const [activeStep, setActiveStep] = useState(0);
 	const [thumbnail, setThumbnail] = useState(
-		blog.thumbnail ? blog.thumbnail : null
+		curriculum.thumbnail ? curriculum.thumbnail : null
 	);
 	
 	const [contentBlockImages, setContentBlockImages] = useState(
-		blog.contentBlocks
-			? blog.contentBlocks.map((block) => ({
-					file: block.image,
-					preview: block.image,
+		curriculum.contentBlocks
+			? curriculum.contentBlocks.map((block) => ({
+					file: block.file,
+					preview: block.file,
 			}))
 			: []
 	);
 	const initialValues = {
-		title: blog ? blog.title : "",
-		tags: blog ? blog.tags : [],
-		introDescription: blog ? blog.introDescription : "",
-		thumbnail: blog ? blog.thumbnail : null,
-		contentBlocks: blog
-			? blog.contentBlocks
-			: [{ title: "", details: "", image: null }],
+		title: curriculum ? curriculum.title : "",
+		introDescription: curriculum ? curriculum.introDescription : "",
+		thumbnail: curriculum ? curriculum.thumbnail : null,
+		contentBlocks: curriculum
+			? curriculum.contentBlocks
+			: [{ title: "", details: "", file: null }],
 	};
 
-	const steps = ["Blog Details", "Content Blocks", "Preview"];
+	const steps = ["Curriculum Details", "Content Blocks", "Preview"];
 
-	const tagsOptions = [
-		{ value: "tandem", label: "Tandem" },
-		{ value: "AFF", label: "Accelerated Freefall" },
-	];
-
-	const BlogSchema = Yup.object().shape({
+	const CurriculumSchema = Yup.object().shape({
 		title: Yup.string().required("Title is required"),
-		tags: Yup.array()
-			.of(Yup.string())
-			.required("At least one tag is required"),
 		introDescription: Yup.string().required(
 			"Intro description is required"
 		),
@@ -66,8 +56,8 @@ const EditBlog = ({ blog }) => {
 			Yup.object().shape({
 				title: Yup.string().required("Block title is required"),
 				details: Yup.string().required("Block details are required"),
-				image: Yup.mixed().required(
-					"An image is required for each content block"
+				file: Yup.mixed().required(
+					"An file is required for each content block"
 				),
 			})
 		),
@@ -104,13 +94,13 @@ const EditBlog = ({ blog }) => {
 		};
 
 		setContentBlockImages(updatedImages);
-		setFieldValue(`contentBlocks[${index}].image`, file);
+		setFieldValue(`contentBlocks[${index}].file`, file);
 	};
 
 	const handleSubmit = async (values, actions) => {
 		try {
 			const response = await dispatch(
-				editBlog(me._id, token, blog._id, values)
+				editCurriculum(me._id, token, values)
 			);
 			//extract success message
 			const { success, message } = response.data;
@@ -150,7 +140,7 @@ const EditBlog = ({ blog }) => {
 				</Stepper>
 				<Formik
 					initialValues={initialValues}
-					validationSchema={BlogSchema}
+					validationSchema={CurriculumSchema}
 					onSubmit={handleSubmit}
 				>
 					{({
@@ -175,12 +165,7 @@ const EditBlog = ({ blog }) => {
 									/>
 									<Textfield
 										name="title"
-										label="Blog Title"
-									/>
-									<MultipleSelect
-										name="tags"
-										label="Tags"
-										options={tagsOptions}
+										label="Curriculum Title"
 									/>
 									<Textfield
 										name="introDescription"
@@ -203,7 +188,7 @@ const EditBlog = ({ blog }) => {
 														sx={{ pb: 3 }}
 													>
 														<Upload
-															name={`contentBlocks[${index}].image`}
+															name={`contentBlocks[${index}].file`}
 															file={
 																contentBlockImages[
 																	index
@@ -260,7 +245,7 @@ const EditBlog = ({ blog }) => {
 													push({
 														title: "",
 														details: "",
-														image: null,
+														file: null,
 													})
 												}
 											>
@@ -271,7 +256,7 @@ const EditBlog = ({ blog }) => {
 								</FieldArray>
 							)}
 							{activeStep === 2 && (
-								<BlogPreview formData={values} />
+								<CurriculumPreview formData={values} />
 							)}
 							<Box
 								sx={{
@@ -339,8 +324,8 @@ const EditBlog = ({ blog }) => {
 	);
 };
 
-EditBlog.propTypes = {
-	blog: PropTypes.object.isRequired,
+EditCurriculum.propTypes = {
+	curriculum: PropTypes.object.isRequired,
 };
 
-export default EditBlog;
+export default EditCurriculum;

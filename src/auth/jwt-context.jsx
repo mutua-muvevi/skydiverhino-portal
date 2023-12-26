@@ -24,6 +24,7 @@ import { fetchAllClients } from "../redux/slices/clients";
 import { fetchAllTerms } from "../redux/slices/terms";
 import { fetchAllManuals } from "../redux/slices/manuals";
 import { fetchAllCurriculums } from "../redux/slices/curriculums";
+import { fetchAllVoicemails } from "../redux/slices/voicemails";
 
 // ----------------------------------------------------------------------
 
@@ -131,6 +132,9 @@ export function AuthProvider({ children }) {
 
 				//fetch all curriculums
 				await reduxDispatch(fetchAllCurriculums(user._id, token));
+
+				//fetch all voicemails
+				await reduxDispatch(fetchAllVoicemails(user._id, token));
 
 				dispatch({
 					type: "INITIAL",

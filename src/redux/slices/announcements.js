@@ -121,7 +121,7 @@ export const { startLoading, stopLoading } = slice.actions;
 // ----------------------------------------------------------------------
 
 //----------------------------add announcement--------------------------------
-export function addAnnouncement(userID, token,  values) {
+export function addAnnouncement(userID, token, values) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 		try {
@@ -142,7 +142,7 @@ export function addAnnouncement(userID, token,  values) {
 			
 		} catch (error) {
 			dispatch(slice.actions.addAnnouncementError(error));
-			throw error.response;
+			throw error;
 		} finally {
 			dispatch(slice.actions.stopLoading());
 		}

@@ -69,6 +69,7 @@ import {
 	Terms,
 	Manuals,
 	Curriculums,
+	Voicemails,
 
 } from "./elements";
 
@@ -170,6 +171,8 @@ export default function Router() {
 				{ path: "manuals", element: <Manuals /> },
 
 				{ path: "curriculums", element: <Curriculums /> },
+
+				{ path: "voicemails", element: <Voicemails /> },
 
 				//the tools
 				{ path: "competition", element: <Competition/> },

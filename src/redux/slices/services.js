@@ -564,7 +564,7 @@ export function addService(userID, token, values) {
 
 			//Append gallery array to FormData
 			if (Array.isArray(values.gallery)) {
-				values.gallery.forEach((image, index) => {
+				values.gallery.forEach((image) => {
 					formData.append(`gallery`, image, image.name);
 				});
 			}
@@ -573,10 +573,6 @@ export function addService(userID, token, values) {
 			for (var pair of formData.entries()) {
 				console.log("asxaS", pair[0] + ", " + pair[1]);
 			}
-
-			//loging the gallery
-			console.log("DALLERY", values.gallery);
-			console.log("Blocks", values.contentBlocks);
 
 
 			const response = await axios.post(

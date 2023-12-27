@@ -126,7 +126,7 @@ const ServiceCards = ({ service }) => {
 										>
 											{truncateStr(
 												sentenceCase(
-													service.shortDescription
+													service.introDescription
 												),
 												isLargeScreen
 													? 500

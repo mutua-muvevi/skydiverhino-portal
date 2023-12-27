@@ -2,14 +2,12 @@ import CustomBreadcrumbs from "../../../components/custom-breadcrumbs";
 import { Page } from "../../../components/page";
 import { PATH_DASHBOARD } from "../../../routes/path";
 
-import { useSelector } from "../../../redux/store";
+
 import ServiceMain from "./sections/main";
 
 
 const Services = () => {
-	const {
-		services: { data: allServices },
-	} = useSelector((state) => state.services);
+
 	
 	return (
 		<Page title="Services">
@@ -24,7 +22,7 @@ const Services = () => {
 				]}
 			/>
 			
-			<ServiceMain services={allServices} />
+			<ServiceMain/>
 		</Page>
 	);
 };

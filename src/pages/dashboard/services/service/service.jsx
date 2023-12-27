@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Iconify from "../../../../components/iconify";
 
 const Service = ({ service }) => {
-	const { leads, shortDescription, details, prices, requirements, clients } =
+	const { leads, introDescription, contentBlocks, prices, requirements, clients } =
 		service;
 
 	return (
@@ -15,18 +15,18 @@ const Service = ({ service }) => {
 					Description
 				</Typography>
 				<Typography variant="body2" textAlign="justify">
-					{sentenceCase(shortDescription)}
+					{sentenceCase(introDescription)}
 				</Typography>
 			</Stack>
 
-			{/* details */}
+			{/* contentBlocks */}
 			<Stack direction="column" spacing={3}>
 				<Typography variant="subtitle1" color="primary">
 					Details
 				</Typography>
 				{
-					// Loop through the details
-					details.map((detail) => (
+					// Loop through the contentBlocks
+					contentBlocks.map((detail) => (
 						<Stack
 							direction="column"
 							spacing={1.5}
@@ -154,8 +154,8 @@ const Service = ({ service }) => {
 Service.propTypes = {
 	service: PropTypes.shape({
 		name: PropTypes.string.isRequired,
-		shortDescription: PropTypes.string.isRequired,
-		details: PropTypes.arrayOf(
+		introDescription: PropTypes.string.isRequired,
+		contentBlocks: PropTypes.arrayOf(
 			PropTypes.shape({
 				_id: PropTypes.string.isRequired,
 				title: PropTypes.string.isRequired,

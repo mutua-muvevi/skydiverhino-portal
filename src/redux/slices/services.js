@@ -528,24 +528,71 @@ export function fetchAllServices() {
 }
 
 //POST SERVICE
-export function postService(userID, values, token) {
+export function addService(userID, token, values) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 
 		try {
+			const formData = new FormData();
+
+			// Append non-file fields to FormData
+			formData.append("name", values.name);
+			formData.append("introDescription", values.introDescription);
+
+			// Append non file array fields to FormData
+			formData.append("requirements", JSON.stringify(values.requirements));
+			formData.append("prices", JSON.stringify(values.prices));
+			formData.append("faq", JSON.stringify(values.faq));
+
+			// Append thumbnail file to FormData
+			if (values.thumbnail) {
+				formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+			}
+
+			// Append content block files and contentBlocks to FormData
+			if (Array.isArray(values.contentBlocks)) {
+				values.contentBlocks.forEach((detail, index) => {
+					formData.append(`contentBlocks[${index}][title]`, detail.title);
+					formData.append(`contentBlocks[${index}][details]`, detail.details);
+
+					// Append each image with the field name 'image'
+					if (detail.image) {
+						formData.append(`image`, detail.image, detail.image.name);
+					}
+				});
+			}
+
+			//Append gallery array to FormData
+			if (Array.isArray(values.gallery)) {
+				values.gallery.forEach((image, index) => {
+					formData.append(`gallery`, image, image.name);
+				});
+			}
+
+			//console log formdata
+			for (var pair of formData.entries()) {
+				console.log("asxaS", pair[0] + ", " + pair[1]);
+			}
+
+			//loging the gallery
+			console.log("DALLERY", values.gallery);
+			console.log("Blocks", values.contentBlocks);
+
+
 			const response = await axios.post(
 				`http://localhost:8100/api/service/${userID}/post`,
-				values,
+				formData,
 				{
 					headers: {
-						"Content-Type": "application/json",
 						Authorization: token,
 					},
 				}
 			);
 
-			dispatch(slice.actions.postServiceSuccess(response));
+			const data = await response.data;
+			dispatch(slice.actions.postServiceSuccess(data));
 			return response;
+
 		} catch (error) {
 			dispatch(slice.actions.postServiceError(error));
 			throw error;
@@ -561,12 +608,47 @@ export function editService(userID, values, token, serviceID) {
 		dispatch(slice.actions.startLoading());
 
 		try {
+			const formData = new FormData();
+
+			// Append non-file fields to FormData
+			formData.append("name", values.name);
+			formData.append("introDescription", values.introDescription);
+
+			// Append non file array fields to FormData
+			formData.append("requirements", JSON.stringify(values.requirements));
+			formData.append("prices", JSON.stringify(values.prices));
+			formData.append("faq", JSON.stringify(values.faq));
+
+			// Append thumbnail file to FormData
+			if (values.thumbnail) {
+				formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+			}
+
+			// Append content block files and contentBlocks to FormData
+			if (Array.isArray(values.contentBlocks)) {
+				values.contentBlocks.forEach((detail, index) => {
+					formData.append(`contentBlocks[${index}][title]`, detail.title);
+					formData.append(`contentBlocks[${index}][contentBlocks]`, detail.contentBlocks);
+
+					// Append each image with the field name 'image'
+					if (detail.image) {
+						formData.append(`image`, detail.image, detail.image.name);
+					}
+				});
+			}
+
+			//Append gallery array to FormData
+			if (Array.isArray(values.gallery)) {
+				values.gallery.forEach((image, index) => {
+					formData.append(`gallery[${index}]`, image, image.name);
+				});
+			}
+
 			const response = await axios.put(
 				`http://localhost:8100/api/service/${userID}/edit/${serviceID}`,
-				values,
+				formData,
 				{
 					headers: {
-						"Content-Type": "application/json",
 						Authorization: token,
 					},
 				}

@@ -44,27 +44,11 @@ const navConfig = [
 	{
 		subheader: "main",
 		items: [
-
 			//main
 			{
 				title: "home",
 				path: PATH_DASHBOARD.general.home,
 				icon: ICONS.home,
-			},
-
-			//tools
-			{
-				title: "tools",
-				path: PATH_DASHBOARD.general.tools,
-				icon: ICONS.tools,
-				
-			},
-
-			//storage
-			{
-				title: "storage",
-				path: PATH_DASHBOARD.general.storage,
-				icon: ICONS.storage,
 			},
 
 			//bookings
@@ -81,28 +65,7 @@ const navConfig = [
 				icon: ICONS.announcements,
 			},
 
-			//terms
-			{
-				title: "terms and policies",
-				path: PATH_DASHBOARD.general.terms,
-				icon: ICONS.terms,
-			},
-
-			//manuals
-			{
-				title: "manuals",
-				path: PATH_DASHBOARD.general.manuals,
-				icon: ICONS.manuals,
-			},
-
-			//curriculums
-			{
-				title: "curriculums",
-				path: PATH_DASHBOARD.general.curriculums,
-				icon: ICONS.curriculums,
-			},
-
-			//curriculums
+			//voicemails
 			{
 				title: "voicemails",
 				path: PATH_DASHBOARD.general.voicemails,
@@ -128,8 +91,57 @@ const navConfig = [
 				path: PATH_DASHBOARD.general.leads,
 				icon: ICONS.leads,
 			},
+
+			//services
+			{
+				title: "services",
+				path: PATH_DASHBOARD.general.services,
+				icon: ICONS.services,
+			},
 		],
 	},
+
+	//RESOURCES
+	{
+		subheader: "resources",
+		items: [
+			//tools
+			{
+				title: "tools",
+				path: PATH_DASHBOARD.general.tools,
+				icon: ICONS.tools,
+			},
+
+			//storage
+			{
+				title: "storage",
+				path: PATH_DASHBOARD.general.storage,
+				icon: ICONS.storage,
+			},
+
+			//curriculums
+			{
+				title: "curriculums",
+				path: PATH_DASHBOARD.general.curriculums,
+				icon: ICONS.curriculums,
+			},
+
+			//terms
+			{
+				title: "terms and policies",
+				path: PATH_DASHBOARD.general.terms,
+				icon: ICONS.terms,
+			},
+
+			//manuals
+			{
+				title: "manuals",
+				path: PATH_DASHBOARD.general.manuals,
+				icon: ICONS.manuals,
+			},
+		],
+	},
+
 
 	//WEBSITE AND LANDING
 	{
@@ -177,44 +189,30 @@ const navConfig = [
 				],
 			},
 
-			//blogs
-			{
-				title: "blogs",
-				path: PATH_DASHBOARD.general.blogs,
-				icon: ICONS.blogs,
-			},
-
-			//services
-			{
-				title: "services",
-				path: PATH_DASHBOARD.general.services,
-				icon: ICONS.services,
-			},
 		],
 	},
 
 	//SOCIAL MEDIA ACCOUNTS
-	{
-		subheader: "social media accounts",
-		items: [
-			{
-				title: "facebook",
-				path: PATH_DASHBOARD.general.social.facebook,
-				icon: ICONS.facebook,
-			},
-			{
-				title: "instagram",
-				path: PATH_DASHBOARD.general.social.instagram,
-				icon: ICONS.instagram,
-			},
-			{
-				title: "tiktok",
-				path: PATH_DASHBOARD.general.social.tiktok,
-				icon: ICONS.tiktok,
-			},
-		],
-	},
-
+	// {
+	// 	subheader: "social media accounts",
+	// 	items: [
+	// 		{
+	// 			title: "facebook",
+	// 			path: PATH_DASHBOARD.general.social.facebook,
+	// 			icon: ICONS.facebook,
+	// 		},
+	// 		{
+	// 			title: "instagram",
+	// 			path: PATH_DASHBOARD.general.social.instagram,
+	// 			icon: ICONS.instagram,
+	// 		},
+	// 		{
+	// 			title: "tiktok",
+	// 			path: PATH_DASHBOARD.general.social.tiktok,
+	// 			icon: ICONS.tiktok,
+	// 		},
+	// 	],
+	// },
 ];
 
 export default navConfig;

@@ -16,13 +16,15 @@ const BlogsMain = () => {
 	return (
 		<>
 			<Stack direction="column" spacing={3}>
-				<Button
-					variant="contained"
-					color="primary"
-					onClick={handleOpenModal}
-				>
-					<Typography variant="h6">Add a new Blog</Typography>
-				</Button>
+				<div>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={handleOpenModal}
+					>
+						<Typography variant="subtitle1">Add a new Blog</Typography>
+					</Button>
+				</div>
 
 				<div>
 					<Grid container spacing={3}>
@@ -42,7 +44,7 @@ const BlogsMain = () => {
 				height={600}
 				maxWidth="lg"
 			>
-				<NewBlog/>
+				<NewBlog onClose={() => setOpenModal(false)}/>
 			</ModalComponent>
 		</>
 	);

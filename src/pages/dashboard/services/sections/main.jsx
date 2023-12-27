@@ -39,7 +39,7 @@ const ServiceMain = () => {
 			</Stack>
 
 			<ModalComponent
-				title="Add a new Blog"
+				title="Add a new Service"
 				open={openModal}
 				onClose={() => setOpenModal(false)}
 				height={700}

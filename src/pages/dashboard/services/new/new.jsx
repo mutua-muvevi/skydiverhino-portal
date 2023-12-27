@@ -37,7 +37,7 @@ const initialValues = {
 
 	faq: [{ question: "", answer: "" }],
 
-	gallery: [],
+	gallery: [""],
 };
 
 const ServiceSchema = Yup.object().shape({

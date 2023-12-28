@@ -1,7 +1,6 @@
 import { Box, Typography, Stack, CardMedia, Paper, Grid } from "@mui/material";
 
 import PropTypes from "prop-types";
-import useResponsive from "../../../../hooks/use-responsive";
 import { isFile } from "../../../../utils/is-file";
 
 const ServicePreview = ({ formData }) => {
@@ -35,7 +34,11 @@ const ServicePreview = ({ formData }) => {
 						</Typography>
 						<CardMedia
 							component="img"
-							image={URL.createObjectURL(formData.thumbnail)}
+							image={
+								isFile(formData.thumbnail)
+									? URL.createObjectURL(formData.thumbnail)
+									: formData.thumbnail
+							}
 							alt="Thumbnail"
 						/>
 					</Box>
@@ -71,7 +74,11 @@ const ServicePreview = ({ formData }) => {
 						{block.image && (
 							<CardMedia
 								component="img"
-								image={URL.createObjectURL(block.image)}
+								image={
+									isFile(block.image)
+										? URL.createObjectURL(block.image)
+										: block.image
+								}
 								alt={`Content Block ${index + 1}`}
 							/>
 						)}
@@ -177,7 +184,6 @@ const ServicePreview = ({ formData }) => {
 			<Grid container spacing={2}>
 				{formData.gallery.map((image, index) => (
 					<Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-						{/* if the gallery images are file object then display them in  */}
 						<CardMedia
 							component="img"
 							image={
@@ -185,7 +191,7 @@ const ServicePreview = ({ formData }) => {
 									? URL.createObjectURL(image)
 									: image
 							}
-							alt={`Gallery Image ${index + 1}`}
+							alt={`Gallery Images for service ${index + 1}`}
 						/>
 					</Grid>
 				))}

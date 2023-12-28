@@ -97,7 +97,7 @@ const CurriculumsCard = ({ curriculum }) => {
 								? truncateStr(
 										sentenceCase(curriculum.title),
 										30
-								  )
+								)
 								: "Curriculum title"
 						}
 						sx={{ color: theme.palette.primary.main }}

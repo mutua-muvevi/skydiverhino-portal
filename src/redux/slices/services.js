@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 // utils
 import axios from "../../utils/axios";
+import { isFile } from "../../utils/is-file";
 
 // ----------------------------------------------------------------------
 
@@ -599,7 +600,7 @@ export function addService(userID, token, values) {
 }
 
 //EDIT SERVICE
-export function editService(userID, values, token, serviceID) {
+export function editService(userID, token, values, serviceID) {
 	return async (dispatch) => {
 		dispatch(slice.actions.startLoading());
 
@@ -617,7 +618,9 @@ export function editService(userID, values, token, serviceID) {
 
 			// Append thumbnail file to FormData
 			if (values.thumbnail) {
-				formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+				if(isFile(values.thumbnail)){
+					formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+				}
 			}
 
 			// Append content block files and contentBlocks to FormData
@@ -628,16 +631,21 @@ export function editService(userID, values, token, serviceID) {
 
 					// Append each image with the field name 'image'
 					if (detail.image) {
-						formData.append(`image`, detail.image, detail.image.name);
+						if(isFile(detail.image)){
+							formData.append(`image`, detail.image, detail.image.name);
+						}	
 					}
 				});
 			}
 
 			//Append gallery array to FormData
 			if (Array.isArray(values.gallery)) {
-				values.gallery.forEach((image, index) => {
-					formData.append(`gallery[${index}]`, image, image.name);
-				});
+				// if one of the files if a file append it to the formdata
+				if(isFile(values.gallery)){
+					values.gallery.forEach((image) => {
+						formData.append(`gallery`, image, image.name);
+					});
+				}
 			}
 
 			const response = await axios.put(

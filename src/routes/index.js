@@ -70,7 +70,6 @@ import {
 	Manuals,
 	Curriculums,
 	Voicemails,
-
 } from "./elements";
 
 import CompactLayout from "../layout/compact/compact-layout";

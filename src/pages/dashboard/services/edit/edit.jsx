@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -14,31 +15,13 @@ import {
 import ServicePreview from "./preview";
 import Iconify from "../../../../components/iconify";
 import { useDispatch, useSelector } from "../../../../redux/store";
-import { addService } from "../../../../redux/slices/services";
+import { editService } from "../../../../redux/slices/services";
 import AddServiceDetails from "./details";
 import AddServiceContent from "./content";
 import AddServicePrices from "./prices";
 import AddRequirements from "./requirements";
 import AddServiceFAQ from "./faq";
 import AddServiceGallery from "./gallery";
-
-const initialValues = {
-	name: "",
-	introDescription: "",
-	thumbnail: null,
-
-	contentBlocks: [{ title: "", details: "", image: null }],
-
-	prices: [
-		{ title: "", listItems: [""], price: { amount: 0, currency: "USD" } },
-	],
-
-	requirements: [{ title: "", details: "" }],
-
-	faq: [{ question: "", answer: "" }],
-
-	gallery: [""],
-};
 
 const ServiceSchema = Yup.object().shape({
 	name: Yup.string().required("Title is required"),
@@ -95,11 +78,23 @@ const steps = [
 	"Preview",
 ];
 
-const NewService = () => {
+const EditService = ({ service, onClose }) => {
 	const [activeStep, setActiveStep] = useState(0);
-	const [thumbnail, setThumbnail] = useState(null);
-	const [gallery, setGalleries] = useState([]);
-	const [contentBlockImages, setContentBlockImages] = useState([]);
+	const [thumbnail, setThumbnail] = useState(
+		service && service.thumbnail ? service.thumbnail : null
+	);
+	const [gallery, setGalleries] = useState(
+		service && service.gallery ? service.gallery : []
+	);
+	const [contentBlockImages, setContentBlockImages] = useState(
+		//i want to obtain service content block images under contentBlocks which is an array of objects with title, details and image. I want to extract the image
+		service && service.contentBlocks
+			? service.contentBlocks.map((block) => ({
+					file: block.image,
+					preview: block.image,
+			}))
+			: []
+	);
 
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
@@ -112,6 +107,41 @@ const NewService = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	const handleBack = () =>
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+	const initialValues = {
+		name: service && service.name ? service.name : "",
+		introDescription:
+			service && service.introDescription ? service.introDescription : "",
+		thumbnail: service && service.thumbnail ? service.thumbnail : null,
+
+		contentBlocks:
+			service && service.contentBlocks
+				? service.contentBlocks
+				: [{ title: "", details: "", image: null }],
+
+		prices:
+			service && service.prices
+				? service.prices
+				: [
+						{
+							title: "",
+							listItems: [""],
+							price: { amount: 0, currency: "USD" },
+						},
+				],
+
+		requirements:
+			service && service.requirements
+				? service.requirements
+				: [{ title: "", details: "" }],
+
+		faqs:
+			service && service.faqs
+				? service.faqs
+				: [{ question: "", answer: "" }],
+
+		gallery: service && service.gallery ? service.gallery : [""],
+	};
 
 	const handleThumbnailChange = useCallback(
 		(acceptedFiles, setFieldValue) => {
@@ -162,7 +192,8 @@ const NewService = () => {
 
 	const handleSubmit = async (values, actions) => {
 		try {
-			const response = await dispatch(addService(me._id, token, values));
+			console.log("RESSS", me._id, token, values, service._id)
+			const response = await dispatch(editService(me._id, token, values, service._id));
 			//extract success message
 			const { success, message } = response.data;
 
@@ -173,11 +204,13 @@ const NewService = () => {
 			//close the modal
 			if (success) {
 				setTimeout(() => {
+					onClose();
+
 					window.location.reload();
 				}, 2000);
 			}
 		} catch (error) {
-			setAlertMessage(error.error || "An error occurred.");
+			setAlertMessage(error.response ? error.response.message : "An error occurred.")
 			setAlertSeverity("error");
 		}
 
@@ -320,4 +353,9 @@ const NewService = () => {
 	);
 };
 
-export default NewService;
+EditService.propTypes = {
+	service: PropTypes.object.isRequired,
+	onClose: PropTypes.func.isRequired,
+};
+
+export default EditService;

@@ -19,16 +19,18 @@ import { setService } from "../../../../redux/slices/services";
 import { useState } from "react";
 import ModalComponent from "../../../../components/modal/modal";
 import Service from "../service/service";
+import EditService from "../edit/edit";
 
 const image = "";
 
 const ServiceCards = ({ service }) => {
 	const [openService, setOpenService] = useState(false);
+	const [openEditService, setOpenEditService] = useState(false);
+	const [openDeleteService, setOpenDeleteService] = useState(false);
 	const dispatch = useDispatch();
 
 	const isLargeScreen = useMediaQuery("(min-width: 1280px)");
 	const isMediumScreen = useMediaQuery("(min-width: 960px)");
-
 
 	const handleSetService = () => {
 		dispatch(setService(service));
@@ -37,12 +39,12 @@ const ServiceCards = ({ service }) => {
 	};
 
 	const handleEditService = () => {
+		dispatch(setService(service));
 
-	}
+		setOpenEditService(true);
+	};
 
-	const handleDeleteService = () => {
-		
-	}
+	const handleDeleteService = () => {};
 
 	const modalActions = [
 		{
@@ -56,7 +58,7 @@ const ServiceCards = ({ service }) => {
 			onClick: handleDeleteService,
 			color: "error",
 		},
-	]
+	];
 
 	return (
 		<>
@@ -262,11 +264,33 @@ const ServiceCards = ({ service }) => {
 				open={openService}
 				onClose={() => setOpenService(false)}
 				title={service.name}
-				height={500}
+				height={700}
 				actions={modalActions}
 			>
 				<Service service={service} />
 			</ModalComponent>
+
+			<ModalComponent
+				open={openEditService}
+				onClose={() => setOpenEditService(false)}
+				title={service.name}
+				height={700}
+			>
+				<EditService
+					service={service}
+					onClose={() => setOpenEditService(false)}
+				/>
+			</ModalComponent>
+			{/* 
+			<ModalComponent
+				open={openService}
+				onClose={() => setOpenService(false)}
+				title={service.name}
+				height={500}
+				actions={modalActions}
+			>
+				<Service service={service} />
+			</ModalComponent> */}
 		</>
 	);
 };

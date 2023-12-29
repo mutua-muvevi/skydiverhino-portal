@@ -20,6 +20,7 @@ import { useState } from "react";
 import ModalComponent from "../../../../components/modal/modal";
 import Service from "../service/service";
 import EditService from "../edit/edit";
+import DeleteService from "../delete/delete";
 
 const image = "";
 
@@ -44,7 +45,11 @@ const ServiceCards = ({ service }) => {
 		setOpenEditService(true);
 	};
 
-	const handleDeleteService = () => {};
+	const handleDeleteService = () => {
+		dispatch(setService(service));
+
+		setOpenDeleteService(true);
+	};
 
 	const modalActions = [
 		{
@@ -64,11 +69,11 @@ const ServiceCards = ({ service }) => {
 		<>
 			<Card>
 				<CardActionArea onClick={handleSetService}>
-					<Stack direction={{ xs: "column", md: "row" }} spacing={1}>
-						{image ? (
+					<Stack direction={{ xs: "column", md: "row" }} spacing={1} sx={{height: 450}}>
+						{service.thumbnail ? (
 							<CardMedia
 								component="img"
-								src={image}
+								src={service.thumbnail}
 								alt={service.name}
 								sx={{
 									width: {
@@ -76,6 +81,7 @@ const ServiceCards = ({ service }) => {
 										lg: "35%",
 										xl: "30%",
 									},
+									height: "100%"
 								}}
 							/>
 						) : (
@@ -260,37 +266,45 @@ const ServiceCards = ({ service }) => {
 				</CardActionArea>
 			</Card>
 
+			{/* Service modal  */}
 			<ModalComponent
 				open={openService}
 				onClose={() => setOpenService(false)}
 				title={service.name}
-				height={700}
+				height={750}
+				maxWidth="xl"
 				actions={modalActions}
 			>
 				<Service service={service} />
 			</ModalComponent>
 
+			{/* Edit service modal */}
 			<ModalComponent
 				open={openEditService}
 				onClose={() => setOpenEditService(false)}
-				title={service.name}
+				title={`Edit Service: ${service.name}`}
 				height={700}
+				maxWidth="xl"
 			>
 				<EditService
 					service={service}
 					onClose={() => setOpenEditService(false)}
 				/>
 			</ModalComponent>
-			{/* 
+
+			{/* Delete service modal */}
 			<ModalComponent
-				open={openService}
-				onClose={() => setOpenService(false)}
-				title={service.name}
-				height={500}
-				actions={modalActions}
+				open={openDeleteService}
+				onClose={() => setOpenDeleteService(false)}
+				title={`Delete Service: ${service.name}`}
+				height={250}
+				maxWidth="sm"
 			>
-				<Service service={service} />
-			</ModalComponent> */}
+				<DeleteService
+					service={service}
+					onClose={() => setOpenDeleteService(false)}
+				/>
+			</ModalComponent>
 		</>
 	);
 };

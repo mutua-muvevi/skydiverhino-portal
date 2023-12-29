@@ -204,15 +204,14 @@ const EditService = ({ service, onClose }) => {
 
 
 			//close the modal
-			// if (success) {
-			// 	setTimeout(() => {
-			// 		onClose();
+			if (success) {
+				setTimeout(() => {
+					onClose();
 
-			// 		window.location.reload();
-			// 	}, 2000);
-			// }
+					window.location.reload();
+				}, 2000);
+			}
 		} catch (error) {
-			console.log("The error is", error)
 			setAlertMessage(
 				error.error ? error.error : "An error occurred."
 			);

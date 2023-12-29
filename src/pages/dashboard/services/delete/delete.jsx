@@ -38,7 +38,7 @@ const DeleteService = ({ service, onClose }) => {
 			);
 
 			//extract success message
-			const { success, message } = response.data;
+			const { success, message } = response;
 
 			// Set the alert message from the response and determine severity
 			setAlertMessage(message);

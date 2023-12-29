@@ -4,7 +4,6 @@ import {
 	Card,
 	CardActionArea,
 	CardContent,
-	CardHeader,
 	CardMedia,
 	Stack,
 	Typography,

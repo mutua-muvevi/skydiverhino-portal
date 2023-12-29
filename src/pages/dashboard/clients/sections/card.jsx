@@ -116,7 +116,7 @@ const ClientCard = ({ client }) => {
 										Service:
 									</Typography>
 									<Typography variant="body2">
-										{client.service.name}
+										{client.service ? client.service.name: "No service"}
 									</Typography>
 								</Stack>
 							</Stack>

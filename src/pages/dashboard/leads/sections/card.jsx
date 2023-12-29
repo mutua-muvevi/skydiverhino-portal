@@ -24,8 +24,7 @@ const LeadCard = ({ lead }) => {
 	const [openLead, setOpenLead] = useState(false);
 	const [openEditLead, setOpenEditLead] = useState(false);
 	const [openDeleteLead, setOpenDeleteLead] = useState(false);
-	const [openConvertLeadToClient, setOpenConvertLeadToClient] =
-		useState(false);
+	const [openConvertLeadToClient, setOpenConvertLeadToClient] =useState(false);
 
 	const dispatch = useDispatch();
 
@@ -131,7 +130,7 @@ const LeadCard = ({ lead }) => {
 										Service:
 									</Typography>
 									<Typography variant="body2">
-										{lead.service.name}
+										{lead.service ? lead.service.name: "No service"}
 									</Typography>
 								</Stack>
 							</Stack>

@@ -5,7 +5,12 @@ import PropTypes from "prop-types";
 import { FieldArray } from "formik";
 import { Box, Button } from "@mui/material";
 
-const AddServiceContent = ({ values, contentBlockImages, handleContentBlockImageChange, setFieldValue  }) => {
+const AddServiceContent = ({
+	values,
+	contentBlockImages,
+	handleContentBlockImageChange,
+	setFieldValue,
+}) => {
 	return (
 		<FieldArray name="contentBlocks">
 			{({ push, remove }) => (

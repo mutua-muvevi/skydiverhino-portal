@@ -13,7 +13,7 @@ const ServicePreview = ({ formData }) => {
 					Title
 				</Typography>
 				<Typography variant="body1" textAlign="justify">
-					{formData.title}
+					{formData.name}
 				</Typography>
 			</Stack>
 

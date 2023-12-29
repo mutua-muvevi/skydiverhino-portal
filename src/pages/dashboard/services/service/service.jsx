@@ -1,15 +1,45 @@
-import { Typography } from "@mui/material";
+import { Card, CardMedia, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
 import Iconify from "../../../../components/iconify";
+import { isFile } from "../../../../utils/is-file";
 
 const Service = ({ service }) => {
-	const { leads, introDescription, contentBlocks, prices, requirements, clients } =
-		service;
+	const {
+		leads,
+		thumbnail,
+		gallery,
+		introDescription,
+		contentBlocks,
+		prices,
+		requirements,
+		clients,
+	} = service;
 
 	return (
 		<Stack direction="column" spacing={3}>
+			<Stack direction="column">
+				<Typography variant="subtitle1" color="primary">
+					Thumbnail
+				</Typography>
+				{
+					// Check if the thumbnail is a file
+					thumbnail ? (
+						<CardMedia
+							component="img"
+							image={thumbnail}
+							alt="Thumbnail"
+							style={{ height: "auto" }}
+						/>
+					) : (
+						<Typography variant="body2" textAlign="justify">
+							No thumbnail
+						</Typography>
+					)
+				}
+			</Stack>
+
 			<Stack direction="column">
 				<Typography variant="subtitle1" color="primary">
 					Description
@@ -39,6 +69,17 @@ const Service = ({ service }) => {
 							<Typography variant="body2" textAlign="justify">
 								{sentenceCase(detail.details)}
 							</Typography>
+							{
+								// Check if the detail has an image
+								detail.image ? (
+									<CardMedia
+										component="img"
+										image={detail.image}
+										alt="Detail"
+										style={{ height: "auto" }}
+									/>
+								) : null
+							}
 						</Stack>
 					))
 				}
@@ -147,6 +188,37 @@ const Service = ({ service }) => {
 					</Stack>
 				</Stack>
 			) : null}
+
+			{/* Gallery */}
+			{gallery.length > 0 ? (
+				<Stack direction="column" spacing={1.5}>
+					<Typography variant="subtitle1" color="primary">
+						Gallery
+					</Typography>
+					<div>
+						<Grid container spacing={2}>
+							{
+								// Loop through the gallery
+								gallery.map((image, index) => (
+									<Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+										<CardMedia
+											component="img"
+											image={
+												isFile(image)
+													? URL.createObjectURL(image)
+													: image
+											}
+											alt={`Gallery Images for service ${
+												index + 1
+											}`}
+										/>
+									</Grid>
+								))
+							}
+						</Grid>
+					</div>
+				</Stack>
+			) : null}
 		</Stack>
 	);
 };
@@ -197,6 +269,8 @@ Service.propTypes = {
 				message: PropTypes.string.isRequired,
 			})
 		),
+		gallery: PropTypes.arrayOf(PropTypes.string.isRequired),
+		thumbnail: PropTypes.string.isRequired,
 	}).isRequired,
 };
 

@@ -7,7 +7,7 @@ const AddServiceFAQ = ({ values }) => {
 	return (
 		<FieldArray name="faqs">
 			{({ push, remove }) => (
-				<Stack >
+				<Stack >{console.log("THE FA@Q", values.faqs)}
 					{values.faqs.map((faq, index) => (
 						<Stack
 							key={index}
@@ -16,11 +16,11 @@ const AddServiceFAQ = ({ values }) => {
 							sx={{ pb: 3 }}
 						>
 							<Textfield
-								name={`faq[${index}].question`}
+								name={`faqs[${index}].question`}
 								label={`FAQ ${index + 1} Question`}
 							/>
 							<Textfield
-								name={`faq[${index}].answer`}
+								name={`faqs[${index}].answer`}
 								label={`FAQ ${index + 1} Answer`}
 								multiline
 								rows={5}

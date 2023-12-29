@@ -67,7 +67,11 @@ const ServiceCards = ({ service }) => {
 		<>
 			<Card>
 				<CardActionArea onClick={handleSetService}>
-					<Stack direction={{ xs: "column", md: "row" }} spacing={1} sx={{height: 450}}>
+					<Stack
+						direction={{ xs: "column", md: "row" }}
+						spacing={1}
+						sx={{ height: 450 }}
+					>
 						{service.thumbnail ? (
 							<CardMedia
 								component="img"
@@ -79,7 +83,7 @@ const ServiceCards = ({ service }) => {
 										lg: "35%",
 										xl: "30%",
 									},
-									height: "100%"
+									height: "100%",
 								}}
 							/>
 						) : (

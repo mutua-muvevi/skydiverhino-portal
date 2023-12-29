@@ -94,6 +94,9 @@ export const Tools = Loadable(lazy(() => import("../pages/dashboard/tools/tools"
 //manuals
 export const Manuals = Loadable(lazy(() => import("../pages/dashboard/manuals/manuals")));
 
+//events
+export const EventsMain = Loadable(lazy(() => import("../pages/dashboard/events/events")));
+
 //the tools
 export const Competition = Loadable(lazy(() => import("../tools/competition/competition")));
 export const Events = Loadable(lazy(() => import("../tools/events/events")));

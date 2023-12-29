@@ -56,7 +56,7 @@ export const PATH_DASHBOARD = {
 		weather: path(ROOTS_DASHBOARD, "/weather"),
 		seo: path(ROOTS_DASHBOARD, "/seo"),
 		jumps: path(ROOTS_DASHBOARD, "/jumps"),
-		events: path(ROOTS_DASHBOARD, "/events"),
+		// events: path(ROOTS_DASHBOARD, "/events"),
 		gears: path(ROOTS_DASHBOARD, "/gears"),
 		
 		//storage
@@ -122,6 +122,9 @@ export const PATH_DASHBOARD = {
 
 		//voicemails
 		voicemails: path(ROOTS_DASHBOARD, "/voicemails"),
+
+		//events
+		events: path(ROOTS_DASHBOARD, "/events"),
 
 		app: path(ROOTS_DASHBOARD, "/app"),
 		ecommerce: path(ROOTS_DASHBOARD, "/ecommerce"),

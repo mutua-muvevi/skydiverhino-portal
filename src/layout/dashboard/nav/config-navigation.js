@@ -36,6 +36,7 @@ const ICONS = {
 	manuals: "iconoir:book-solid",
 	curriculums: "material-symbols:school",
 	voicemails: "fluent:voicemail-48-filled",
+	events: "bi:calendar-event-fill",
 };
 
 const navConfig = [
@@ -70,6 +71,13 @@ const navConfig = [
 				title: "voicemails",
 				path: PATH_DASHBOARD.general.voicemails,
 				icon: ICONS.voicemails,
+			},
+
+			//Events
+			{
+				title: "events",
+				path: PATH_DASHBOARD.general.events,
+				icon: ICONS.events,
 			},
 		],
 	},

@@ -70,6 +70,7 @@ import {
 	Manuals,
 	Curriculums,
 	Voicemails,
+	EventsMain,
 } from "./elements";
 
 import CompactLayout from "../layout/compact/compact-layout";
@@ -172,6 +173,8 @@ export default function Router() {
 				{ path: "curriculums", element: <Curriculums /> },
 
 				{ path: "voicemails", element: <Voicemails /> },
+
+				{ path: "events", element: <EventsMain /> },
 
 				//the tools
 				{ path: "competition", element: <Competition/> },

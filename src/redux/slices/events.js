@@ -164,11 +164,11 @@ export function addEvent(userID, token, values) {
 				}
 			);
 			const data = await response.data;
-			dispatch(slice.actions.addManual(data));
+			dispatch(slice.actions.addEvent(data));
 			return data;
 
 		} catch (error) {
-			dispatch(slice.actions.addManualError(error));
+			dispatch(slice.actions.addEventError(error));
 			throw error;
 
 		} finally {

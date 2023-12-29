@@ -10,7 +10,11 @@ export const processPieChartData = (data) => {
 	// The 'countPerService' object will hold the count of reservations per service
 	const countPerService = data.reduce((acc, reservation) => {
 		// Extract the service name from each reservation
-		const serviceName = reservation.service.name;
+		const serviceName = reservation.service
+			? reservation.service.name
+				? reservation.service.fullname
+				: "No Service"
+			: "No Service";
 
 		// If 'serviceName' exists in accumulator 'acc', increment its count by 1
 		// Otherwise, initialize it with 1

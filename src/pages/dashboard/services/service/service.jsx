@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid, Typography } from "@mui/material";
+import { CardMedia, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";

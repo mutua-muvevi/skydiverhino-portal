@@ -606,7 +606,6 @@ export function editService(userID, token, values, serviceID) {
 
 		try {
 			const formData = new FormData();
-
 			// Append non-file fields to FormData
 			formData.append("name", values.name);
 			formData.append("introDescription", values.introDescription);
@@ -614,7 +613,7 @@ export function editService(userID, token, values, serviceID) {
 			// Append non file array fields to FormData
 			formData.append("requirements", JSON.stringify(values.requirements));
 			formData.append("prices", JSON.stringify(values.prices));
-			formData.append("faq", JSON.stringify(values.faq));
+			formData.append("faqs", JSON.stringify(values.faqs));
 
 			// Append thumbnail file to FormData
 			if (values.thumbnail) {
@@ -627,7 +626,7 @@ export function editService(userID, token, values, serviceID) {
 			if (Array.isArray(values.contentBlocks)) {
 				values.contentBlocks.forEach((detail, index) => {
 					formData.append(`contentBlocks[${index}][title]`, detail.title);
-					formData.append(`contentBlocks[${index}][contentBlocks]`, detail.contentBlocks);
+					formData.append(`contentBlocks[${index}][details]`, detail.details);
 
 					// Append each image with the field name 'image'
 					if (detail.image) {
@@ -637,15 +636,20 @@ export function editService(userID, token, values, serviceID) {
 					}
 				});
 			}
+			console.log("VAAAAAAAAAAAAAAAAALUE GALLERY", values.gallery)
 
 			//Append gallery array to FormData
 			if (Array.isArray(values.gallery)) {
-				// if one of the files if a file append it to the formdata
-				if(isFile(values.gallery)){
-					values.gallery.forEach((image) => {
-						formData.append(`gallery`, image, image.name);
-					});
-				}
+				values.gallery.forEach((image) => {
+					if (isFile(image)) {
+						formData.append("gallery", image, image.name);
+					}
+				});
+			}
+
+			//console log formdata
+			for (var pair of formData.entries()) {
+				console.log("asxaS", pair[0] + ", " + pair[1]);
 			}
 
 			const response = await axios.put(
@@ -662,6 +666,7 @@ export function editService(userID, token, values, serviceID) {
 			dispatch(slice.actions.editServiceSuccess(data));
 			return data;
 		} catch (error) {
+			console.log('Error in editService:', error);
 			dispatch(slice.actions.editServiceError(error));
 			throw error;
 		} finally {

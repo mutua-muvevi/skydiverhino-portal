@@ -58,7 +58,7 @@ const ServiceSchema = Yup.object().shape({
 		})
 	),
 
-	faq: Yup.array().of(
+	faqs: Yup.array().of(
 		Yup.object().shape({
 			question: Yup.string().required("Question is required"),
 			answer: Yup.string().required("Answer is required"),
@@ -191,26 +191,31 @@ const EditService = ({ service, onClose }) => {
 	};
 
 	const handleSubmit = async (values, actions) => {
-		try {
-			console.log("RESSS", me._id, token, values, service._id)
-			const response = await dispatch(editService(me._id, token, values, service._id));
+		try {console.log("Values are", values)
+			const response = await dispatch(
+				editService(me._id, token, values, service._id)
+			);
 			//extract success message
-			const { success, message } = response.data;
+			const { success, message } = response;
 
 			// Set the alert message from the response and determine severity
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
-			//close the modal
-			if (success) {
-				setTimeout(() => {
-					onClose();
 
-					window.location.reload();
-				}, 2000);
-			}
+			//close the modal
+			// if (success) {
+			// 	setTimeout(() => {
+			// 		onClose();
+
+			// 		window.location.reload();
+			// 	}, 2000);
+			// }
 		} catch (error) {
-			setAlertMessage(error.response ? error.response.message : "An error occurred.")
+			console.log("The error is", error)
+			setAlertMessage(
+				error.error ? error.error : "An error occurred."
+			);
 			setAlertSeverity("error");
 		}
 

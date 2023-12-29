@@ -151,8 +151,6 @@ export function addManual(userID, token, values) {
 				formData.append("file", values.file, values.file.name);
 			}
 
-			console.log("The values are: ", values)
-
 			const response = await axios.post(
 				`http://localhost:8100/api/manual/${userID}/new`,
 				formData,

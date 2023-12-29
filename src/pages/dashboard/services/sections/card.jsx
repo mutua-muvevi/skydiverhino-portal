@@ -22,8 +22,6 @@ import Service from "../service/service";
 import EditService from "../edit/edit";
 import DeleteService from "../delete/delete";
 
-const image = "";
-
 const ServiceCards = ({ service }) => {
 	const [openService, setOpenService] = useState(false);
 	const [openEditService, setOpenEditService] = useState(false);

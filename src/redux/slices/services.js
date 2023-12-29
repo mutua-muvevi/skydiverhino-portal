@@ -636,7 +636,6 @@ export function editService(userID, token, values, serviceID) {
 					}
 				});
 			}
-			console.log("VAAAAAAAAAAAAAAAAALUE GALLERY", values.gallery)
 
 			//Append gallery array to FormData
 			if (Array.isArray(values.gallery)) {
@@ -645,11 +644,6 @@ export function editService(userID, token, values, serviceID) {
 						formData.append("gallery", image, image.name);
 					}
 				});
-			}
-
-			//console log formdata
-			for (var pair of formData.entries()) {
-				console.log("asxaS", pair[0] + ", " + pair[1]);
 			}
 
 			const response = await axios.put(

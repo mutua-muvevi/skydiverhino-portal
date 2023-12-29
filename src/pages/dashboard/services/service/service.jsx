@@ -56,7 +56,7 @@ const Service = ({ service }) => {
 				</Typography>
 				{
 					// Loop through the contentBlocks
-					contentBlocks.map((detail) => (
+					contentBlocks ? contentBlocks.map((detail) => (
 						<Stack
 							direction="column"
 							spacing={1.5}
@@ -81,7 +81,7 @@ const Service = ({ service }) => {
 								) : null
 							}
 						</Stack>
-					))
+					)): null
 				}
 			</Stack>
 

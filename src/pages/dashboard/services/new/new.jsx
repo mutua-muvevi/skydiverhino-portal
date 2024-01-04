@@ -25,7 +25,10 @@ import AddServiceGallery from "./gallery";
 const initialValues = {
 	name: "",
 	introDescription: "",
+
 	thumbnail: null,
+	priceImage: null,
+	faqImage: null,
 
 	contentBlocks: [{ title: "", details: "", image: null }],
 
@@ -35,7 +38,7 @@ const initialValues = {
 
 	requirements: [{ title: "", details: "" }],
 
-	faq: [{ question: "", answer: "" }],
+	faqs: [{ question: "", answer: "" }],
 
 	gallery: [""],
 };
@@ -43,7 +46,10 @@ const initialValues = {
 const ServiceSchema = Yup.object().shape({
 	name: Yup.string().required("Title is required"),
 	introDescription: Yup.string().required("Intro description is required"),
+
 	thumbnail: Yup.mixed().required("Thumbnail is required"),
+	priceImage: Yup.mixed().required("Price background image is required"),
+	faqImage: Yup.mixed().required("FAQ background image is required"),
 
 	contentBlocks: Yup.array().of(
 		Yup.object().shape({
@@ -75,7 +81,7 @@ const ServiceSchema = Yup.object().shape({
 		})
 	),
 
-	faq: Yup.array().of(
+	faqs: Yup.array().of(
 		Yup.object().shape({
 			question: Yup.string().required("Question is required"),
 			answer: Yup.string().required("Answer is required"),
@@ -92,7 +98,7 @@ const steps = [
 	"Requirements",
 	"Frequent Asked Questions",
 	"Gallery",
-	"Preview",
+	"Submit",
 ];
 
 const NewService = () => {
@@ -100,6 +106,8 @@ const NewService = () => {
 	const [thumbnail, setThumbnail] = useState(null);
 	const [gallery, setGalleries] = useState([]);
 	const [contentBlockImages, setContentBlockImages] = useState([]);
+	const [priceImage, setPriceImage] = useState(null);
+	const [faqImage, setFaqImage] = useState(null);
 
 	const [alertMessage, setAlertMessage] = useState("");
 	const [alertSeverity, setAlertSeverity] = useState("info");
@@ -124,6 +132,27 @@ const NewService = () => {
 		},
 		[]
 	);
+
+	const handlePriceImageChange = useCallback(
+		(acceptedFiles, setFieldValue) => {
+			const newFile = acceptedFiles[0];
+			if (newFile) {
+				const fileUrl = URL.createObjectURL(newFile);
+				setPriceImage(fileUrl);
+				setFieldValue("priceImage", newFile);
+			}
+		},
+		[]
+	);
+
+	const handleFAQImageChange = useCallback((acceptedFiles, setFieldValue) => {
+		const newFile = acceptedFiles[0];
+		if (newFile) {
+			const fileUrl = URL.createObjectURL(newFile);
+			setFaqImage(fileUrl);
+			setFieldValue("faqImage", newFile);
+		}
+	}, []);
 
 	const handleDropMultiFile = useCallback(
 		(acceptedFiles, setFieldValue) => {
@@ -241,7 +270,14 @@ const NewService = () => {
 
 							{/* prices */}
 							{activeStep === 2 && (
-								<AddServicePrices values={values} />
+								<AddServicePrices
+									priceImage={priceImage}
+									values={values}
+									setFieldValue={setFieldValue}
+									handlePriceImageChange={
+										handlePriceImageChange
+									}
+								/>
 							)}
 
 							{/* requirements */}
@@ -251,7 +287,14 @@ const NewService = () => {
 
 							{/* faq */}
 							{activeStep === 4 && (
-								<AddServiceFAQ values={values} />
+								<AddServiceFAQ
+									values={values}
+									setFieldValue={setFieldValue}
+									faqImage={faqImage}
+									handleFAQImageChange={
+										handleFAQImageChange
+									}
+								/>
 							)}
 
 							{/* gallery */}

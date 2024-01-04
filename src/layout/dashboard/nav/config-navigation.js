@@ -147,6 +147,13 @@ const navConfig = [
 				path: PATH_DASHBOARD.general.manuals,
 				icon: ICONS.manuals,
 			},
+
+			//blogs
+			{
+				title: "blogs",
+				path: PATH_DASHBOARD.general.blogs,
+				icon: ICONS.blogs,
+			},
 		],
 	},
 

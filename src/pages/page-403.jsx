@@ -14,7 +14,7 @@ export default function Page403() {
 	return (
 		<>
 			<Helmet>
-				<title> 403 Forbidden | Freelance Tool</title>
+				<title> 403 Forbidden | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<MotionContainer>

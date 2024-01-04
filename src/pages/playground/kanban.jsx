@@ -119,7 +119,7 @@ export default function KanbanPage() {
 	return (
 		<>
 			<Helmet>
-				<title> Kanban | Freelance Tool</title>
+				<title> Kanban | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<Container maxWidth="xl" sx={{ height: 1, my: 10 }}>

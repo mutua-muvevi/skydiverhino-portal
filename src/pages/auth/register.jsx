@@ -8,7 +8,7 @@ export default function RegisterPage() {
 	return (
 		<>
 			<Helmet>
-				<title> Register | Freelance Tool</title>
+				<title> Register | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<Register />

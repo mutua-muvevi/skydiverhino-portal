@@ -543,11 +543,21 @@ export function addService(userID, token, values) {
 			// Append non file array fields to FormData
 			formData.append("requirements", JSON.stringify(values.requirements));
 			formData.append("prices", JSON.stringify(values.prices));
-			formData.append("faq", JSON.stringify(values.faq));
+			formData.append("faqs", JSON.stringify(values.faqs));
 
 			// Append thumbnail file to FormData
 			if (values.thumbnail) {
 				formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+			}
+
+			//Append price image to FormData
+			if (values.priceImage) {
+				formData.append("priceImage", values.priceImage, values.priceImage.name);
+			}
+
+			//Append FAQ image to FormData
+			if (values.faqImage) {
+				formData.append("faqImage", values.faqImage, values.faqImage.name);
 			}
 
 			// Append content block files and contentBlocks to FormData

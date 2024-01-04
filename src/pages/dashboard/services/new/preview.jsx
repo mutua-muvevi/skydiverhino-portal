@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { isFile } from "../../../../utils/is-file";
 
 const ServicePreview = ({ formData }) => {
-
 	return (
 		<Stack direction="column" spacing={3}>
 			{/* service details */}
@@ -13,7 +12,7 @@ const ServicePreview = ({ formData }) => {
 					Title
 				</Typography>
 				<Typography variant="body1" textAlign="justify">
-					{formData.title}
+					{formData.name}
 				</Typography>
 			</Stack>
 
@@ -83,12 +82,22 @@ const ServicePreview = ({ formData }) => {
 				Prices
 			</Typography>
 
-			{formData.prices.map((price, index) => (
-				<Paper
-					key={index}
-					sx={{ backgroundColor: "rgba(0,0,0,0.1)", p: 3 }}
-				>
-					<Stack spacing={3}>
+			<Paper sx={{ backgroundColor: "rgba(0,0,0,0.1)", p: 3 }}>
+				<Stack spacing={3}>
+					<Typography variant="subtitle1" color="primary">
+						Price background image
+					</Typography>
+
+					{formData.priceImage && (
+						<CardMedia
+							component="img"
+							image={URL.createObjectURL(formData.priceImage)}
+							alt="Price background"
+						/>
+					)}
+				</Stack>
+				{formData.prices.map((price, index) => (
+					<Stack spacing={3} key={index}>
 						<Typography
 							variant="subtitle1"
 							color="primary"
@@ -105,8 +114,8 @@ const ServicePreview = ({ formData }) => {
 							{price.details}
 						</Typography>
 					</Stack>
-				</Paper>
-			))}
+				))}
+			</Paper>
 
 			{/* requirements */}
 			<Typography variant="h5" color="primary">
@@ -143,30 +152,39 @@ const ServicePreview = ({ formData }) => {
 				FAQ
 			</Typography>
 
-			{formData.faqs.map((faq, index) => (
-				<Paper
-					key={index}
-					sx={{ backgroundColor: "rgba(0,0,0,0.1)", p: 3 }}
-				>
-					<Stack spacing={3}>
-						<Typography
-							variant="subtitle1"
-							color="primary"
-						>{`FAQ ${index + 1} Question`}</Typography>
+			<Paper sx={{ backgroundColor: "rgba(0,0,0,0.1)", p: 3 }}>
+				<Stack spacing={3}>
+					<Typography variant="subtitle1" color="primary">
+						FAQ background image
+					</Typography>
+
+					{formData.faqImage && (
+						<CardMedia
+							component="img"
+							image={URL.createObjectURL(formData.faqImage)}
+							alt="FAQ background"
+						/>
+					)}
+				</Stack>
+				{console.log("FAQS", formData.faqs)}
+				{formData.faqs.map((faq, index) => (
+					<Stack spacing={3} key={index}>
+						<Typography variant="subtitle1" color="primary">{`FAQ ${
+							index + 1
+						} Question`}</Typography>
 						<Typography variant="body1" textAlign="justify">
 							{faq.question}
 						</Typography>
 
-						<Typography
-							variant="subtitle1"
-							color="primary"
-						>{`FAQ ${index + 1} Answer`}</Typography>
+						<Typography variant="subtitle1" color="primary">{`FAQ ${
+							index + 1
+						} Answer`}</Typography>
 						<Typography variant="body1" textAlign="justify">
 							{faq.answer}
 						</Typography>
 					</Stack>
-				</Paper>
-			))}
+				))}
+			</Paper>
 
 			{/* gallery */}
 			<Typography variant="h5" color="primary">
@@ -189,7 +207,6 @@ const ServicePreview = ({ formData }) => {
 					</Grid>
 				))}
 			</Grid>
-			
 		</Stack>
 	);
 };

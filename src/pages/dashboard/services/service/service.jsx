@@ -1,4 +1,4 @@
-import { CardMedia, Grid, Typography, useTheme } from "@mui/material";
+import { CardMedia, Divider, Grid, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
@@ -19,11 +19,12 @@ const Service = ({ service }) => {
 	} = service;
 
 	return (
-		<Stack direction="column" spacing={3}>
+		<Stack direction="column" spacing={6}>
 			<Stack direction="column">
 				<Typography variant="subtitle1" color="primary">
 					Thumbnail
 				</Typography>
+				<Divider sx={{ my: 3 }} />
 				{
 					// Check if the thumbnail is a file
 					thumbnail ? (
@@ -31,7 +32,7 @@ const Service = ({ service }) => {
 							component="img"
 							image={thumbnail}
 							alt="Thumbnail"
-							style={{ height: "auto" }}
+							sx={{ maxHeight: 500 }}
 						/>
 					) : (
 						<Typography variant="body2" textAlign="justify">
@@ -45,6 +46,7 @@ const Service = ({ service }) => {
 				<Typography variant="subtitle1" color="primary">
 					Description
 				</Typography>
+				<Divider sx={{ my: 3 }} />
 				<Typography variant="body2" textAlign="justify">
 					{sentenceCase(introDescription)}
 				</Typography>
@@ -55,6 +57,7 @@ const Service = ({ service }) => {
 				<Typography variant="subtitle1" color="primary">
 					Details
 				</Typography>
+				<Divider sx={{ my: 3 }} />
 				{
 					// Loop through the contentBlocks
 					contentBlocks
@@ -84,7 +87,7 @@ const Service = ({ service }) => {
 												component="img"
 												image={detail.image}
 												alt="Detail"
-												style={{ height: "auto" }}
+												sx={{ maxHeight: 500 }}
 											/>
 										) : null
 									}
@@ -99,6 +102,17 @@ const Service = ({ service }) => {
 				<Typography variant="subtitle1" color="primary">
 					Prices
 				</Typography>
+				<Divider sx={{ my: 3 }} />
+
+				{service.priceImage ? (
+					<CardMedia
+						component="img"
+						image={service.priceImage}
+						alt="Price Image"
+						sx={{ maxHeight: 500 }}
+					/>
+				) : null}
+
 				<div>
 					<Stack direction="column" spacing={1.5}>
 						{prices.map((price) => (
@@ -164,6 +178,7 @@ const Service = ({ service }) => {
 				<Typography variant="subtitle1" color="primary">
 					Requirements
 				</Typography>
+				<Divider sx={{ my: 3 }} />
 
 				<Stack direction="column" spacing={1.5}>
 					{requirements.map((requirement, index) => (
@@ -191,6 +206,57 @@ const Service = ({ service }) => {
 										textAlign="justify"
 									>
 										{sentenceCase(requirement.details)}
+									</Typography>
+								</Stack>
+							</Stack>
+						</Stack>
+					))}
+				</Stack>
+			</Stack>
+
+			{/* faq */}
+			<Stack direction="column" spacing={1.5}>
+				<Typography variant="subtitle1" color="primary">
+					FAQ
+				</Typography>
+
+				<Divider sx={{ my: 3 }} />
+
+				{service.faqImage ? (
+					<CardMedia
+						component="img"
+						image={service.faqImage}
+						alt="FAQ Image"
+						sx={{ maxHeight: 500 }}
+					/>
+				) : null}
+
+				<Stack direction="column" spacing={1.5}>
+					{service.faqs.map((faq, index) => (
+						<Stack
+							direction="column"
+							spacing={3}
+							key={faq._id}
+							color="primary"
+						>
+							<Stack direction="row" spacing={3}>
+								<Typography variant="subtitle2" color="primary">
+									{index + 1}.
+								</Typography>
+
+								<Stack direction="column">
+									<Typography
+										variant="subtitle2"
+										color="primary"
+									>
+										{sentenceCase(faq.question)}
+									</Typography>
+
+									<Typography
+										variant="body2"
+										textAlign="justify"
+									>
+										{sentenceCase(faq.answer)}
 									</Typography>
 								</Stack>
 							</Stack>
@@ -292,6 +358,13 @@ Service.propTypes = {
 				}),
 			})
 		),
+		faqs: PropTypes.arrayOf(
+			PropTypes.shape({
+				_id: PropTypes.string.isRequired,
+				question: PropTypes.string.isRequired,
+				answer: PropTypes.string.isRequired,
+			})
+		),
 		requirements: PropTypes.arrayOf(
 			PropTypes.shape({
 				_id: PropTypes.string.isRequired,
@@ -319,6 +392,8 @@ Service.propTypes = {
 		),
 		gallery: PropTypes.arrayOf(PropTypes.string.isRequired),
 		thumbnail: PropTypes.string.isRequired,
+		priceImage: PropTypes.string.isRequired,
+		faqImage: PropTypes.string.isRequired,
 	}).isRequired,
 };
 

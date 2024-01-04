@@ -13,7 +13,7 @@ const AddServiceFAQ = ({
 	return (
 		<Stack direction="column" spacing={3}>
 			<Stack direction="column" spacing={1}>
-				<Typography variant="body1">FAQ Tumbnail</Typography>
+				<Typography variant="body1">FAQ Thumbnail</Typography>
 				<Upload
 					name={`faqImage`}
 					file={faqImage}
@@ -22,33 +22,29 @@ const AddServiceFAQ = ({
 					}
 				/>
 			</Stack>
-			<FieldArray name="faq">
+
+			<FieldArray name="faqs">
 				{({ push, remove }) => (
-					<Stack>
-						{values.faq.map((faq, index) => (
-							<Stack
-								key={index}
-								direction="column"
-								spacing={3}
-								sx={{ pb: 3 }}
-							>
+					<Stack spacing={3}>
+						{values.faqs.map((faq, index) => (
+							<Stack key={index} direction="column" spacing={2}>
 								<Textfield
-									name={`faq[${index}].question`}
+									name={`faqs[${index}].question`}
 									label={`FAQ ${index + 1} Question`}
 								/>
 								<Textfield
-									name={`faq[${index}].answer`}
+									name={`faqs[${index}].answer`}
 									label={`FAQ ${index + 1} Answer`}
 									multiline
 									rows={5}
 								/>
-								{values.faq.length > 1 && (
+								{values.faqs.length > 1 && (
 									<Button
 										type="button"
 										variant="outlined"
 										onClick={() => remove(index)}
 									>
-										Remove the above faq
+										Remove the above FAQ
 									</Button>
 								)}
 							</Stack>

@@ -25,7 +25,7 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }) {
 	}
 
 	return (
-		<AnimatePresence initial={false}>
+		<AnimatePresence initial={false}>{console.log("Thumbnail", thumbnail, files,)}
 			{files.map((file) => {
 				const { key, name = "", size = 0 } = fileData(file);
 

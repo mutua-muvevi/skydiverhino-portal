@@ -38,7 +38,7 @@ const initialValues = {
 
 	requirements: [{ title: "", details: "" }],
 
-	faq: [{ question: "", answer: "" }],
+	faqs: [{ question: "", answer: "" }],
 
 	gallery: [""],
 };
@@ -81,7 +81,7 @@ const ServiceSchema = Yup.object().shape({
 		})
 	),
 
-	faq: Yup.array().of(
+	faqs: Yup.array().of(
 		Yup.object().shape({
 			question: Yup.string().required("Question is required"),
 			answer: Yup.string().required("Answer is required"),

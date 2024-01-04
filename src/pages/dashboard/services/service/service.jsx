@@ -1,4 +1,4 @@
-import { CardMedia, Grid, Typography } from "@mui/material";
+import { CardMedia, Grid, Typography, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { sentenceCase } from "change-case";
 import PropTypes from "prop-types";
@@ -6,6 +6,7 @@ import Iconify from "../../../../components/iconify";
 import { isFile } from "../../../../utils/is-file";
 
 const Service = ({ service }) => {
+	const theme = useTheme();
 	const {
 		leads,
 		thumbnail,
@@ -56,32 +57,40 @@ const Service = ({ service }) => {
 				</Typography>
 				{
 					// Loop through the contentBlocks
-					contentBlocks ? contentBlocks.map((detail) => (
-						<Stack
-							direction="column"
-							spacing={1.5}
-							key={detail._id}
-							color="primary"
-						>
-							<Typography variant="subtitle2" color="primary">
-								{sentenceCase(detail.title)}
-							</Typography>
-							<Typography variant="body2" textAlign="justify">
-								{sentenceCase(detail.details)}
-							</Typography>
-							{
-								// Check if the detail has an image
-								detail.image ? (
-									<CardMedia
-										component="img"
-										image={detail.image}
-										alt="Detail"
-										style={{ height: "auto" }}
-									/>
-								) : null
-							}
-						</Stack>
-					)): null
+					contentBlocks
+						? contentBlocks.map((detail) => (
+								<Stack
+									direction="column"
+									spacing={1.5}
+									key={detail._id}
+									color="primary"
+								>
+									<Typography
+										variant="subtitle2"
+										color="primary"
+									>
+										{sentenceCase(detail.title)}
+									</Typography>
+									<Typography
+										variant="body2"
+										textAlign="justify"
+									>
+										{sentenceCase(detail.details)}
+									</Typography>
+									{
+										// Check if the detail has an image
+										detail.image ? (
+											<CardMedia
+												component="img"
+												image={detail.image}
+												alt="Detail"
+												style={{ height: "auto" }}
+											/>
+										) : null
+									}
+								</Stack>
+						  ))
+						: null
 				}
 			</Stack>
 
@@ -94,24 +103,56 @@ const Service = ({ service }) => {
 					<Stack direction="column" spacing={1.5}>
 						{prices.map((price) => (
 							<Stack
-								direction="row"
+								direction="column"
 								spacing={3}
 								key={price._id}
-								color="primary"
 							>
-								<Typography variant="subtitle2">
-									{sentenceCase(price.title)}
-								</Typography>
-								<Stack direction="row" spacing={3}>
-									<Iconify icon="icomoon-free:price-tags" />
-									<Typography
-										variant="body2"
-										textAlign="justify"
-									>
-										{price.price.amount}{" "}
-										{price.price.currency}
+								<Stack
+									direction="row"
+									spacing={3}
+									key={price._id}
+									color="primary"
+								>
+									<Typography variant="subtitle2">
+										{sentenceCase(price.title)}
 									</Typography>
+									<Stack direction="row" spacing={3}>
+										<Iconify
+											icon="icomoon-free:price-tags"
+											sx={{
+												color: theme.palette.primary
+													.main,
+											}}
+										/>
+										<Typography
+											variant="body2"
+											textAlign="justify"
+											color="primary"
+										>
+											{price.price.amount}{" "}
+											{price.price.currency}
+										</Typography>
+									</Stack>
 								</Stack>
+
+								{price.listItems
+									? price.listItems.map((item, index) => (
+											<Stack
+												direction="row"
+												spacing={2}
+												alignItems="center"
+												key={index}
+											>
+												<Typography variant="body2">
+													<Iconify icon="fluent:checkmark-20-filled" />
+												</Typography>
+
+												<Typography variant="body2">
+													{item}
+												</Typography>
+											</Stack>
+									  ))
+									: ""}
 							</Stack>
 						))}
 					</Stack>
@@ -200,7 +241,14 @@ const Service = ({ service }) => {
 							{
 								// Loop through the gallery
 								gallery.map((image, index) => (
-									<Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+									<Grid
+										item
+										key={index}
+										xs={12}
+										sm={6}
+										md={4}
+										lg={3}
+									>
 										<CardMedia
 											component="img"
 											image={

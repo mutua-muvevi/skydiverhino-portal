@@ -1,7 +1,6 @@
 import { Box, Typography, Stack, CardMedia, Paper, Grid } from "@mui/material";
 
 import PropTypes from "prop-types";
-import useResponsive from "../../../../hooks/use-responsive";
 import { isFile } from "../../../../utils/is-file";
 
 const ServicePreview = ({ formData }) => {

@@ -14,7 +14,7 @@ export default function Page404() {
 	return (
 		<>
 			<Helmet>
-				<title> 404 Page Not Found | Freelance Tool</title>
+				<title> 404 Page Not Found | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<MotionContainer>

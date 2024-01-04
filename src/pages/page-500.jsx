@@ -14,7 +14,7 @@ export default function Page500() {
 	return (
 		<>
 			<Helmet>
-				<title> 500 Internal Server Error | Freelance Tool</title>
+				<title> 500 Internal Server Error | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<MotionContainer>

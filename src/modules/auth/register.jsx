@@ -18,7 +18,7 @@ export default function Register() {
 			sx={{ height: "100%" }}
 		>
 			<Helmet>
-				<title> Register | Freelance Tool</title>
+				<title> Register | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<Container maxWidth="md">

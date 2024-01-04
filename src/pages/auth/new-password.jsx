@@ -17,7 +17,7 @@ export default function NewPasswordPage() {
 	return (
 		<>
 			<Helmet>
-				<title> New Password | Freelance Tool</title>
+				<title> New Password | Skydive Rhino Kenya</title>
 			</Helmet>
 
 			<SentIcon sx={{ mb: 5, height: 96 }} />

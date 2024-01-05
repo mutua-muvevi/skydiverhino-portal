@@ -26,7 +26,10 @@ import AddServiceGallery from "./gallery";
 const ServiceSchema = Yup.object().shape({
 	name: Yup.string().required("Title is required"),
 	introDescription: Yup.string().required("Intro description is required"),
+
 	thumbnail: Yup.mixed().required("Thumbnail is required"),
+	priceImage: Yup.mixed().required("Price background image is required"),
+	faqImage: Yup.mixed().required("FAQ background image is required"),
 
 	contentBlocks: Yup.array().of(
 		Yup.object().shape({
@@ -87,13 +90,19 @@ const EditService = ({ service, onClose }) => {
 		service && service.gallery ? service.gallery : []
 	);
 	const [contentBlockImages, setContentBlockImages] = useState(
-		//i want to obtain service content block images under contentBlocks which is an array of objects with title, details and image. I want to extract the image
 		service && service.contentBlocks
 			? service.contentBlocks.map((block) => ({
 					file: block.image,
 					preview: block.image,
 			}))
 			: []
+	);
+
+	const [priceImage, setPriceImage] = useState(
+		service && service.priceImage ? service.priceImage : null
+	);
+	const [faqImage, setFaqImage] = useState(
+		service && service.faqImage ? service.faqImage : null
 	);
 
 	const [alertMessage, setAlertMessage] = useState("");
@@ -141,6 +150,8 @@ const EditService = ({ service, onClose }) => {
 				: [{ question: "", answer: "" }],
 
 		gallery: service && service.gallery ? service.gallery : [""],
+		priceImage: service && service.priceImage ? service.priceImage : null,
+		faqImage: service && service.faqImage ? service.faqImage : null,
 	};
 
 	const handleThumbnailChange = useCallback(
@@ -154,6 +165,27 @@ const EditService = ({ service, onClose }) => {
 		},
 		[]
 	);
+
+	const handlePriceImageChange = useCallback(
+		(acceptedFiles, setFieldValue) => {
+			const newFile = acceptedFiles[0];
+			if (newFile) {
+				const fileUrl = URL.createObjectURL(newFile);
+				setPriceImage(fileUrl);
+				setFieldValue("priceImage", newFile);
+			}
+		},
+		[]
+	);
+
+	const handleFAQImageChange = useCallback((acceptedFiles, setFieldValue) => {
+		const newFile = acceptedFiles[0];
+		if (newFile) {
+			const fileUrl = URL.createObjectURL(newFile);
+			setFaqImage(fileUrl);
+			setFieldValue("faqImage", newFile);
+		}
+	}, []);
 
 	const handleDropMultiFile = useCallback(
 		(acceptedFiles, setFieldValue) => {
@@ -191,7 +223,8 @@ const EditService = ({ service, onClose }) => {
 	};
 
 	const handleSubmit = async (values, actions) => {
-		try {console.log("Values are", values)
+		try {
+			console.log("Values are", values);
 			const response = await dispatch(
 				editService(me._id, token, values, service._id)
 			);
@@ -202,7 +235,6 @@ const EditService = ({ service, onClose }) => {
 			setAlertMessage(message);
 			setAlertSeverity(success ? "success" : "error");
 
-
 			//close the modal
 			if (success) {
 				setTimeout(() => {
@@ -212,9 +244,7 @@ const EditService = ({ service, onClose }) => {
 				}, 2000);
 			}
 		} catch (error) {
-			setAlertMessage(
-				error.error ? error.error : "An error occurred."
-			);
+			setAlertMessage(error.error ? error.error : "An error occurred.");
 			setAlertSeverity("error");
 		}
 
@@ -278,7 +308,14 @@ const EditService = ({ service, onClose }) => {
 
 							{/* prices */}
 							{activeStep === 2 && (
-								<AddServicePrices values={values} />
+								<AddServicePrices
+									priceImage={priceImage}
+									values={values}
+									setFieldValue={setFieldValue}
+									handlePriceImageChange={
+										handlePriceImageChange
+									}
+								/>
 							)}
 
 							{/* requirements */}
@@ -288,7 +325,14 @@ const EditService = ({ service, onClose }) => {
 
 							{/* faq */}
 							{activeStep === 4 && (
-								<AddServiceFAQ values={values} />
+								<AddServiceFAQ
+								values={values}
+								setFieldValue={setFieldValue}
+								faqImage={faqImage}
+								handleFAQImageChange={
+									handleFAQImageChange
+								}
+							/>
 							)}
 
 							{/* gallery */}

@@ -26,79 +26,6 @@ const initialState = {
 
 	deleteManyServices: null,
 	deleteManyServicesError: null,
-
-	//detail
-	detail: null,
-	detailError: null,
-
-	details: null,
-	detailsError: null,
-
-	postDetails: null,
-	postDetailsError: null,
-
-	editDetails: null,
-	editDetailsError: null,
-
-	deleteDetails: null,
-	deleteDetailsError: null,
-
-	deleteManyDetails: null,
-	deleteManyDetailsError: null,
-
-	//prices
-	price: null,
-	priceError: null,
-
-	prices: null,
-	pricesError: null,
-
-	postPrice: null,
-	postPriceError: null,
-
-	editPrice: null,
-	editPriceError: null,
-
-	deletePrice: null,
-	deletePriceError: null,
-
-	deleteManyPrices: null,
-	deleteManyPricesError: null,
-
-	//faq
-	faq: null,
-	faqError: null,
-
-	faqs: null,
-	faqsError: null,
-
-	postFaq: null,
-	postFaqError: null,
-
-	editFaq: null,
-	editFaqError: null,
-
-	deleteFaq: null,
-	deleteFaqError: null,
-
-	deleteManyFaqs: null,
-	deleteManyFaqsError: null,
-
-	//requirements
-	requirements: null,
-	requirementsError: null,
-
-	postRequirements: null,
-	postRequirementsError: null,
-
-	editRequirements: null,
-	editRequirementsError: null,
-
-	deleteRequirements: null,
-	deleteRequirementsError: null,
-
-	deleteManyRequirements: null,
-	deleteManyRequirementsError: null,
 };
 
 //the slice
@@ -192,259 +119,6 @@ const slice = createSlice({
 			state.isLoading = false;
 			state.deleteManyServicesError = action.payload;
 		},
-
-		//DETAIL
-		getDetailSuccess(state, action) {
-			state.isLoading = false;
-			state.detail = action.payload;
-		},
-
-		getDetailError(state, action) {
-			state.isLoading = false;
-			state.detailError = action.payload;
-		},
-
-		//DETAILS
-		getDetailsSuccess(state, action) {
-			state.isLoading = false;
-			state.details = action.payload;
-		},
-
-		getDetailsError(state, action) {
-			state.isLoading = false;
-			state.detailsError = action.payload;
-		},
-
-		//POST DETAIL
-		postDetailSuccess(state, action) {
-			state.isLoading = false;
-			state.postDetail = action.payload;
-		},
-
-		postDetailError(state, action) {
-			state.isLoading = false;
-			state.postDetailError = action.payload;
-		},
-
-		//EDIT DETAIL
-		editDetailSuccess(state, action) {
-			state.isLoading = false;
-			state.editDetail = action.payload;
-		},
-
-		editDetailError(state, action) {
-			state.isLoading = false;
-			state.editDetailError = action.payload;
-		},
-
-		//DELETE DETAIL
-		deleteDetailSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteDetail = action.payload;
-		},
-
-		deleteDetailError(state, action) {
-			state.isLoading = false;
-			state.deleteDetailError = action.payload;
-		},
-
-		//DELETE MANY DETAILS
-		deleteManyDetailsSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteManyDetails = action.payload;
-		},
-
-		deleteManyDetailsError(state, action) {
-			state.isLoading = false;
-			state.deleteManyDetailsError = action.payload;
-		},
-
-		//PRICE
-		getPriceSuccess(state, action) {
-			state.isLoading = false;
-			state.price = action.payload;
-		},
-
-		getPriceError(state, action) {
-			state.isLoading = false;
-			state.priceError = action.payload;
-		},
-
-		//PRICES
-		getPricesSuccess(state, action) {
-			state.isLoading = false;
-			state.prices = action.payload;
-		},
-
-		getPricesError(state, action) {
-			state.isLoading = false;
-			state.pricesError = action.payload;
-		},
-
-		//POST PRICE
-		postPriceSuccess(state, action) {
-			state.isLoading = false;
-			state.postPrice = action.payload;
-		},
-
-		postPriceError(state, action) {
-			state.isLoading = false;
-			state.postPriceError = action.payload;
-		},
-
-		//EDIT PRICE
-		editPriceSuccess(state, action) {
-			state.isLoading = false;
-			state.editPrice = action.payload;
-		},
-
-		editPriceError(state, action) {
-			state.isLoading = false;
-			state.editPriceError = action.payload;
-		},
-
-		//DELETE PRICE
-		deletePriceSuccess(state, action) {
-			state.isLoading = false;
-			state.deletePrice = action.payload;
-		},
-
-		deletePriceError(state, action) {
-			state.isLoading = false;
-			state.deletePriceError = action.payload;
-		},
-
-		//DELETE MANY PRICES
-		deleteManyPricesSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteManyPrices = action.payload;
-		},
-
-		deleteManyPricesError(state, action) {
-			state.isLoading = false;
-			state.deleteManyPricesError = action.payload;
-		},
-
-		//FAQ
-		getFaqSuccess(state, action) {
-			state.isLoading = false;
-			state.faq = action.payload;
-		},
-
-		getFaqError(state, action) {
-			state.isLoading = false;
-			state.faqError = action.payload;
-		},
-
-		//FAQS
-		getFaqsSuccess(state, action) {
-			state.isLoading = false;
-			state.faqs = action.payload;
-		},
-
-		getFaqsError(state, action) {
-			state.isLoading = false;
-			state.faqsError = action.payload;
-		},
-
-		//POST FAQ
-		postFaqSuccess(state, action) {
-			state.isLoading = false;
-			state.postFaq = action.payload;
-		},
-
-		postFaqError(state, action) {
-			state.isLoading = false;
-			state.postFaqError = action.payload;
-		},
-
-		//EDIT FAQ
-		editFaqSuccess(state, action) {
-			state.isLoading = false;
-			state.editFaq = action.payload;
-		},
-
-		editFaqError(state, action) {
-			state.isLoading = false;
-			state.editFaqError = action.payload;
-		},
-
-		//DELETE FAQ
-		deleteFaqSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteFaq = action.payload;
-		},
-
-		deleteFaqError(state, action) {
-			state.isLoading = false;
-			state.deleteFaqError = action.payload;
-		},
-
-		//DELETE MANY FAQS
-		deleteManyFaqsSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteManyFaqs = action.payload;
-		},
-
-		deleteManyFaqsError(state, action) {
-			state.isLoading = false;
-			state.deleteManyFaqsError = action.payload;
-		},
-
-		//REQUIREMENTS
-		getRequirementsSuccess(state, action) {
-			state.isLoading = false;
-			state.requirements = action.payload;
-		},
-
-		getRequirementsError(state, action) {
-			state.isLoading = false;
-			state.requirementsError = action.payload;
-		},
-
-		//POST REQUIREMENTS
-		postRequirementsSuccess(state, action) {
-			state.isLoading = false;
-			state.postRequirements = action.payload;
-		},
-
-		postRequirementsError(state, action) {
-			state.isLoading = false;
-			state.postRequirementsError = action.payload;
-		},
-
-		//EDIT REQUIREMENTS
-		editRequirementsSuccess(state, action) {
-			state.isLoading = false;
-			state.editRequirements = action.payload;
-		},
-
-		editRequirementsError(state, action) {
-			state.isLoading = false;
-			state.editRequirementsError = action.payload;
-		},
-
-		//DELETE REQUIREMENTS
-		deleteRequirementsSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteRequirements = action.payload;
-		},
-
-		deleteRequirementsError(state, action) {
-			state.isLoading = false;
-			state.deleteRequirementsError = action.payload;
-		},
-
-		//DELETE MANY REQUIREMENTS
-		deleteManyRequirementsSuccess(state, action) {
-			state.isLoading = false;
-			state.deleteManyRequirements = action.payload;
-		},
-
-		deleteManyRequirementsError(state, action) {
-			state.isLoading = false;
-			state.deleteManyRequirementsError = action.payload;
-		},
 	},
 });
 
@@ -472,7 +146,6 @@ export function setService(service) {
 		}
 	};
 }
-
 
 //SERVICE
 export function fetchSingleService(serviceID) {
@@ -541,34 +214,59 @@ export function addService(userID, token, values) {
 			formData.append("introDescription", values.introDescription);
 
 			// Append non file array fields to FormData
-			formData.append("requirements", JSON.stringify(values.requirements));
+			formData.append(
+				"requirements",
+				JSON.stringify(values.requirements)
+			);
 			formData.append("prices", JSON.stringify(values.prices));
 			formData.append("faqs", JSON.stringify(values.faqs));
 
 			// Append thumbnail file to FormData
 			if (values.thumbnail) {
-				formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+				formData.append(
+					"thumbnail",
+					values.thumbnail,
+					values.thumbnail.name
+				);
 			}
 
 			//Append price image to FormData
 			if (values.priceImage) {
-				formData.append("priceImage", values.priceImage, values.priceImage.name);
+				formData.append(
+					"priceImage",
+					values.priceImage,
+					values.priceImage.name
+				);
 			}
 
 			//Append FAQ image to FormData
 			if (values.faqImage) {
-				formData.append("faqImage", values.faqImage, values.faqImage.name);
+				formData.append(
+					"faqImage",
+					values.faqImage,
+					values.faqImage.name
+				);
 			}
 
 			// Append content block files and contentBlocks to FormData
 			if (Array.isArray(values.contentBlocks)) {
 				values.contentBlocks.forEach((detail, index) => {
-					formData.append(`contentBlocks[${index}][title]`, detail.title);
-					formData.append(`contentBlocks[${index}][details]`, detail.details);
+					formData.append(
+						`contentBlocks[${index}][title]`,
+						detail.title
+					);
+					formData.append(
+						`contentBlocks[${index}][details]`,
+						detail.details
+					);
 
 					// Append each image with the field name 'image'
 					if (detail.image) {
-						formData.append(`image`, detail.image, detail.image.name);
+						formData.append(
+							`image`,
+							detail.image,
+							detail.image.name
+						);
 					}
 				});
 			}
@@ -585,7 +283,6 @@ export function addService(userID, token, values) {
 				console.log("asxaS", pair[0] + ", " + pair[1]);
 			}
 
-
 			const response = await axios.post(
 				`http://localhost:8100/api/service/${userID}/post`,
 				formData,
@@ -599,7 +296,6 @@ export function addService(userID, token, values) {
 			const data = await response.data;
 			dispatch(slice.actions.postServiceSuccess(data));
 			return response;
-
 		} catch (error) {
 			dispatch(slice.actions.postServiceError(error));
 			throw error;
@@ -621,28 +317,70 @@ export function editService(userID, token, values, serviceID) {
 			formData.append("introDescription", values.introDescription);
 
 			// Append non file array fields to FormData
-			formData.append("requirements", JSON.stringify(values.requirements));
+			formData.append(
+				"requirements",
+				JSON.stringify(values.requirements)
+			);
 			formData.append("prices", JSON.stringify(values.prices));
 			formData.append("faqs", JSON.stringify(values.faqs));
 
+			for (var pair of formData.entries()) {
+				console.log("asxaS", pair[0] + ", " + pair[1]);
+			}
+
 			// Append thumbnail file to FormData
 			if (values.thumbnail) {
-				if(isFile(values.thumbnail)){
-					formData.append("thumbnail", values.thumbnail, values.thumbnail.name);
+				if (isFile(values.thumbnail)) {
+					formData.append(
+						"thumbnail",
+						values.thumbnail,
+						values.thumbnail.name
+					);
+				}
+			}
+			//Append price image to FormData
+			if (values.priceImage) {
+				if (isFile(values.priceImage)) {
+					formData.append(
+						"priceImage",
+						values.priceImage,
+						values.priceImage.name
+					);
+				}
+			}
+
+			//Append FAQ image to FormData
+			if (values.faqImage) {
+				if (isFile(values.faqImage)) {
+					formData.append(
+						"faqImage",
+						values.faqImage,
+						values.faqImage.name
+					);
 				}
 			}
 
 			// Append content block files and contentBlocks to FormData
 			if (Array.isArray(values.contentBlocks)) {
 				values.contentBlocks.forEach((detail, index) => {
-					formData.append(`contentBlocks[${index}][title]`, detail.title);
-					formData.append(`contentBlocks[${index}][details]`, detail.details);
+					formData.append(
+						`contentBlocks[${index}][title]`,
+						detail.title
+					);
+					formData.append(
+						`contentBlocks[${index}][details]`,
+						detail.details
+					);
 
 					// Append each image with the field name 'image'
 					if (detail.image) {
-						if(isFile(detail.image)){
-							formData.append(`image`, detail.image, detail.image.name);
-						}	
+						if (isFile(detail.image)) {
+							formData.append(
+								`image`,
+								detail.image,
+								detail.image.name
+							);
+						}
 					}
 				});
 			}
@@ -655,7 +393,7 @@ export function editService(userID, token, values, serviceID) {
 					}
 				});
 			}
-
+console.log("formdata", userID, token, values, serviceID)
 			const response = await axios.put(
 				`http://localhost:8100/api/service/${userID}/edit/${serviceID}`,
 				formData,
@@ -670,7 +408,7 @@ export function editService(userID, token, values, serviceID) {
 			dispatch(slice.actions.editServiceSuccess(data));
 			return data;
 		} catch (error) {
-			console.log('Error in editService:', error);
+			console.log("Error in editService:", error);
 			dispatch(slice.actions.editServiceError(error));
 			throw error;
 		} finally {

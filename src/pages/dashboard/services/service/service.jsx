@@ -92,7 +92,7 @@ const Service = ({ service }) => {
 										) : null
 									}
 								</Stack>
-						  ))
+						))
 						: null
 				}
 			</Stack>
@@ -165,7 +165,7 @@ const Service = ({ service }) => {
 													{item}
 												</Typography>
 											</Stack>
-									  ))
+									))
 									: ""}
 							</Stack>
 						))}
